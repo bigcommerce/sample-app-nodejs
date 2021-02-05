@@ -19,6 +19,9 @@ To get the app running locally, follow these instructions:
 5. Copy .env-sample to `.env`.
 6. [Replace client_id and client_secret in .env](https://devtools.bigcommerce.com/my/apps) (from `View Client ID` in the dev portal).
 7. Update AUTH_CALLBACK in `.env` with the `ngrok_id` from step 5.
-8. Start your dev environment in a **separate** terminal from `ngrok`. If `ngrok` restarts, update callbacks in steps 4 and 7 with the new ngrok_id.
+8. Enter a cookie name, as well as a jwt secret in `.env`.
+    - The cookie name should be unique
+    - JWT key should be at least 32 random characters (256 bits) for HS256
+9. Start your dev environment in a **separate** terminal from `ngrok`. If `ngrok` restarts, update callbacks in steps 4 and 7 with the new ngrok_id.
     - `npm run dev`
-9. [Install the app and launch.](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app)
+10. [Install the app and launch.](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app)
