@@ -1,14 +1,16 @@
 export interface User {
     id: number;
-    username: string;
+    username?: string;
     email: string;
 }
 
 export interface SessionProps {
-    access_token: string;
-    scope: string;
+    access_token?: string;
+    scope?: string;
     user: User;
     context: string;
+    store_hash?: string;
+    timestamp?: number;
 }
 
 export interface QueryParams {

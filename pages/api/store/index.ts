@@ -1,10 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { decode, getCookie } from '../../../lib/cookie';
+import { getSession } from '../../../lib/auth';
 
 export default async function store(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const cookies = getCookie(req);
-        const { storeId } = (cookies && decode(cookies)) ?? null;
+        const { storeId } = await getSession(req);
 
         res.status(200).json({ storeId });
     } catch (error) {

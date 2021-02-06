@@ -22,6 +22,8 @@ To get the app running locally, follow these instructions:
 8. Enter a cookie name, as well as a jwt secret in `.env`.
     - The cookie name should be unique
     - JWT key should be at least 32 random characters (256 bits) for HS256
-9. Start your dev environment in a **separate** terminal from `ngrok`. If `ngrok` restarts, update callbacks in steps 4 and 7 with the new ngrok_id.
+9. Specify DB_TYPE in `.env`
+    - If using Firebase, enter your firebase config keys. See [Firebase quickstart](https://firebase.google.com/docs/firestore/quickstart)
+10. Start your dev environment in a **separate** terminal from `ngrok`. If `ngrok` restarts, update callbacks in steps 4 and 7 with the new ngrok_id.
     - `npm run dev`
-10. [Install the app and launch.](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app)
+11. [Install the app and launch.](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app)
