@@ -7,7 +7,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
 
         res.redirect(302, '/');
     } catch (error) {
-        const { data, response } = error;
-        res.status(response?.status || 500).json(data);
+        const { message, response } = error;
+        res.status(response?.status || 500).json(message);
     }
 }
