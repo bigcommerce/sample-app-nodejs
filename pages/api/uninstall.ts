@@ -7,7 +7,7 @@ export default async function uninstall(req: NextApiRequest, res: NextApiRespons
 
         res.status(200).end();
     } catch (error) {
-        const { data, response } = error;
-        res.status(response?.status || 500).json(data);
+        const { message, response } = error;
+        res.status(response?.status || 500).json(message);
     }
 }
