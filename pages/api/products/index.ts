@@ -1,11 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { bigcommerceClient } from '../../../lib/auth';
-import { decode, getCookie } from '../../../lib/cookie';
+import { bigcommerceClient, getSession } from '../../../lib/auth';
 
 export default async function products(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const cookies = getCookie(req);
-        const { accessToken, storeId } = (cookies && decode(cookies)) ?? null;
+        const { accessToken, storeId } = await getSession(req);
         const bigcommerce = bigcommerceClient(accessToken, storeId);
 
         const { data } = await bigcommerce.get('/catalog/summary');

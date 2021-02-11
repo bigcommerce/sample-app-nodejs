@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getBCVerify } from '../../lib/auth';
+import { getBCVerify, setSession } from '../../lib/auth';
 
 export default async function load(req: NextApiRequest, res: NextApiResponse) {
     try {
-        await getBCVerify(req.query);
+        const session = await getBCVerify(req.query);
 
+        await setSession(req, res, session);
         res.redirect(302, '/');
     } catch (error) {
         const { message, response } = error;
