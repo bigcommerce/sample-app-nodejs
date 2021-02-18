@@ -6,17 +6,8 @@ function fetcher(url: string) {
 
 // Reusable SWR hooks
 // https://swr.vercel.app/
-export function useStore() {
-    // Request is deduped and cached; Can be shared across components
-    const { data, error } = useSWR('/api/store', fetcher);
-
-    return {
-        storeId: data?.storeId,
-        isError: error,
-    };
-}
-
 export function useProducts() {
+    // Request is deduped and cached; Can be shared across components
     const { data, error } = useSWR('/api/products', fetcher);
 
     return {
