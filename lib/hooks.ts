@@ -12,15 +12,18 @@ export function useProducts() {
 
     return {
         summary: data,
+        isLoading: !data && !error,
         isError: error,
     };
 }
 
 export function useProductList() {
-    const { data, error } = useSWR('/api/products/list', fetcher);
+    const { data, error, mutate: mutateList } = useSWR('/api/products/list', fetcher);
 
     return {
         list: data,
+        isLoading: !data && !error,
         isError: error,
+        mutateList,
     };
 }

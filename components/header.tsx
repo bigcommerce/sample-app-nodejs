@@ -1,6 +1,7 @@
 import { Box, Tabs } from '@bigcommerce/big-design';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import InnerHeader from './innerHeader';
 
 const TabIds = {
     HOME: 'home',
@@ -12,17 +13,33 @@ const TabRoutes = {
     [TabIds.PRODUCTS]: '/products',
 };
 
+const InnerRoutes = [
+    '/products/[pid]',
+];
+
+const HeaderTypes = {
+    GLOBAL: 'global',
+    INNER: 'inner',
+};
+
 const Header = () => {
-    const [activeTab, setActiveTab] = useState(TabIds.HOME);
+    const [activeTab, setActiveTab] = useState<string>('');
+    const [headerType, setHeaderType] = useState<string>(HeaderTypes.GLOBAL);
     const router = useRouter();
     const { pathname } = router;
 
     useEffect(() => {
-        // Check if new route matches TabRoutes
-        const tabKey = Object.keys(TabRoutes).find(key => TabRoutes[key] === pathname);
+        if (InnerRoutes.includes(pathname)) {
+            // Use InnerHeader if route matches inner routes
+            setHeaderType(HeaderTypes.INNER);
+        } else {
+            // Check if new route matches TabRoutes
+            const tabKey = Object.keys(TabRoutes).find(key => TabRoutes[key] === pathname);
 
-        // Set the active tab to tabKey or set no active tab if route doesn't match (404)
-        setActiveTab(tabKey ?? '');
+            // Set the active tab to tabKey or set no active tab if route doesn't match (404)
+            setActiveTab(tabKey ?? '');
+            setHeaderType(HeaderTypes.GLOBAL);
+        }
 
     }, [pathname]);
 
@@ -41,6 +58,8 @@ const Header = () => {
 
         return router.push(TabRoutes[tabId]);
     };
+
+    if (headerType === HeaderTypes.INNER) return <InnerHeader />;
 
     return (
         <Box marginBottom="xxLarge">
