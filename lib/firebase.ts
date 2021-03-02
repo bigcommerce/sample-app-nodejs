@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { SessionProps, StoreData, UserData } from '../types';
 
 // Firebase config and initialization
 // Prod applications might use config file
@@ -24,10 +25,10 @@ const db = firebase.firestore();
 export async function setUser({ context, user }: SessionProps) {
     if (!user) return null;
 
-    const { id, username, email } = user;
+    const { email, id, username } = user;
     const storeId = context?.split('/')[1] || '';
     const ref = db.collection('users').doc(String(id));
-    const data = { email, storeId };
+    const data: UserData = { email, storeId };
 
     if (username) {
         data.username = username;
@@ -51,7 +52,7 @@ export async function setStore(session: SessionProps) {
 export async function getStore() {
     const doc = await db.collection('store').limit(1).get();
     const [storeDoc] = doc?.docs ?? [];
-    const storeData = { ...storeDoc?.data(), storeId: storeDoc?.id };
+    const storeData: StoreData = { ...storeDoc?.data(), storeId: storeDoc?.id };
 
     return storeDoc.exists ? storeData : null;
 }
