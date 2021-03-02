@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as BigCommerce from 'node-bigcommerce';
+import { QueryParams, SessionProps } from '../types';
 import { decode, getCookie, removeCookie, setCookie } from './cookie';
 import * as fire from './firebase';
-import { QueryParams } from '../types';
 
 const { AUTH_CALLBACK, CLIENT_ID, CLIENT_SECRET, DB_TYPE } = process.env;
 
@@ -42,8 +42,7 @@ export function getBCVerify({ signed_payload }: QueryParams) {
 }
 
 export async function setSession(req: NextApiRequest, res: NextApiResponse, session: SessionProps) {
-    const cookies = getCookie(req);
-    if (!cookies) await setCookie(res, session);
+    await setCookie(res, session);
 
     // Store data to specified db; needed if cookies expired/ unavailable
     if (DB_TYPE === 'firebase') {
