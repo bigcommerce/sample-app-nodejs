@@ -1,7 +1,7 @@
 import { Box, Link } from '@bigcommerce/big-design';
 
 const Header = () => (
-    <Box margin="xxLarge">
+    <Box marginBottom="xxLarge">
         <Link href="#">Home</Link>
     </Box>
 );

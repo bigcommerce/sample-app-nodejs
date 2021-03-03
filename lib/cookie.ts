@@ -1,8 +1,8 @@
 import { parse, serialize } from 'cookie';
 import * as jwt from 'jsonwebtoken';
 import { NextApiRequest, NextApiResponse } from 'next';
-import * as fire from './firebase';
 import { SessionProps } from '../types';
+import * as fire from './firebase';
 
 const { COOKIE_NAME, JWT_KEY } = process.env;
 const MAX_AGE = 60 * 60 * 24; // 24 hours
@@ -31,6 +31,7 @@ export function parseCookies(req: NextApiRequest) {
     if (req.cookies) return req.cookies; // API routes don't parse cookies
 
     const cookie = req.headers?.cookie;
+
     return parse(cookie || '');
 }
 
