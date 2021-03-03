@@ -25,7 +25,7 @@ const db = firebase.firestore();
 export async function setUser({ context, user }: SessionProps) {
     if (!user) return null;
 
-    const { email, id, username } = user;
+    const { email, id, username } = user;
     const storeId = context?.split('/')[1] || '';
     const ref = db.collection('users').doc(String(id));
     const data: UserData = { email, storeId };
