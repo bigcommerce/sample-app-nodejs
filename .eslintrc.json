@@ -18,6 +18,9 @@
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": {}
     }
   },
   "rules": {
@@ -40,6 +43,7 @@
       }
     ],
     "import/named": "off",
+    "import/no-named-as-default-member": "off",
     "import/order": [
       "error",
       {

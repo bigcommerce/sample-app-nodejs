@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Homepage renders correctly 1`] = `
+<div
+  class="styled__StyledBox-sj5f1m-0 htmbUi styled__StyledPanel-sc-1h6ef3q-0 jooDHr"
+>
+  <div
+    class="styled__StyledBox-sj5f1m-0 jvmRZj styled__StyledFlex-hcvk8l-0 kObzyk"
+  >
+    <h2
+      class="styled__StyledH2-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 fJTAEy"
+    >
+      Homepage
+    </h2>
+  </div>
+  <div
+    class="styled__StyledBox-sj5f1m-0 jvmRZj styled__StyledFlex-hcvk8l-0 cyJYsQ"
+  >
+    <div
+      class="styled__StyledBox-sj5f1m-0 cqnBsC pages__StyledBox-w19pxz-0 dsrqWr"
+    >
+      <h4
+        class="styled__StyledH4-tqnj75-4 clKqyF"
+      >
+        Inventory count
+      </h4>
+      <h1
+        class="styled__StyledH1-tqnj75-1 kOjopT"
+      >
+        3
+      </h1>
+    </div>
+    <div
+      class="styled__StyledBox-sj5f1m-0 cqnBsC pages__StyledBox-w19pxz-0 dsrqWr"
+    >
+      <h4
+        class="styled__StyledH4-tqnj75-4 clKqyF"
+      >
+        Variant count
+      </h4>
+      <h1
+        class="styled__StyledH1-tqnj75-1 kOjopT"
+      >
+        2
+      </h1>
+    </div>
+    <div
+      class="styled__StyledBox-sj5f1m-0 goqkha pages__StyledBox-w19pxz-0 dsrqWr"
+    >
+      <h4
+        class="styled__StyledH4-tqnj75-4 clKqyF"
+      >
+        Primary category
+      </h4>
+      <h1
+        class="styled__StyledH1-tqnj75-1 kOjopT"
+      >
+        widgets
+      </h1>
+    </div>
+  </div>
+</div>
+`;

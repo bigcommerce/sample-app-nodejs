@@ -6,11 +6,12 @@ import { ReactElement } from 'react';
 import ErrorMessage from '../../components/error';
 import Loading from '../../components/loading';
 import { useProductList } from '../../lib/hooks';
+import { TableItem } from '../../types';
 
 const Products = () => {
     const router = useRouter();
     const { isError, isLoading, list = [] } = useProductList();
-    const tableItems = list.map(({ id, inventory_level: stock, name, price }) => ({
+    const tableItems: TableItem[] = list.map(({ id, inventory_level: stock, name, price }) => ({
         id,
         name,
         price,
