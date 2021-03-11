@@ -1,0 +1,278 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Product Info Form renders correctly 1`] = `
+<form
+  class="styled__StyledForm-qzey9b-0 fcYVUB"
+>
+  <div
+    class="styled__StyledBox-sj5f1m-0 htmbUi styled__StyledPanel-sc-1h6ef3q-0 jooDHr"
+  >
+    <div
+      class="styled__StyledBox-sj5f1m-0 jvmRZj styled__StyledFlex-hcvk8l-0 kObzyk"
+    >
+      <h2
+        class="styled__StyledH2-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 fJTAEy"
+      >
+        Basic Information
+      </h2>
+    </div>
+    <div
+      class="styled__StyledInlineGroup-sc-1a6yr6l-2 jCnZYy"
+    >
+      <div>
+        <label
+          class="styled__StyledH4-tqnj75-4 styled__StyledLabel-m3fyue-0 dXrVUw"
+          for="bd-input-1"
+        >
+          Product name
+        </label>
+        <span
+          class="styled__StyledInputWrapper-g32raa-0 DGFME"
+        >
+          <div
+            class="styled__StyledInputContent-g32raa-3 dZqoEc"
+          >
+            <input
+              class="styled__StyledInput-g32raa-1 guXifo"
+              id="bd-input-1"
+              name="name"
+              required=""
+              value="Product 1"
+            />
+          </div>
+        </span>
+      </div>
+    </div>
+    <div
+      class="styled__StyledInlineGroup-sc-1a6yr6l-2 jCnZYy"
+    >
+      <div>
+        <label
+          class="styled__StyledH4-tqnj75-4 styled__StyledLabel-m3fyue-0 dXrVUw"
+          for="bd-select-2-input"
+          id="bd-select-2-label"
+        >
+          Product type
+        </label>
+        <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-owns="bd-select-2-menu"
+          role="combobox"
+        >
+          <div
+            class="styled__StyledInputContainer-sc-1v66t78-2 hYKybX"
+          >
+            <div>
+              <span
+                class="styled__StyledInputWrapper-g32raa-0 DGFME"
+              >
+                <div
+                  class="styled__StyledInputContent-g32raa-3 dZqoEc"
+                >
+                  <input
+                    aria-autocomplete="list"
+                    aria-controls="bd-select-2-menu"
+                    aria-labelledby="bd-select-2-label"
+                    autocomplete="off"
+                    class="styled__StyledInput-g32raa-1 bmlNhQ"
+                    id="bd-select-2-input"
+                    name="type"
+                    required=""
+                    value=""
+                  />
+                </div>
+                <div
+                  class="styled__StyledIconWrapper-g32raa-2 crTPTg"
+                >
+                  <button
+                    aria-label="toggle menu"
+                    class="styled__StyledButton-sc-3yq204-0 styled__DropdownButton-sc-1v66t78-3 jaofCM"
+                    id="bd-select-2-toggle-button"
+                    tabindex="-1"
+                    type="button"
+                  >
+                    <svg
+                      class="base__StyledIcon-a9u0e1-0 gqewKr styled__StyledDropdownIcon-sc-1v66t78-1 cseddx"
+                      fill="currentColor"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 24 24"
+                      width="24"
+                    >
+                      <path
+                        d="M0 0h24v24H0V0z"
+                        fill="none"
+                      />
+                      <path
+                        d="M8.71 11.71l2.59 2.59c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.18-1.71-.71-1.71H9.41c-.89 0-1.33 1.08-.7 1.71z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <ul
+          aria-labelledby="bd-select-2-label"
+          class="styled__StyledList-sc-5w3dcq-0 pzdvE"
+          data-placement="bottom-start"
+          id="bd-select-2-menu"
+          role="listbox"
+          style="position: absolute; left: 0px; top: 0px; transform: translate(0px, 4px);"
+        />
+      </div>
+    </div>
+    <div
+      class="styled__StyledInlineGroup-sc-1a6yr6l-2 jCnZYy"
+    >
+      <div>
+        <label
+          class="styled__StyledH4-tqnj75-4 styled__StyledLabel-m3fyue-0 dXrVUw"
+          for="bd-input-5"
+        >
+          Default price (excluding tax)
+        </label>
+        <span
+          class="styled__StyledInputWrapper-g32raa-0 DGFME"
+        >
+          <div
+            class="styled__StyledIconWrapper-g32raa-2 hMLXGI"
+          >
+            $
+          </div>
+          <div
+            class="styled__StyledInputContent-g32raa-3 dZqoEc"
+          >
+            <input
+              class="styled__StyledInput-g32raa-1 bzntjL"
+              id="bd-input-5"
+              name="price"
+              placeholder="10.00"
+              required=""
+              step="0.01"
+              type="number"
+              value="20"
+            />
+          </div>
+        </span>
+      </div>
+    </div>
+    <div
+      class="styled__StyledGroup-sc-1a6yr6l-1 llfHep"
+    >
+      <div
+        class="styled__CheckboxContainer-s1u0st-1 kzragh"
+      >
+        <input
+          aria-labelledby="bd-checkbox_label-7"
+          class="styled__HiddenCheckbox-s1u0st-2 bDurHK"
+          id="bd-checkbox-6"
+          name="isVisible"
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          class="styled__StyledCheckbox-s1u0st-3 qxpOx"
+          for="bd-checkbox-6"
+        >
+          <svg
+            class="base__StyledIcon-a9u0e1-0 gqewKr"
+            fill="currentColor"
+            height="24"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 24 24"
+            width="24"
+          >
+            <path
+              d="M0 0h24v24H0V0z"
+              fill="none"
+            />
+            <path
+              d="M9 16.17L5.53 12.7a.996.996 0 10-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 10-1.41-1.41L9 16.17z"
+            />
+          </svg>
+        </label>
+        <div
+          class="styled__CheckboxLabelContainer-s1u0st-0 jFHYyI"
+        >
+          <label
+            class="styled__StyledText-tqnj75-5 styled__StyledLabel-sc-3soea9-0 hEjIUC"
+            for="bd-checkbox-6"
+            id="bd-checkbox_label-7"
+          >
+            Visible on storefront
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="styled__StyledBox-sj5f1m-0 htmbUi styled__StyledPanel-sc-1h6ef3q-0 jooDHr"
+  >
+    <div
+      class="styled__StyledBox-sj5f1m-0 jvmRZj styled__StyledFlex-hcvk8l-0 kObzyk"
+    >
+      <h2
+        class="styled__StyledH2-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 fJTAEy"
+      >
+        Description
+      </h2>
+    </div>
+    <div
+      class="styled__StyledInlineGroup-sc-1a6yr6l-2 jCnZYy"
+    >
+      <div>
+        <label
+          class="styled__StyledH4-tqnj75-4 styled__StyledLabel-m3fyue-0 eGzlfW"
+          for="bd-textarea-9"
+        >
+          Description
+        </label>
+        <span
+          class="styled__StyledTextareaWrapper-c1uos0-0 ebteIa"
+        >
+          <textarea
+            class="styled__StyledTextarea-c1uos0-1 hFnLEN"
+            id="bd-textarea-9"
+            name="description"
+            placeholder="Product info"
+            rows="3"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    class="styled__StyledBox-sj5f1m-0 jvmRZj styled__StyledFlex-hcvk8l-0 iUvuyy"
+  >
+    <button
+      class="styled__StyledButton-sc-3yq204-0 fWTCew bd-button"
+      role="button"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="styled__ContentWrapper-sc-3yq204-1 cUnSLq"
+      >
+        Cancel
+      </span>
+    </button>
+    <button
+      class="styled__StyledButton-sc-3yq204-0 keKQsv bd-button"
+      role="button"
+      tabindex="0"
+      type="submit"
+    >
+      <span
+        class="styled__ContentWrapper-sc-3yq204-1 cUnSLq"
+      >
+        Save
+      </span>
+    </button>
+  </div>
+</form>
+`;
