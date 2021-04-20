@@ -7,7 +7,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "test": "jest",
+    "test": "jest -u",
     "lint": "eslint . --ext .ts,.tsx,.js"
   },
   "keywords": [],
