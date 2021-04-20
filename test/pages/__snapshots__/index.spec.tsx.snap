@@ -17,7 +17,7 @@ exports[`Homepage renders correctly 1`] = `
     class="styled__StyledBox-sj5f1m-0 jvmRZj styled__StyledFlex-hcvk8l-0 cyJYsQ"
   >
     <div
-      class="styled__StyledBox-sj5f1m-0 cqnBsC pages__StyledBox-w19pxz-0 dsrqWr"
+      class="styled__StyledBox-sj5f1m-0 cqnBsC pages__StyledBox-jwwna7-0 hLZLBD"
     >
       <h4
         class="styled__StyledH4-tqnj75-4 clKqyF"
@@ -31,7 +31,7 @@ exports[`Homepage renders correctly 1`] = `
       </h1>
     </div>
     <div
-      class="styled__StyledBox-sj5f1m-0 cqnBsC pages__StyledBox-w19pxz-0 dsrqWr"
+      class="styled__StyledBox-sj5f1m-0 cqnBsC pages__StyledBox-jwwna7-0 hLZLBD"
     >
       <h4
         class="styled__StyledH4-tqnj75-4 clKqyF"
@@ -45,7 +45,7 @@ exports[`Homepage renders correctly 1`] = `
       </h1>
     </div>
     <div
-      class="styled__StyledBox-sj5f1m-0 goqkha pages__StyledBox-w19pxz-0 dsrqWr"
+      class="styled__StyledBox-sj5f1m-0 goqkha pages__StyledBox-jwwna7-0 hLZLBD"
     >
       <h4
         class="styled__StyledH4-tqnj75-4 clKqyF"
