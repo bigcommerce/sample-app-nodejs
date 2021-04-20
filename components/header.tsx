@@ -3,12 +3,12 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import InnerHeader from './innerHeader';
 
-const TabIds = {
+export const TabIds = {
     HOME: 'home',
     PRODUCTS: 'products',
 };
 
-const TabRoutes = {
+export const TabRoutes = {
     [TabIds.HOME]: '/',
     [TabIds.PRODUCTS]: '/products',
 };
