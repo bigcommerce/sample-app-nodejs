@@ -53,7 +53,12 @@ export async function setSession(req: NextApiRequest, res: NextApiResponse, sess
 
 export async function getSession(req: NextApiRequest) {
     const cookies = getCookie(req);
-    if (cookies) return decode(cookies);
+    if (cookies) {
+        const cookieData = decode(cookies);
+        const accessToken = await fire.getStoreToken(cookieData?.storeId);
+
+        return { ...cookieData, accessToken };
+    }
 
     return await fire.getStore();
 }

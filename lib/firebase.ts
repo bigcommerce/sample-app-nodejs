@@ -57,6 +57,13 @@ export async function getStore() {
     return storeDoc.exists ? storeData : null;
 }
 
+export async function getStoreToken(storeId: string) {
+    if (!storeId) return null;
+    const storeDoc = await db.collection('store').doc(storeId).get();
+
+    return storeDoc.exists ? storeDoc.data()?.accessToken : null;
+}
+
 export async function deleteStore({ store_hash: storeId }: SessionProps) {
     const ref = db.collection('store').doc(storeId);
 
