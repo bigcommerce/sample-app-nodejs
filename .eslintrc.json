@@ -58,6 +58,5 @@
   },
   "globals": {
     "React": "writable"
-  },
-  "ignorePatterns": ["scripts/*"]
+  }
 }

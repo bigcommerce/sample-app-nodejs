@@ -33,7 +33,6 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules",
-    "scripts"
+    "node_modules"
   ]
 }
