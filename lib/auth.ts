@@ -2,9 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import * as BigCommerce from 'node-bigcommerce';
 import { QueryParams, SessionProps } from '../types';
 import { decode, getCookie, removeCookie, setCookie } from './cookie';
-import * as fire from './firebase';
+import db from './db';
 
-const { AUTH_CALLBACK, CLIENT_ID, CLIENT_SECRET, DB_TYPE } = process.env;
+const { AUTH_CALLBACK, CLIENT_ID, CLIENT_SECRET } = process.env;
 
 // Create BigCommerce instance
 // https://github.com/getconversio/node-bigcommerce
@@ -44,11 +44,8 @@ export function getBCVerify({ signed_payload }: QueryParams) {
 export async function setSession(req: NextApiRequest, res: NextApiResponse, session: SessionProps) {
     await setCookie(res, session);
 
-    // Store data to specified db; needed if cookies expired/ unavailable
-    if (DB_TYPE === 'firebase') {
-        fire.setUser(session);
-        fire.setStore(session);
-    }
+    db.setUser(session);
+    db.setStore(session);
 }
 
 export async function getSession(req: NextApiRequest) {
@@ -60,11 +57,11 @@ export async function getSession(req: NextApiRequest) {
         return { ...cookieData, accessToken };
     }
 
-    return await fire.getStore();
+    return await db.getStore();
 }
 
 export async function removeSession(res: NextApiResponse, session: SessionProps) {
     removeCookie(res);
 
-    if (DB_TYPE === 'firebase') await fire.deleteStore(session);
+    await db.deleteStore(session);
 }
