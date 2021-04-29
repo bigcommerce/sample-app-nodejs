@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import { SessionProps, StoreData, UserData } from '../../types/index';
+import { SessionProps, StoreData, UserData } from '../types';
 
 // Firebase config and initialization
 // Prod applications might use config file
