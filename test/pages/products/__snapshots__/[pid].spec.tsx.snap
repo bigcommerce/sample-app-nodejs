@@ -79,7 +79,7 @@ exports[`Product Info Form renders correctly 1`] = `
                     id="bd-select-2-input"
                     name="type"
                     required=""
-                    value=""
+                    value="Physical"
                   />
                 </div>
                 <div
@@ -241,7 +241,9 @@ exports[`Product Info Form renders correctly 1`] = `
             name="description"
             placeholder="Product info"
             rows="3"
-          />
+          >
+            &lt;h1&gt;some sample product&lt;/h1&gt;
+          </textarea>
         </span>
       </div>
     </div>
