@@ -1,0 +1,12 @@
+targets:
+  production:
+    heroku_server_name: 'go-sample-app-production'
+    private_key_path: '/etc/deploy_keys/deploy_herokuapp.key'
+
+  staging:
+    heroku_server_name: 'go-sample-app-staging'
+    private_key_path: '/etc/deploy_keys/deploy_herokuapp.key'
+
+  integration:
+    heroku_server_name: 'go-sample-app-integration'
+    private_key_path: '/etc/deploy_keys/deploy_herokuapp.key'
