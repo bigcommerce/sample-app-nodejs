@@ -8,9 +8,9 @@ const MAX_AGE = 60 * 60 * 24; // 24 hours
 
 export async function setCookie(res: NextApiResponse, session: SessionProps) {
     const { context, scope } = session;
-    const storeId = context?.split('/')[1] || '';
+    const storeHash = context?.split('/')[1] || '';
 
-    const cookie = serialize(COOKIE_NAME, encode(scope, storeId), {
+    const cookie = serialize(COOKIE_NAME, encode(scope, storeHash), {
         expires: new Date(Date.now() + MAX_AGE * 1000),
         httpOnly: true,
         path: '/',
@@ -39,8 +39,8 @@ export function removeCookie(res: NextApiResponse) {
     res.setHeader('Set-Cookie', cookie);
 }
 
-export function encode(scope: string, storeId: string) {
-    return jwt.sign({ scope, storeId }, JWT_KEY);
+export function encode(scope: string, storeHash: string) {
+    return jwt.sign({ scope, storeHash }, JWT_KEY);
 }
 
 export function decode(encodedCookie: string) {

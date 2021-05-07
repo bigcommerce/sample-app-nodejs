@@ -19,8 +19,7 @@ export function useProducts() {
 }
 
 export function useProductList() {
-    const options = { revalidateOnMount: false }; // Disable auto validation when switching pages
-    const { data, error, mutate: mutateList } = useSWR('/api/products/list', fetcher, options);
+    const { data, error, mutate: mutateList } = useSWR('/api/products/list', fetcher);
 
     return {
         list: data,

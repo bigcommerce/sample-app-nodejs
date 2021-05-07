@@ -22,13 +22,14 @@ if (!firebase.apps.length) {
 const db = firebase.firestore();
 
 // Firestore data management functions
-export async function setUser({ context, user }: SessionProps) {
+
+// Use setUser for storing global user data (persists between installs)
+export async function setUser({ user }: SessionProps) {
     if (!user) return null;
 
     const { email, id, username } = user;
-    const storeId = context?.split('/')[1] || '';
     const ref = db.collection('users').doc(String(id));
-    const data: UserData = { email, storeId };
+    const data: UserData = { email };
 
     if (username) {
         data.username = username;
@@ -38,34 +39,77 @@ export async function setUser({ context, user }: SessionProps) {
 }
 
 export async function setStore(session: SessionProps) {
-    const { access_token: accessToken, context, scope } = session;
+    const { access_token: accessToken, context, scope, user: { id } } = session;
     // Only set on app install or update
     if (!accessToken || !scope) return null;
 
-    const storeId = context?.split('/')[1] || '';
-    const ref = db.collection('store').doc(storeId);
-    const data = { accessToken, scope };
+    const storeHash = context?.split('/')[1] || '';
+    const ref = db.collection('store').doc(storeHash);
+    const data = { accessToken, adminId: id, scope };
 
     await ref.set(data);
+}
+
+// User management for multi-user apps
+// Use setStoreUser for storing store specific variables
+export async function setStoreUser(session: SessionProps) {
+    const { access_token: accessToken, context, user: { id } } = session;
+    if (!id) return null;
+
+    const storeHash = context?.split('/')[1] || '';
+    const collection = db.collection('storeUsers');
+    const ref = collection.doc(String(id));
+
+    // Set admin (store owner) if installing/ updating the app
+    // https://developer.bigcommerce.com/api-docs/apps/guide/users
+    if (accessToken) {
+        const oldAdmin = collection.where('isAdmin', '==', true).limit(1);
+        const oldAdminRes = await oldAdmin.get();
+        const [oldAdminDoc] = oldAdminRes?.docs ?? [];
+
+        // Nothing to update if admin the same
+        if (oldAdminDoc?.id === String(id)) return null;
+
+        // Update admin (if different and previously installed)
+        if (oldAdminDoc?.exists) {
+            await oldAdminDoc.ref.update({ isAdmin: false });
+        }
+
+        // Create a new record
+        await ref.set({ storeHash, isAdmin: true });
+    } else {
+        const storeUser = await ref.get();
+
+        // Create a new user if it doesn't exist (non-store owners added here for multi-user apps)
+        if (!storeUser?.exists) {
+            await ref.set({ storeHash, isAdmin: false });
+        }
+    }
+}
+
+export async function deleteUser({ user }: SessionProps) {
+    const storeUsersRef = db.collection('storeUsers').doc(String(user?.id));
+
+    await storeUsersRef.delete();
 }
 
 export async function getStore() {
     const doc = await db.collection('store').limit(1).get();
     const [storeDoc] = doc?.docs ?? [];
-    const storeData: StoreData = { ...storeDoc?.data(), storeId: storeDoc?.id };
+    const storeData: StoreData = { ...storeDoc?.data(), storeHash: storeDoc?.id };
 
-    return storeDoc.exists ? storeData : null;
+    return storeDoc?.exists ? storeData : null;
 }
 
-export async function getStoreToken(storeId: string) {
-    if (!storeId) return null;
-    const storeDoc = await db.collection('store').doc(storeId).get();
+export async function getStoreToken(storeHash: string) {
+    if (!storeHash) return null;
+    const storeDoc = await db.collection('store').doc(storeHash).get();
 
-    return storeDoc.exists ? storeDoc.data()?.accessToken : null;
+    return storeDoc?.exists ? storeDoc.data()?.accessToken : null;
 }
 
-export async function deleteStore({ store_hash: storeId }: SessionProps) {
-    const ref = db.collection('store').doc(storeId);
+export async function deleteStore({ store_hash: storeHash }: SessionProps) {
+    const ref = db.collection('store').doc(storeHash);
 
     await ref.delete();
 }
