@@ -2,21 +2,15 @@ import { parse, serialize } from 'cookie';
 import * as jwt from 'jsonwebtoken';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { SessionProps } from '../types';
-import * as fire from './firebase';
 
 const { COOKIE_NAME, JWT_KEY } = process.env;
 const MAX_AGE = 60 * 60 * 24; // 24 hours
 
 export async function setCookie(res: NextApiResponse, session: SessionProps) {
-    let { access_token: token, scope } = session;
-    const { context } = session;
+    const { context, scope } = session;
     const storeId = context?.split('/')[1] || '';
 
-    if (!token) {
-        ({ accessToken: token, scope } = await fire.getStore());
-    }
-
-    const cookie = serialize(COOKIE_NAME, encode(token, scope, storeId), {
+    const cookie = serialize(COOKIE_NAME, encode(scope, storeId), {
         expires: new Date(Date.now() + MAX_AGE * 1000),
         httpOnly: true,
         path: '/',
@@ -45,8 +39,8 @@ export function removeCookie(res: NextApiResponse) {
     res.setHeader('Set-Cookie', cookie);
 }
 
-export function encode(token: string, scope: string, storeId: string) {
-    return jwt.sign({ accessToken: token, scope, storeId }, JWT_KEY);
+export function encode(scope: string, storeId: string) {
+    return jwt.sign({ scope, storeId }, JWT_KEY);
 }
 
 export function decode(encodedCookie: string) {
