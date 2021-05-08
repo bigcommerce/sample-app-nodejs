@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "test": "jest",
-    "lint": "eslint . --ext .ts,.tsx,.js"
+    "lint": "eslint . --ext .ts,.tsx,.js",
+    "db:setup": "node scripts/db.js"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,7 @@
     "cookie": "^0.4.1",
     "firebase": "^8.2.6",
     "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
     "next": "^10.0.5",
     "node-bigcommerce": "^4.1.0",
     "react": "^17.0.1",
