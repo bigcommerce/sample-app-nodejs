@@ -13,6 +13,10 @@ export interface TableItem {
     stock: number;
 }
 
+export interface ListItem extends FormData {
+    id: number;
+}
+
 export interface StringKeyValue {
     [key: string]: string;
 }

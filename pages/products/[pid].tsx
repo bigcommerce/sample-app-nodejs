@@ -2,14 +2,14 @@ import { useRouter } from 'next/router';
 import ErrorMessage from '../../components/error';
 import Form from '../../components/form';
 import Loading from '../../components/loading';
-import { useProductList } from '../../lib/hooks';
+import { useProductInfo, useProductList } from '../../lib/hooks';
 import { FormData } from '../../types';
 
 const ProductInfo = () => {
     const router = useRouter();
-    const { pid } = router.query;
+    const pid = Number(router.query?.pid);
     const { isError, isLoading, list = [], mutateList } = useProductList();
-    const product = list.find(item => item.id === Number(pid));
+    const { isLoading: isInfoLoading, product } = useProductInfo(pid, list);
     const { description, is_visible: isVisible, name, price, type } = product ?? {};
     const formData = { description, isVisible, name, price, type };
 
@@ -17,7 +17,7 @@ const ProductInfo = () => {
 
     const handleSubmit = async (data: FormData) => {
         try {
-            const filteredList = list.filter(item => item.id !== Number(pid));
+            const filteredList = list.filter(item => item.id !== pid);
             // Update local data immediately (reduce latency to user)
             mutateList([...filteredList, { ...product, ...data }], false);
 
@@ -37,7 +37,7 @@ const ProductInfo = () => {
         }
     };
 
-    if (isLoading) return <Loading />;
+    if (isLoading || isInfoLoading) return <Loading />;
     if (isError) return <ErrorMessage />;
 
     return (
