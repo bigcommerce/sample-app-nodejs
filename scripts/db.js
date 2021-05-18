@@ -27,7 +27,7 @@ const storesCreate = query('CREATE TABLE `stores` (\n' +
 const storeUsersCreate = query('CREATE TABLE `storeUsers` (\n' +
     '  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,\n' +
     '  `userId` int(11) NOT NULL,\n' +
-    '  `storeHash` varchar(10),\n' +
+    '  `storeHash` varchar(10) NOT NULL,\n' +
     '  `isAdmin` boolean,\n' +
     '  PRIMARY KEY (`id`),\n' +
     '  UNIQUE KEY `userId` (`userId`,`storeHash`)\n' +
