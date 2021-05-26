@@ -3,8 +3,8 @@ import { bigcommerceClient, getSession } from '../../../lib/auth';
 
 export default async function list(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const { accessToken, storeId } = await getSession(req);
-        const bigcommerce = bigcommerceClient(accessToken, storeId);
+        const { accessToken, storeHash } = await getSession(req);
+        const bigcommerce = bigcommerceClient(accessToken, storeHash);
         // Optional: pass in API params here
         const params = [
             'limit=11',

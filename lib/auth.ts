@@ -23,11 +23,11 @@ const bigcommerceSigned = new BigCommerce({
     responseType: 'json'
 });
 
-export function bigcommerceClient(accessToken: string, storeId: string) {
+export function bigcommerceClient(accessToken: string, storeHash: string) {
     return new BigCommerce({
         clientId: CLIENT_ID,
         accessToken,
-        storeHash: storeId,
+        storeHash,
         responseType: 'json',
         apiVersion: 'v3'
     });
@@ -46,13 +46,14 @@ export async function setSession(req: NextApiRequest, res: NextApiResponse, sess
 
     db.setUser(session);
     db.setStore(session);
+    db.setStoreUser(session);
 }
 
 export async function getSession(req: NextApiRequest) {
     const cookies = getCookie(req);
     if (cookies) {
         const cookieData = decode(cookies);
-        const accessToken = await db.getStoreToken(cookieData?.storeId);
+        const accessToken = await db.getStoreToken(cookieData?.storeHash);
 
         return { ...cookieData, accessToken };
     }
@@ -64,4 +65,10 @@ export async function removeSession(res: NextApiResponse, session: SessionProps)
     removeCookie(res);
 
     await db.deleteStore(session);
+}
+
+export async function removeUserData(res: NextApiResponse, session: SessionProps) {
+    removeCookie(res);
+
+    await db.deleteUser(session);
 }
