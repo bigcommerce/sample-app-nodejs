@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as BigCommerce from 'node-bigcommerce';
 import { QueryParams, SessionProps } from '../types';
-import { decode, getCookie, removeCookie, setCookie } from './cookie';
 import db from './db';
 
 const { AUTH_CALLBACK, CLIENT_ID, CLIENT_SECRET } = process.env;
@@ -41,34 +40,22 @@ export function getBCVerify({ signed_payload }: QueryParams) {
     return bigcommerceSigned.verify(signed_payload);
 }
 
-export async function setSession(req: NextApiRequest, res: NextApiResponse, session: SessionProps) {
-    await setCookie(res, session);
-
+export async function setSession(session: SessionProps) {
     db.setUser(session);
     db.setStore(session);
     db.setStoreUser(session);
 }
 
-export async function getSession(req: NextApiRequest) {
-    const cookies = getCookie(req);
-    if (cookies) {
-        const cookieData = decode(cookies);
-        const accessToken = await db.getStoreToken(cookieData?.storeHash);
+export async function getSession({ query }: NextApiRequest) {
+    const accessToken = await db.getStoreToken(query?.context);
 
-        return { ...cookieData, accessToken };
-    }
-
-    throw new Error('Cookies unavailable. Please reload the application.');
+    return { accessToken, storeHash: query?.context };
 }
 
 export async function removeSession(res: NextApiResponse, session: SessionProps) {
-    removeCookie(res);
-
     await db.deleteStore(session);
 }
 
 export async function removeUserData(res: NextApiResponse, session: SessionProps) {
-    removeCookie(res);
-
     await db.deleteUser(session);
 }
