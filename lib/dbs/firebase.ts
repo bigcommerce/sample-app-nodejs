@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import { SessionProps, StoreData, UserData } from '../../types';
+import { SessionProps, UserData } from '../../types';
 
 // Firebase config and initialization
 // Prod applications might use config file
@@ -53,33 +53,25 @@ export async function setStore(session: SessionProps) {
 // User management for multi-user apps
 // Use setStoreUser for storing store specific variables
 export async function setStoreUser(session: SessionProps) {
-    const { access_token: accessToken, context, user: { id } } = session;
-    if (!id) return null;
+    const { access_token: accessToken, context, user: { id: userId } } = session;
+    if (!userId) return null;
 
     const storeHash = context?.split('/')[1] || '';
     const collection = db.collection('storeUsers');
-    const ref = collection.doc(String(id));
+    const documentId = `${userId}_${storeHash}`; // users can belong to multiple stores
+    const ref = collection.doc(documentId);
+    const storeUser = await ref.get();
 
     // Set admin (store owner) if installing/ updating the app
     // https://developer.bigcommerce.com/api-docs/apps/guide/users
     if (accessToken) {
-        const oldAdmin = collection.where('isAdmin', '==', true).limit(1);
-        const oldAdminRes = await oldAdmin.get();
-        const [oldAdminDoc] = oldAdminRes?.docs ?? [];
-
-        // Nothing to update if admin the same
-        if (oldAdminDoc?.id === String(id)) return null;
-
-        // Update admin (if different and previously installed)
-        if (oldAdminDoc?.exists) {
-            await oldAdminDoc.ref.update({ isAdmin: false });
+        // Create a new admin user if none exists
+        if (!storeUser?.exists) {
+            await ref.set({ storeHash, isAdmin: true });
+        } else if (!storeUser.data()?.isAdmin) {
+            await ref.update({ isAdmin: true });
         }
-
-        // Create a new record
-        await ref.set({ storeHash, isAdmin: true });
     } else {
-        const storeUser = await ref.get();
-
         // Create a new user if it doesn't exist (non-store owners added here for multi-user apps)
         if (!storeUser?.exists) {
             await ref.set({ storeHash, isAdmin: false });
@@ -91,14 +83,6 @@ export async function deleteUser({ user }: SessionProps) {
     const storeUsersRef = db.collection('storeUsers').doc(String(user?.id));
 
     await storeUsersRef.delete();
-}
-
-export async function getStore() {
-    const doc = await db.collection('store').limit(1).get();
-    const [storeDoc] = doc?.docs ?? [];
-    const storeData: StoreData = { ...storeDoc?.data(), storeHash: storeDoc?.id };
-
-    return storeDoc?.exists ? storeData : null;
 }
 
 export async function getStoreToken(storeHash: string) {

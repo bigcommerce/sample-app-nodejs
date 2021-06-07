@@ -58,7 +58,7 @@ export async function getSession(req: NextApiRequest) {
         return { ...cookieData, accessToken };
     }
 
-    return await db.getStore();
+    throw new Error('Cookies unavailable. Please reload the application.');
 }
 
 export async function removeSession(res: NextApiResponse, session: SessionProps) {
