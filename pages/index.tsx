@@ -1,10 +1,17 @@
 import { Box, Flex, H1, H4, Panel } from '@bigcommerce/big-design';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import Loading from '../components/loading';
+import { useSession } from '../context/session';
 import { useProducts } from '../lib/hooks';
 
-const Index = () => {
+const Index = ({ context }: string) => {
     const { isLoading, summary } = useProducts();
+    const { setStoreHash } = useSession();
+
+    useEffect(() => {
+        if (context) setStoreHash(context);
+    }, [context, setStoreHash]);
 
     if (isLoading) return <Loading />;
 
@@ -27,6 +34,10 @@ const Index = () => {
         </Panel>
     );
 };
+
+export const getServerSideProps = async ({ query }) => ({
+    props: { context: query?.context ?? '' }
+});
 
 const StyledBox = styled(Box)`
     min-width: 10rem;
