@@ -5,7 +5,7 @@ import Loading from '../components/loading';
 import { useSession } from '../context/session';
 import { useProducts } from '../lib/hooks';
 
-const Index = ({ context }: string) => {
+const Index = ({ context }: { context: string }) => {
     const { isLoading, summary } = useProducts();
     const { setStoreHash } = useSession();
 

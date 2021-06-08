@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from 'react';
+import { ContextValues } from '../types';
 
-const SessionContext = createContext({});
+const SessionContext = createContext<Partial<ContextValues>>({});
 
 const SessionProvider = ({ children }) => {
     const [storeHash, setStoreHash] = useState('');

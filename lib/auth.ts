@@ -46,10 +46,11 @@ export async function setSession(session: SessionProps) {
     db.setStoreUser(session);
 }
 
-export async function getSession({ query }: NextApiRequest) {
-    const accessToken = await db.getStoreToken(query?.context);
+export async function getSession({ query: { context = '' } }: NextApiRequest) {
+    if (typeof context !== 'string') return;
+    const accessToken = await db.getStoreToken(context);
 
-    return { accessToken, storeHash: query?.context };
+    return { accessToken, storeHash: context };
 }
 
 export async function removeSession(res: NextApiResponse, session: SessionProps) {
