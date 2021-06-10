@@ -2,11 +2,13 @@ import { useRouter } from 'next/router';
 import ErrorMessage from '../../components/error';
 import Form from '../../components/form';
 import Loading from '../../components/loading';
+import { useSession } from '../../context/session';
 import { useProductInfo, useProductList } from '../../lib/hooks';
 import { FormData } from '../../types';
 
 const ProductInfo = () => {
     const router = useRouter();
+    const { storeHash } = useSession();
     const pid = Number(router.query?.pid);
     const { isError, isLoading, list = [], mutateList } = useProductList();
     const { isLoading: isInfoLoading, product } = useProductInfo(pid, list);
@@ -22,7 +24,7 @@ const ProductInfo = () => {
             mutateList([...filteredList, { ...product, ...data }], false);
 
             // Update product details
-            await fetch(`/api/products/${pid}`, {
+            await fetch(`/api/products/${pid}?context=${storeHash}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
