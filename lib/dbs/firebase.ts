@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import { SessionProps, StoreData, UserData } from '../types';
+import { SessionProps, UserData } from '../../types';
 
 // Firebase config and initialization
 // Prod applications might use config file
@@ -26,9 +26,9 @@ export async function setUser({ context, user }: SessionProps) {
     if (!user) return null;
 
     const { email, id, username } = user;
-    const storeId = context?.split('/')[1] || '';
+    const storeHash = context?.split('/')[1] || '';
     const ref = db.collection('users').doc(String(id));
-    const data: UserData = { email, storeId };
+    const data: UserData = { email, storeHash };
 
     if (username) {
         data.username = username;
@@ -42,30 +42,22 @@ export async function setStore(session: SessionProps) {
     // Only set on app install or update
     if (!accessToken || !scope) return null;
 
-    const storeId = context?.split('/')[1] || '';
-    const ref = db.collection('store').doc(storeId);
+    const storeHash = context?.split('/')[1] || '';
+    const ref = db.collection('store').doc(storeHash);
     const data = { accessToken, scope };
 
     await ref.set(data);
 }
 
-export async function getStore() {
-    const doc = await db.collection('store').limit(1).get();
-    const [storeDoc] = doc?.docs ?? [];
-    const storeData: StoreData = { ...storeDoc?.data(), storeId: storeDoc?.id };
-
-    return storeDoc.exists ? storeData : null;
-}
-
-export async function getStoreToken(storeId: string) {
-    if (!storeId) return null;
-    const storeDoc = await db.collection('store').doc(storeId).get();
+export async function getStoreToken(storeHash: string) {
+    if (!storeHash) return null;
+    const storeDoc = await db.collection('store').doc(storeHash).get();
 
     return storeDoc.exists ? storeDoc.data()?.accessToken : null;
 }
 
-export async function deleteStore({ store_hash: storeId }: SessionProps) {
-    const ref = db.collection('store').doc(storeId);
+export async function deleteStore({ store_hash: storeHash }: SessionProps) {
+    const ref = db.collection('store').doc(storeHash);
 
     await ref.delete();
 }

@@ -1,9 +1,16 @@
 import { Box, Flex, Panel, Text } from '@bigcommerce/big-design';
+import { useEffect } from 'react';
 import Header from '../components/header';
+import { useSession } from '../context/session';
 import { useProducts } from '../lib/hooks';
 
-const Index = () => {
+const Index = ({ context }: { context: string }) => {
     const { summary } = useProducts();
+    const { setStoreHash } = useSession();
+
+    useEffect(() => {
+        if (context) setStoreHash(context);
+    }, [context, setStoreHash]);
 
     return (
         <Panel header="Homepage">
@@ -26,5 +33,9 @@ const Index = () => {
         </Panel>
     );
 };
+
+export const getServerSideProps = async ({ query }) => ({
+    props: { context: query?.context ?? '' }
+});
 
 export default Index;
