@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as BigCommerce from 'node-bigcommerce';
 import { QueryParams, SessionProps } from '../types';
-import { decode, getCookie, removeCookie, setCookie } from './cookie';
-import * as fire from './firebase';
+import db from './db';
 
 const { AUTH_CALLBACK, CLIENT_ID, CLIENT_SECRET, DB_TYPE } = process.env;
 
@@ -23,11 +22,11 @@ const bigcommerceSigned = new BigCommerce({
     responseType: 'json'
 });
 
-export function bigcommerceClient(accessToken: string, storeId: string) {
+export function bigcommerceClient(accessToken: string, storeHash: string) {
     return new BigCommerce({
         clientId: CLIENT_ID,
         accessToken,
-        storeHash: storeId,
+        storeHash,
         responseType: 'json',
         apiVersion: 'v3'
     });
@@ -41,30 +40,18 @@ export function getBCVerify({ signed_payload }: QueryParams) {
     return bigcommerceSigned.verify(signed_payload);
 }
 
-export async function setSession(req: NextApiRequest, res: NextApiResponse, session: SessionProps) {
-    await setCookie(res, session);
-
-    // Store data to specified db; needed if cookies expired/ unavailable
-    if (DB_TYPE === 'firebase') {
-        fire.setUser(session);
-        fire.setStore(session);
-    }
+export async function setSession(session: SessionProps) {
+    db.setUser(session);
+    db.setStore(session);
 }
 
-export async function getSession(req: NextApiRequest) {
-    const cookies = getCookie(req);
-    if (cookies) {
-        const cookieData = decode(cookies);
-        const accessToken = await fire.getStoreToken(cookieData?.storeId);
+export async function getSession({ query: { context = '' } }: NextApiRequest) {
+    if (typeof context !== 'string') return;
+    const accessToken = await db.getStoreToken(context);
 
-        return { ...cookieData, accessToken };
-    }
-
-    return await fire.getStore();
+    return { accessToken, storeHash: context };
 }
 
 export async function removeSession(res: NextApiResponse, session: SessionProps) {
-    removeCookie(res);
-
-    if (DB_TYPE === 'firebase') await fire.deleteStore(session);
+    await db.deleteStore(session);
 }
