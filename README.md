@@ -24,6 +24,7 @@ To get the app running locally, follow these instructions:
     - JWT key should be at least 32 random characters (256 bits) for HS256
 9. Specify DB_TYPE in `.env`
     - If using Firebase, enter your firebase config keys. See [Firebase quickstart](https://firebase.google.com/docs/firestore/quickstart)
+    - If using MySQL, enter your mysql database config keys (host, database, user/pass and port).
 10. Start your dev environment in a **separate** terminal from `ngrok`. If `ngrok` restarts, update callbacks in steps 4 and 7 with the new ngrok_id.
     - `npm run dev`
 11. [Install the app and launch.](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app)

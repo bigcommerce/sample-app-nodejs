@@ -1,13 +1,16 @@
 import { Box, GlobalStyles } from '@bigcommerce/big-design';
 import type { AppProps } from 'next/app';
 import Header from '../components/header';
+import SessionProvider from '../context/session';
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
     <>
         <GlobalStyles />
         <Box marginHorizontal="xxxLarge" marginVertical="xxLarge">
             <Header />
-            <Component {...pageProps} />
+            <SessionProvider>
+                <Component {...pageProps} />
+            </SessionProvider>
         </Box>
     </>
 );
