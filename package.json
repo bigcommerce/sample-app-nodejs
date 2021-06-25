@@ -16,6 +16,7 @@
   "dependencies": {
     "@bigcommerce/big-design": "^0.27.0",
     "firebase": "^8.2.6",
+    "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "next": "^10.0.5",
     "node-bigcommerce": "^4.1.0",
