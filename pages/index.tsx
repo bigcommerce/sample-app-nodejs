@@ -7,11 +7,11 @@ import { useProducts } from '../lib/hooks';
 
 const Index = ({ context }: { context: string }) => {
     const { isLoading, summary } = useProducts();
-    const { setStoreHash } = useSession();
+    const { setContext } = useSession();
 
     useEffect(() => {
-        if (context) setStoreHash(context);
-    }, [context, setStoreHash]);
+        if (context) setContext(context);
+    }, [context, setContext]);
 
     if (isLoading) return <Loading />;
 

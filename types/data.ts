@@ -1,6 +1,6 @@
 export interface ContextValues {
-  storeHash: string;
-  setStoreHash: (key: string) => void;
+  context: string;
+  setContext: (key: string) => void;
 }
 
 export interface FormData {
