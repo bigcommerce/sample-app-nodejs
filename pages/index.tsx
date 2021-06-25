@@ -6,11 +6,11 @@ import { useProducts } from '../lib/hooks';
 
 const Index = ({ context }: { context: string }) => {
     const { summary } = useProducts();
-    const { setStoreHash } = useSession();
+    const { setContext } = useSession();
 
     useEffect(() => {
-        if (context) setStoreHash(context);
-    }, [context, setStoreHash]);
+        if (context) setContext(context);
+    }, [context, setContext]);
 
     return (
         <Panel header="Homepage">
