@@ -19,8 +19,7 @@ To get the app running locally, follow these instructions:
 5. Copy .env-sample to `.env`.
 6. [Replace client_id and client_secret in .env](https://devtools.bigcommerce.com/my/apps) (from `View Client ID` in the dev portal).
 7. Update AUTH_CALLBACK in `.env` with the `ngrok_id` from step 5.
-8. Enter a cookie name, as well as a jwt secret in `.env`.
-    - The cookie name should be unique
+8. Enter a jwt secret in `.env`.
     - JWT key should be at least 32 random characters (256 bits) for HS256
 9. Specify DB_TYPE in `.env`
     - If using Firebase, enter your firebase config keys. See [Firebase quickstart](https://firebase.google.com/docs/firestore/quickstart)

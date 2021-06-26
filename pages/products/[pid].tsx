@@ -8,7 +8,7 @@ import { FormData } from '../../types';
 
 const ProductInfo = () => {
     const router = useRouter();
-    const { storeHash } = useSession();
+    const encodedContext = useSession()?.context;
     const { pid } = router.query;
     const { isError, isLoading, list = [], mutateList } = useProductList();
     const product = list.find(item => item.id === Number(pid));
@@ -24,7 +24,7 @@ const ProductInfo = () => {
             mutateList([...filteredList, { ...product, ...data }], false);
 
             // Update product details
-            await fetch(`/api/products/${pid}?context=${storeHash}`, {
+            await fetch(`/api/products/${pid}?context=${encodedContext}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),

@@ -4,8 +4,8 @@ import { ContextValues } from '../types';
 const SessionContext = createContext<Partial<ContextValues>>({});
 
 const SessionProvider = ({ children }) => {
-    const [storeHash, setStoreHash] = useState('');
-    const value = { storeHash, setStoreHash };
+    const [context, setContext] = useState('');
+    const value = { context, setContext };
 
     return (
         <SessionContext.Provider value={value}>
