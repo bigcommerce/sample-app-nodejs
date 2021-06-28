@@ -20,9 +20,6 @@ Styleguides
 First ensure that your feature isn't already being developed or considered (see open PRs and issues). 
 If it is, please consider contributing to those initiatives.
 
-For new features, consider whether a new plugin or hook is a more beneficial solution. We'd like to keep
-sample-app-nodejs light and minimal, and delegate adaptive functionality out into separate plugins.
-
 All PRs require test coverage to be accepted when applicable.
 
 ## Issues / Bugs
