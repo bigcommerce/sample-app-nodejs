@@ -10,7 +10,7 @@ const ProductInfo = () => {
     const router = useRouter();
     const encodedContext = useSession()?.context;
     const pid = Number(router.query?.pid);
-    const { isError, isLoading, list = [], mutateList } = useProductList();
+    const { error, isLoading, list = [], mutateList } = useProductList();
     const { isLoading: isInfoLoading, product } = useProductInfo(pid, list);
     const { description, is_visible: isVisible, name, price, type } = product ?? {};
     const formData = { description, isVisible, name, price, type };
@@ -40,7 +40,7 @@ const ProductInfo = () => {
     };
 
     if (isLoading || isInfoLoading) return <Loading />;
-    if (isError) return <ErrorMessage />;
+    if (error) return <ErrorMessage error={error} />;
 
     return (
         <Form formData={formData} onCancel={handleCancel} onSubmit={handleSubmit} />

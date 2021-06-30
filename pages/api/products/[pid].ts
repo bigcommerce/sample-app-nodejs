@@ -18,7 +18,7 @@ export default async function products(req: NextApiRequest, res: NextApiResponse
                 res.status(200).json(data);
             } catch (error) {
                 const { message, response } = error;
-                res.status(response?.status || 500).end(message || 'Authentication failed, please re-install');
+                res.status(response?.status || 500).json({ message });
             }
             break;
         case 'PUT':
@@ -30,7 +30,7 @@ export default async function products(req: NextApiRequest, res: NextApiResponse
                 res.status(200).json(data);
             } catch (error) {
                 const { message, response } = error;
-                res.status(response?.status || 500).end(message || 'Authentication failed, please re-install');
+                res.status(response?.status || 500).json({ message });
             }
             break;
         default:

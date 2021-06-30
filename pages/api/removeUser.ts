@@ -9,6 +9,6 @@ export default async function removeUser(req: NextApiRequest, res: NextApiRespon
         res.status(200).end();
     } catch (error) {
         const { message, response } = error;
-        res.status(response?.status || 500).json(message);
+        res.status(response?.status || 500).json({ message });
     }
 }

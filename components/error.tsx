@@ -1,8 +1,5 @@
 import { H3, Panel } from '@bigcommerce/big-design';
-
-interface ErrorMessageProps {
-    error?: Error;
-}
+import { ErrorMessageProps } from '../types';
 
 const ErrorMessage = ({ error }: ErrorMessageProps) => (
     <Panel>

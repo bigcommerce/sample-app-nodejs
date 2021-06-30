@@ -1,9 +1,19 @@
 import useSWR from 'swr';
 import { useSession } from '../context/session';
-import { ListItem } from '../types';
+import { ErrorProps, ListItem } from '../types';
 
-function fetcher(url: string, encodedContext: string) {
-    return fetch(`${url}?context=${encodedContext}`).then(res => res.json());
+async function fetcher(url: string, encodedContext: string) {
+    const res = await fetch(`${url}?context=${encodedContext}`);
+
+    // If the status code is not in the range 200-299, throw an error
+    if (!res.ok) {
+        const { message } = await res.json();
+        const error: ErrorProps = new Error(message || 'An error occurred while fetching the data.');
+        error.status = res.status; // e.g. 500
+        throw error;
+    }
+
+    return res.json();
 }
 
 // Reusable SWR hooks
@@ -16,7 +26,7 @@ export function useProducts() {
     return {
         summary: data,
         isLoading: !data && !error,
-        isError: error,
+        error,
     };
 }
 
@@ -28,7 +38,7 @@ export function useProductList() {
     return {
         list: data,
         isLoading: !data && !error,
-        isError: error,
+        error,
         mutateList,
     };
 }
@@ -42,6 +52,6 @@ export function useProductInfo(pid: number, list: ListItem[]) {
     return {
         product: product ?? data,
         isLoading: product ? false : (!data && !error),
-        isError: error,
+        error,
     };
 }

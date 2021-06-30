@@ -41,7 +41,7 @@ export function getBCVerify({ signed_payload }: QueryParams) {
     return bigcommerceSigned.verify(signed_payload);
 }
 
-export async function setSession(session: SessionProps) {
+export function setSession(session: SessionProps) {
     db.setUser(session);
     db.setStore(session);
     db.setStoreUser(session);
@@ -49,10 +49,16 @@ export async function setSession(session: SessionProps) {
 
 export async function getSession({ query: { context = '' } }: NextApiRequest) {
     if (typeof context !== 'string') return;
-    const decodedContext = decodePayload(context)?.context;
-    const accessToken = await db.getStoreToken(decodedContext);
+    const { context: storeHash, user } = decodePayload(context);
+    const hasUser = await db.hasStoreUser(storeHash, user?.id);
+    const accessToken = await db.getStoreToken(storeHash);
 
-    return { accessToken, storeHash: decodedContext };
+    // Before retrieving session/ hitting APIs, check user
+    if (!hasUser) {
+        throw new Error('User is not available. Please login or ensure you have access permissions.');
+    }
+
+    return { accessToken, storeHash };
 }
 
 export async function removeSession(res: NextApiResponse, session: SessionProps) {
@@ -63,8 +69,10 @@ export async function removeUserData(res: NextApiResponse, session: SessionProps
     await db.deleteUser(session);
 }
 
-export function encodePayload(context: string) {
-    return jwt.sign({ context }, JWT_KEY, { expiresIn: '24h' });
+export function encodePayload({ user, owner, ...session }: SessionProps) {
+    const context = session?.context?.split('/')[1] || '';
+
+    return jwt.sign({ context, user, owner }, JWT_KEY, { expiresIn: '24h' });
 }
 
 export function decodePayload(encodedContext: string) {
