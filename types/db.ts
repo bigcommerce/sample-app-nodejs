@@ -12,6 +12,7 @@ export interface UserData {
 }
 
 export interface Db {
+    hasStoreUser(storeHash: string, userId: string): boolean;
     setUser(session: SessionProps): Promise<void>;
     setStore(session: SessionProps): Promise<void>;
     setStoreUser(session: SessionProps): Promise<void>;

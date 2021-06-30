@@ -79,10 +79,21 @@ export async function setStoreUser(session: SessionProps) {
     }
 }
 
-export async function deleteUser({ user }: SessionProps) {
-    const storeUsersRef = db.collection('storeUsers').doc(String(user?.id));
+export async function deleteUser({ context, user }: SessionProps) {
+    const storeHash = context?.split('/')[1] || '';
+    const docId = `${user?.id}_${storeHash}`;
+    const storeUsersRef = db.collection('storeUsers').doc(docId);
 
     await storeUsersRef.delete();
+}
+
+export async function hasStoreUser(storeHash: string, userId: string) {
+    if (!storeHash || !userId) return false;
+
+    const docId = `${userId}_${storeHash}`;
+    const userDoc = await db.collection('storeUsers').doc(docId).get();
+
+    return userDoc?.exists;
 }
 
 export async function getStoreToken(storeHash: string) {

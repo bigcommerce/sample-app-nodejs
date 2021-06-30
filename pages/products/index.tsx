@@ -10,7 +10,7 @@ import { TableItem } from '../../types';
 
 const Products = () => {
     const router = useRouter();
-    const { isError, isLoading, list = [] } = useProductList();
+    const { error, isLoading, list = [] } = useProductList();
     const tableItems: TableItem[] = list.map(({ id, inventory_level: stock, name, price }) => ({
         id,
         name,
@@ -41,7 +41,7 @@ const Products = () => {
     );
 
     if (isLoading) return <Loading />;
-    if (isError) return <ErrorMessage />;
+    if (error) return <ErrorMessage error={error} />;
 
     return (
         <Panel>

@@ -55,8 +55,19 @@ export async function setStoreUser(session: SessionProps) {
     }
 }
 
-export async function deleteUser({ user }: SessionProps) {
-    await query('DELETE FROM storeUsers WHERE userId = ?', String(user?.id));
+export async function deleteUser({ context, user }: SessionProps) {
+    const storeHash = context?.split('/')[1] || '';
+    const values = [String(user?.id), storeHash];
+    await query('DELETE FROM storeUsers WHERE userId = ? AND storeHash = ?', values);
+}
+
+export async function hasStoreUser(storeHash: string, userId: string) {
+    if (!storeHash || !userId) return false;
+
+    const values = [userId, storeHash];
+    const results = await query('SELECT * FROM storeUsers WHERE userId = ? AND storeHash = ? LIMIT 1', values);
+
+    return results.length > 0;
 }
 
 export async function getStoreToken(storeHash: string) {

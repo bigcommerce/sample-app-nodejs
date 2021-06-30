@@ -19,10 +19,6 @@
       "description": "Which type of database we are using. Options are 'mysql' or 'firebase'. Can safely leave unchanged.",
       "value": "mysql"
     },
-    "COOKIE_NAME":{
-      "description": "The cookie name to use for storing session data in the browser. Can safely leave unchanged.",
-      "value": "_bcsampleapp"
-    },
     "JWT_KEY":{
       "description": "Key the app will use for signing JWT. Can safely leave unchanged.",
       "generator": "secret"
