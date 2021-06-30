@@ -7,10 +7,16 @@ export interface User {
 export interface SessionProps {
     access_token?: string;
     context: string;
-    owner: User;
+    owner?: User;
     scope?: string;
     store_hash?: string;
     timestamp?: number;
+    user: User;
+}
+
+export interface SessionContextProps {
+    accessToken: string;
+    storeHash: string;
     user: User;
 }
 

@@ -1,4 +1,4 @@
-export function bigCommerceSDK() {
+export function bigCommerceSDK(context) {
     if (typeof window === "undefined") return;
 
     const s = 'script';
@@ -15,6 +15,10 @@ export function bigCommerceSDK() {
     bcjs.parentNode.insertBefore(js, bcjs);
 
     window.bcAsyncInit = function() {
-        Bigcommerce.init();
+        Bigcommerce.init({
+            onLogout: function() {
+                fetch(`/api/logout?context=${context}`);
+            },
+        });
     }
 }
