@@ -41,7 +41,7 @@ export function getBCVerify({ signed_payload }: QueryParams) {
     return bigcommerceSigned.verify(signed_payload);
 }
 
-export async function setSession(session: SessionProps) {
+export function setSession(session: SessionProps) {
     db.setUser(session);
     db.setStore(session);
 }
