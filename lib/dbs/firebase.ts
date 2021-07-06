@@ -53,7 +53,7 @@ export async function setStore(session: SessionProps) {
 // User management for multi-user apps
 // Use setStoreUser for storing store specific variables
 export async function setStoreUser(session: SessionProps) {
-    const { access_token: accessToken, context, user: { id: userId } } = session;
+    const { access_token: accessToken, context, owner, user: { id: userId } } = session;
     if (!userId) return null;
 
     const storeHash = context?.split('/')[1] || '';
@@ -72,9 +72,9 @@ export async function setStoreUser(session: SessionProps) {
             await ref.update({ isAdmin: true });
         }
     } else {
-        // Create a new user if it doesn't exist (non-store owners added here for multi-user apps)
+        // Create a new user if it doesn't exist
         if (!storeUser?.exists) {
-            await ref.set({ storeHash, isAdmin: false });
+            await ref.set({ storeHash, isAdmin: owner.id === userId }); // isAdmin true if owner == user
         }
     }
 }

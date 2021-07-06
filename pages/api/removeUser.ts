@@ -5,7 +5,7 @@ export default async function removeUser(req: NextApiRequest, res: NextApiRespon
     try {
         const session = await getBCVerify(req.query);
 
-        await removeUserData(res, session);
+        await removeUserData(session);
         res.status(200).end();
     } catch (error) {
         const { message, response } = error;
