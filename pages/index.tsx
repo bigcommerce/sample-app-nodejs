@@ -1,6 +1,5 @@
 import { Box, Flex, Panel, Text } from '@bigcommerce/big-design';
 import { useEffect } from 'react';
-import Header from '../components/header';
 import { useSession } from '../context/session';
 import { useProducts } from '../lib/hooks';
 
