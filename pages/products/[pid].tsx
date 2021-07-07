@@ -20,6 +20,9 @@ const ProductInfo = () => {
     const handleSubmit = async (data: FormData) => {
         try {
             const filteredList = list.filter(item => item.id !== Number(pid));
+            const { description, isVisible, name, price, type } = data;
+            const apiFormattedData = { description, is_visible: isVisible, name, price, type };
+
             // Update local data immediately (reduce latency to user)
             mutateList([...filteredList, { ...product, ...data }], false);
 
@@ -27,7 +30,7 @@ const ProductInfo = () => {
             await fetch(`/api/products/${pid}?context=${encodedContext}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
+                body: JSON.stringify(apiFormattedData),
             });
 
             // Refetch to validate local data
