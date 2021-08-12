@@ -7,7 +7,6 @@ This demo includes all of the files necessary to get started with a basic, hello
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/bigcommerce/sample-app-nodejs)
 
 To get the app running locally, follow these instructions:
-#dggd
 
 1. [Use Node 10+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#checking-your-version-of-npm-and-node-js)
 2. Install npm packages
