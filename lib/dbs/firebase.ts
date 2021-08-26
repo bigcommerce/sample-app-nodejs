@@ -39,7 +39,12 @@ export async function setUser({ user }: SessionProps) {
 }
 
 export async function setStore(session: SessionProps) {
-    const { access_token: accessToken, context, scope, user: { id } } = session;
+    const {
+        access_token: accessToken,
+        context,
+        scope,
+        user: { id },
+    } = session;
     // Only set on app install or update
     if (!accessToken || !scope) return null;
 
@@ -53,10 +58,17 @@ export async function setStore(session: SessionProps) {
 // User management for multi-user apps
 // Use setStoreUser for storing store specific variables
 export async function setStoreUser(session: SessionProps) {
-    const { access_token: accessToken, context, owner, user: { id: userId } } = session;
+    const {
+        access_token: accessToken,
+        context,
+        owner,
+        sub,
+        user: { id: userId },
+    } = session;
     if (!userId) return null;
 
-    const storeHash = context?.split('/')[1] || '';
+    const contextString = context ?? sub;
+    const storeHash = contextString?.split('/')[1] || '';
     const collection = db.collection('storeUsers');
     const documentId = `${userId}_${storeHash}`; // users can belong to multiple stores
     const ref = collection.doc(documentId);
@@ -79,8 +91,9 @@ export async function setStoreUser(session: SessionProps) {
     }
 }
 
-export async function deleteUser({ context, user }: SessionProps) {
-    const storeHash = context?.split('/')[1] || '';
+export async function deleteUser({ context, user, sub }: SessionProps) {
+    const contextString = context ?? sub;
+    const storeHash = contextString?.split('/')[1] || '';
     const docId = `${user?.id}_${storeHash}`;
     const storeUsersRef = db.collection('storeUsers').doc(docId);
 

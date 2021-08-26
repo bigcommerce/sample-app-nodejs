@@ -30,10 +30,11 @@ export async function setStore(session: SessionProps) {
 
 // Use setStoreUser for storing store specific variables
 export async function setStoreUser(session: SessionProps) {
-    const { access_token: accessToken, context, owner, user: { id: userId } } = session;
+    const { access_token: accessToken, context, owner, sub, user: { id: userId } } = session;
     if (!userId) return null;
 
-    const storeHash = context?.split('/')[1] || '';
+    const contextString = context ?? sub;
+    const storeHash = contextString?.split('/')[1] || '';
     const sql = 'SELECT * FROM storeUsers WHERE userId = ? AND storeHash = ?';
     const values = [String(userId), storeHash];
     const storeUser = await query(sql, values);
@@ -55,8 +56,9 @@ export async function setStoreUser(session: SessionProps) {
     }
 }
 
-export async function deleteUser({ context, user }: SessionProps) {
-    const storeHash = context?.split('/')[1] || '';
+export async function deleteUser({ context, user, sub }: SessionProps) {
+    const contextString = context ?? sub;
+    const storeHash = contextString?.split('/')[1] || '';
     const values = [String(user?.id), storeHash];
     await query('DELETE FROM storeUsers WHERE userId = ? AND storeHash = ?', values);
 }
