@@ -41,3 +41,27 @@ const productMock = {
 export const useProductInfo = jest.fn().mockImplementation(() => ({
     product: productMock,
 }));
+
+// useContext Mock
+export const useContext = jest.fn().mockImplementation(() => ({
+    appPID: '1234',
+    context: 'eysdfkj.2345qwfeup2fht2u34hg9hsafgp2tiuh',
+    setContext: jest.fn(),
+    setAppPID: jest.fn(),
+}));
+
+// useAlerts Mock
+export const useAlerts = jest.fn().mockImplementation(() => ({
+    add: jest.fn(),
+    remove: jest.fn(),
+}));
+
+// useSubscription Mock
+export const useSubscription = jest.fn().mockImplementation(() => ({
+    subscription: {
+        pid: '2',
+        showPaidWelcome: false,
+        isPaidApp: true,
+        trialEndDate: Date.now(),
+    },
+}));

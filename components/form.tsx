@@ -1,4 +1,4 @@
-import { Button, Checkbox, Flex, FormGroup, Input, Panel, Select, Form as StyledForm, Textarea } from '@bigcommerce/big-design';
+import { Box, Button, Checkbox, Flex, FormGroup, Input, Panel, Select, Form as StyledForm, Textarea } from '@bigcommerce/big-design';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { FormData, StringKeyValue } from '../types';
 
@@ -48,78 +48,80 @@ const Form = ({ formData, onCancel, onSubmit }: FormProps) => {
     };
 
     return (
-        <StyledForm onSubmit={handleSubmit}>
-            <Panel header="Basic Information">
-                <FormGroup>
-                    <Input
-                        error={errors?.name}
-                        label="Product name"
-                        name="name"
-                        required
-                        value={form.name}
-                        onChange={handleChange}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Select
-                        label="Product type"
-                        name="type"
-                        options={[
-                            { value: 'physical', content: 'Physical' },
-                            { value: 'digital', content: 'Digital' }
-                        ]}
-                        required
-                        value={form.type}
-                        onOptionChange={handleSelectChange}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Input
-                        error={errors?.price}
-                        iconLeft={'$'}
-                        label="Default price (excluding tax)"
-                        name="price"
-                        placeholder="10.00"
-                        required
-                        type="number"
-                        step="0.01"
-                        value={form.price}
-                        onChange={handleChange}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Checkbox
-                        name="isVisible"
-                        checked={form.isVisible}
-                        onChange={handleCheckboxChange}
-                        label="Visible on storefront"
-                    />
-                </FormGroup>
-            </Panel>
-            <Panel header="Description">
-                <FormGroup>
-                    {/* Using description for demo purposes. Consider using a wysiwig instead (e.g. TinyMCE) */}
-                    <Textarea
-                        label="Description"
-                        name="description"
-                        placeholder="Product info"
-                        value={form.description}
-                        onChange={handleChange}
-                    />
-                </FormGroup>
-            </Panel>
-            <Flex justifyContent="flex-end">
-                <Button
-                    marginRight="medium"
-                    type="button"
-                    variant="subtle"
-                    onClick={onCancel}
-                >
-                    Cancel
-                </Button>
-                <Button type="submit">Save</Button>
-            </Flex>
-        </StyledForm>
+        <Box marginHorizontal="xxxLarge">
+            <StyledForm onSubmit={handleSubmit}>
+                <Panel header="Basic Information">
+                    <FormGroup>
+                        <Input
+                            error={errors?.name}
+                            label="Product name"
+                            name="name"
+                            required
+                            value={form.name}
+                            onChange={handleChange}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Select
+                            label="Product type"
+                            name="type"
+                            options={[
+                                { value: 'physical', content: 'Physical' },
+                                { value: 'digital', content: 'Digital' }
+                            ]}
+                            required
+                            value={form.type}
+                            onOptionChange={handleSelectChange}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Input
+                            error={errors?.price}
+                            iconLeft={'$'}
+                            label="Default price (excluding tax)"
+                            name="price"
+                            placeholder="10.00"
+                            required
+                            type="number"
+                            step="0.01"
+                            value={form.price}
+                            onChange={handleChange}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Checkbox
+                            name="isVisible"
+                            checked={form.isVisible}
+                            onChange={handleCheckboxChange}
+                            label="Visible on storefront"
+                        />
+                    </FormGroup>
+                </Panel>
+                <Panel header="Description">
+                    <FormGroup>
+                        {/* Using description for demo purposes. Consider using a wysiwig instead (e.g. TinyMCE) */}
+                        <Textarea
+                            label="Description"
+                            name="description"
+                            placeholder="Product info"
+                            value={form.description}
+                            onChange={handleChange}
+                        />
+                    </FormGroup>
+                </Panel>
+                <Flex justifyContent="flex-end">
+                    <Button
+                        marginRight="medium"
+                        type="button"
+                        variant="subtle"
+                        onClick={onCancel}
+                    >
+                        Cancel
+                    </Button>
+                    <Button type="submit">Save</Button>
+                </Flex>
+            </StyledForm>
+        </Box>
     );
 };
 

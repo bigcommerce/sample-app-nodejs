@@ -1,8 +1,9 @@
-import { Box, Button, H1, HR, Text } from '@bigcommerce/big-design';
+import { Box, Button, Flex, H1, HR, Text } from '@bigcommerce/big-design';
 import { ArrowBackIcon } from '@bigcommerce/big-design-icons';
 import { useRouter } from 'next/router';
 import { useProductList } from '../lib/hooks';
 import { TabIds, TabRoutes } from './header';
+import { TopBar } from './topBar';
 
 const InnerHeader = () => {
     const router = useRouter();
@@ -13,15 +14,18 @@ const InnerHeader = () => {
     const handleBackClick = () => router.push(TabRoutes[TabIds.PRODUCTS]);
 
     return (
-        <Box marginBottom="xxLarge">
-            <Button iconLeft={<ArrowBackIcon color="secondary50" />} variant="subtle" onClick={handleBackClick}>
-                <Text bold color="secondary50">Products</Text>
-            </Button>
-            {name &&
-                <H1>{name}</H1>
-            }
-            <HR color="secondary30" />
-        </Box>
+        <Flex flexDirection="column">
+            <TopBar />
+            <Box marginBottom="xxLarge" marginHorizontal="xxxLarge">
+                <Button iconLeft={<ArrowBackIcon color="secondary50" />} variant="subtle" onClick={handleBackClick}>
+                    <Text bold color="secondary50">Products</Text>
+                </Button>
+                {name &&
+                    <H1>{name}</H1>
+                }
+                <HR color="secondary30" />
+            </Box>
+        </Flex>
     );
 };
 

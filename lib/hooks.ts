@@ -1,4 +1,7 @@
+import { useContext, useMemo } from 'react';
 import useSWR from 'swr';
+
+import { AlertsContext } from '../context/alerts';
 import { useSession } from '../context/session';
 import { ErrorProps, ListItem, Order, QueryParams, ShippingAndProductsInfo } from '../types';
 
@@ -14,6 +17,30 @@ async function fetcher(url: string, query: string) {
     }
 
     return res.json();
+}
+
+export function useAlerts() {
+    const alertsContext = useContext(AlertsContext);
+
+    if (!alertsContext) {
+        throw new Error('useAlerts must be used within an <AlertsProvider>');
+    }
+
+    return useMemo(() => ({
+        add: alertsContext.add,
+        remove: alertsContext.remove,
+    }), [alertsContext]);
+}
+
+export function useSubscription() {
+    const encodedContext = useSession()?.context;
+    const { data, error } = useSWR(encodedContext ? ['/api/subscription', encodedContext] : null, fetcher);
+
+    return {
+        subscription: data,
+        isLoading: !data && !error,
+        error,
+    };
 }
 
 // Reusable SWR hooks
