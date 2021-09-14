@@ -19,7 +19,7 @@
     "firebase": "^8.2.6",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
-    "next": "^10.2.3",
+    "next": "^11.1.1",
     "node-bigcommerce": "bigcommerce/node-bigcommerce",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
