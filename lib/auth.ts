@@ -7,7 +7,7 @@ import db from './db';
 const { AUTH_CALLBACK, CLIENT_ID, CLIENT_SECRET, JWT_KEY } = process.env;
 
 // Create BigCommerce instance
-// https://github.com/getconversio/node-bigcommerce
+// https://github.com/bigcommerce/node-bigcommerce/
 const bigcommerce = new BigCommerce({
     logLevel: 'info',
     clientId: CLIENT_ID,
@@ -15,12 +15,12 @@ const bigcommerce = new BigCommerce({
     callback: AUTH_CALLBACK,
     responseType: 'json',
     headers: { 'Accept-Encoding': '*' },
-    apiVersion: 'v3'
+    apiVersion: 'v3',
 });
 
 const bigcommerceSigned = new BigCommerce({
     secret: CLIENT_SECRET,
-    responseType: 'json'
+    responseType: 'json',
 });
 
 export function bigcommerceClient(accessToken: string, storeHash: string) {
@@ -29,7 +29,7 @@ export function bigcommerceClient(accessToken: string, storeHash: string) {
         accessToken,
         storeHash,
         responseType: 'json',
-        apiVersion: 'v3'
+        apiVersion: 'v3',
     });
 }
 // Authorizes app on install
@@ -37,8 +37,8 @@ export function getBCAuth(query: QueryParams) {
     return bigcommerce.authorize(query);
 }
 // Verifies app on load/ uninstall
-export function getBCVerify({ signed_payload }: QueryParams) {
-    return bigcommerceSigned.verify(signed_payload);
+export function getBCVerify({ signed_payload_jwt }: QueryParams) {
+    return bigcommerceSigned.verifyJWT(signed_payload_jwt);
 }
 
 export function setSession(session: SessionProps) {
@@ -64,7 +64,8 @@ export async function getSession({ query: { context = '' } }: NextApiRequest) {
 
 // JWT functions to sign/ verify 'context' query param from /api/auth||load
 export function encodePayload({ user, owner, ...session }: SessionProps) {
-    const context = session?.context?.split('/')[1] || '';
+    const contextString = session?.context ?? session?.sub;
+    const context = contextString.split('/')[1] || '';
 
     return jwt.sign({ context, user, owner }, JWT_KEY, { expiresIn: '24h' });
 }

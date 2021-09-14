@@ -20,7 +20,7 @@
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "next": "^10.2.3",
-    "node-bigcommerce": "^4.1.0",
+    "node-bigcommerce": "bigcommerce/node-bigcommerce",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^4.4.1",

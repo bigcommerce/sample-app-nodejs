@@ -10,6 +10,7 @@ export interface SessionProps {
     owner?: User;
     scope?: string;
     store_hash?: string;
+    sub?: string;
     timestamp?: number;
     user: User;
 }
