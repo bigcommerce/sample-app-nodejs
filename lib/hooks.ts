@@ -1,9 +1,9 @@
 import useSWR from 'swr';
 import { useSession } from '../context/session';
-import { ErrorProps, ListItem } from '../types';
+import { ErrorProps, ListItem, QueryParams } from '../types';
 
-async function fetcher(url: string, encodedContext: string) {
-    const res = await fetch(`${url}?context=${encodedContext}`);
+async function fetcher(url: string, query: string) {
+    const res = await fetch(`${url}?${query}`);
 
     // If the status code is not in the range 200-299, throw an error
     if (!res.ok) {
@@ -19,9 +19,10 @@ async function fetcher(url: string, encodedContext: string) {
 // Reusable SWR hooks
 // https://swr.vercel.app/
 export function useProducts() {
-    const encodedContext = useSession()?.context;
+    const { context } = useSession();
+    const params = new URLSearchParams({ context }).toString();
     // Request is deduped and cached; Can be shared across components
-    const { data, error } = useSWR(encodedContext ? ['/api/products', encodedContext] : null, fetcher);
+    const { data, error } = useSWR(context ? ['/api/products', params] : null, fetcher);
 
     return {
         summary: data,
@@ -30,13 +31,16 @@ export function useProducts() {
     };
 }
 
-export function useProductList() {
-    const encodedContext = useSession()?.context;
+export function useProductList(query?: QueryParams) {
+    const { context } = useSession();
+    const params = new URLSearchParams({ ...query, context }).toString();
+
     // Use an array to send multiple arguments to fetcher
-    const { data, error, mutate: mutateList } = useSWR(encodedContext ? ['/api/products/list', encodedContext] : null, fetcher);
+    const { data, error, mutate: mutateList } = useSWR(context ? ['/api/products/list', params] : null, fetcher);
 
     return {
-        list: data,
+        list: data?.data,
+        meta: data?.meta,
         isLoading: !data && !error,
         error,
         mutateList,
@@ -44,10 +48,11 @@ export function useProductList() {
 }
 
 export function useProductInfo(pid: number, list: ListItem[]) {
-    const encodedContext = useSession()?.context;
+    const { context } = useSession();
+    const params = new URLSearchParams({ context }).toString();
     const product = list.find(item => item.id === pid);
     // Conditionally fetch product if it doesn't exist in the list (e.g. deep linking)
-    const { data, error } = useSWR(!product && encodedContext ? [`/api/products/${pid}`, encodedContext] : null, fetcher);
+    const { data, error } = useSWR(!product && context ? [`/api/products/${pid}`, params] : null, fetcher);
 
     return {
         product: product ?? data,

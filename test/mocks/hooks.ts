@@ -26,6 +26,7 @@ const generateList = (): TableItem[] => (
 
 export const useProductList = jest.fn().mockImplementation(() => ({
     list: generateList(),
+    meta: { pagination: { total: ROW_NUMBERS } }
 }));
 
 // useProductInfo Mock
