@@ -60,3 +60,15 @@ export function useProductInfo(pid: number, list: ListItem[]) {
         error,
     };
 }
+
+export function useOrderInfo(oid: number) {
+    const context = useSession()?.context;
+    const params = new URLSearchParams({ context }).toString();
+    const { data, error } = useSWR(context ? [`/api/orders/${oid}`, params] : null, fetcher);
+
+    return {
+        order: data,
+        isLoading: !data && !error,
+        error,
+    };
+}

@@ -17,9 +17,14 @@ const InnerRoutes = [
     '/products/[pid]',
 ];
 
+const HeadlessRoutes = [
+    '/orders/[oid]',
+]
+
 const HeaderTypes = {
     GLOBAL: 'global',
-    INNER: 'inner',
+    HEADLESS: 'headless',
+    INNER: 'inner', 
 };
 
 const Header = () => {
@@ -32,6 +37,8 @@ const Header = () => {
         if (InnerRoutes.includes(pathname)) {
             // Use InnerHeader if route matches inner routes
             setHeaderType(HeaderTypes.INNER);
+        } else if (HeadlessRoutes.includes(pathname)) {
+            setHeaderType(HeaderTypes.HEADLESS);
         } else {
             // Check if new route matches TabRoutes
             const tabKey = Object.keys(TabRoutes).find(key => TabRoutes[key] === pathname);
@@ -60,6 +67,7 @@ const Header = () => {
     };
 
     if (headerType === HeaderTypes.INNER) return <InnerHeader />;
+    if (headerType === HeaderTypes.HEADLESS) return null;
 
     return (
         <Box marginBottom="xxLarge">
