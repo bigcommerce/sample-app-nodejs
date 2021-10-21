@@ -22,13 +22,12 @@ if (!firebase.apps.length) {
 const db = firebase.firestore();
 
 // Firestore data management functions
-export async function setUser({ context, user }: SessionProps) {
+export async function setUser({ user }: SessionProps) {
     if (!user) return null;
 
     const { email, id, username } = user;
-    const storeHash = context?.split('/')[1] || '';
     const ref = db.collection('users').doc(String(id));
-    const data: UserData = { email, storeHash };
+    const data: UserData = { email };
 
     if (username) {
         data.username = username;

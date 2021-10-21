@@ -6,9 +6,7 @@ export default async function list(req: NextApiRequest, res: NextApiResponse) {
         const { accessToken, storeHash } = await getSession(req);
         const bigcommerce = bigcommerceClient(accessToken, storeHash);
         // Optional: pass in API params here
-        const params = [
-            'limit=11',
-        ].join('&');
+        const params = new URLSearchParams({ limit: '11' }).toString();
 
         const { data } = await bigcommerce.get(`/catalog/products?${params}`);
         res.status(200).json(data);
