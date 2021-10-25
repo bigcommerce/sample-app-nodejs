@@ -1,7 +1,7 @@
 import * as BigCommerce from 'node-bigcommerce';
 
 // Create BigCommerce instance
-// https://github.com/getconversio/node-bigcommerce
+// https://github.com/bigcommerce/node-bigcommerce
 const bigcommerce = new BigCommerce({
     logLevel: 'info',
     clientId: process.env.CLIENT_ID,
@@ -9,12 +9,12 @@ const bigcommerce = new BigCommerce({
     callback: process.env.AUTH_CALLBACK,
     responseType: 'json',
     headers: { 'Accept-Encoding': '*' },
-    apiVersion: 'v3'
+    apiVersion: 'v3',
 });
 
 const bigcommerceSigned = new BigCommerce({
     secret: process.env.CLIENT_SECRET,
-    responseType: 'json'
+    responseType: 'json',
 });
 
 interface QueryParams {
@@ -25,6 +25,6 @@ export function getBCAuth(query: QueryParams) {
     return bigcommerce.authorize(query);
 }
 
-export function getBCVerify({ signed_payload }: QueryParams) {
-    return bigcommerceSigned.verify(signed_payload);
+export function getBCVerify({ signed_payload_jwt }: QueryParams) {
+    return bigcommerceSigned.verifyJWT(signed_payload_jwt);
 }
