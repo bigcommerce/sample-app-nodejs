@@ -8,7 +8,6 @@ export interface StoreData {
 
 export interface UserData {
     email: string;
-    storeHash: string;
     username?: string;
 }
 
