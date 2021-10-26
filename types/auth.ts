@@ -10,6 +10,7 @@ export interface SessionProps {
     user: User;
     context: string;
     store_hash?: string;
+    sub?: string;
     timestamp?: number;
 }
 

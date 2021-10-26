@@ -5,13 +5,11 @@ import { SessionProps, StoreData } from '../../types';
 const connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
 const query = promisify(connection.query.bind(connection));
 
-export async function setUser({ context, user }: SessionProps) {
+export async function setUser({ user }: SessionProps) {
     if (!user) return null;
 
     const { email, id, username } = user;
-    const storeHash = context?.split('/')[1] || '';
-
-    const userData = { email, userId: id, storeHash, username };
+    const userData = { email, userId: id, username };
 
     await query('REPLACE INTO users SET ?', userData);
 }
