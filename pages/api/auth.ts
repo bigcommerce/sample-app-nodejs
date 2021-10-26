@@ -5,8 +5,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     try {
         // Authenticate the app on install
         const session = await getBCAuth(req.query);
-        const storeHash = session?.context?.split('/')[1] || '';
-        const encodedContext = encodePayload(storeHash); // Signed JWT to validate/ prevent tampering
+        const encodedContext = encodePayload(session); // Signed JWT to validate/ prevent tampering
 
         await setSession(session);
         res.redirect(302, `/?context=${encodedContext}`);

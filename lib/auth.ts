@@ -7,7 +7,7 @@ import db from './db';
 const { AUTH_CALLBACK, CLIENT_ID, CLIENT_SECRET, JWT_KEY } = process.env;
 
 // Create BigCommerce instance
-// https://github.com/getconversio/node-bigcommerce
+// https://github.com/bigcommerce/node-bigcommerce
 const bigcommerce = new BigCommerce({
     logLevel: 'info',
     clientId: CLIENT_ID,
@@ -15,12 +15,12 @@ const bigcommerce = new BigCommerce({
     callback: AUTH_CALLBACK,
     responseType: 'json',
     headers: { 'Accept-Encoding': '*' },
-    apiVersion: 'v3'
+    apiVersion: 'v3',
 });
 
 const bigcommerceSigned = new BigCommerce({
     secret: CLIENT_SECRET,
-    responseType: 'json'
+    responseType: 'json',
 });
 
 export function bigcommerceClient(accessToken: string, storeHash: string) {
@@ -37,8 +37,8 @@ export function getBCAuth(query: QueryParams) {
     return bigcommerce.authorize(query);
 }
 
-export function getBCVerify({ signed_payload }: QueryParams) {
-    return bigcommerceSigned.verify(signed_payload);
+export function getBCVerify({ signed_payload_jwt }: QueryParams) {
+    return bigcommerceSigned.verifyJWT(signed_payload_jwt);
 }
 
 export function setSession(session: SessionProps) {
@@ -54,11 +54,15 @@ export async function getSession({ query: { context = '' } }: NextApiRequest) {
     return { accessToken, storeHash: decodedContext };
 }
 
-export async function removeSession(res: NextApiResponse, session: SessionProps) {
+// Removes store and storeUser on uninstall
+export async function removeDataStore(res: NextApiResponse, session: SessionProps) {
     await db.deleteStore(session);
 }
 
-export function encodePayload(context: string) {
+export function encodePayload({ ...session }: SessionProps) {
+    const contextString = session?.context ?? session?.sub;
+    const context = contextString.split('/')[1] || '';
+
     return jwt.sign({ context }, JWT_KEY, { expiresIn: '24h' });
 }
 
