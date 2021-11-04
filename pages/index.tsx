@@ -1,18 +1,11 @@
 import { Box, Flex, H1, H4, Panel } from '@bigcommerce/big-design';
-import { useEffect } from 'react';
 import styled from 'styled-components';
 import ErrorMessage from '../components/error';
 import Loading from '../components/loading';
-import { useSession } from '../context/session';
 import { useProducts } from '../lib/hooks';
 
-const Index = ({ context }: { context: string }) => {
+const Index = () => {
     const { error, isLoading, summary } = useProducts();
-    const { setContext } = useSession();
-
-    useEffect(() => {
-        if (context) setContext(context);
-    }, [context, setContext]);
 
     if (isLoading) return <Loading />;
     if (error) return <ErrorMessage error={error} />;
@@ -36,10 +29,6 @@ const Index = ({ context }: { context: string }) => {
         </Panel>
     );
 };
-
-export const getServerSideProps = async ({ query }) => ({
-    props: { context: query?.context ?? '' }
-});
 
 const StyledBox = styled(Box)`
     min-width: 10rem;
