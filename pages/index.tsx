@@ -1,15 +1,8 @@
 import { Box, Flex, Panel, Text } from '@bigcommerce/big-design';
-import { useEffect } from 'react';
-import { useSession } from '../context/session';
 import { useProducts } from '../lib/hooks';
 
-const Index = ({ context }: { context: string }) => {
+const Index = () => {
     const { summary } = useProducts();
-    const { setContext } = useSession();
-
-    useEffect(() => {
-        if (context) setContext(context);
-    }, [context, setContext]);
 
     return (
         <Panel header="Homepage">
