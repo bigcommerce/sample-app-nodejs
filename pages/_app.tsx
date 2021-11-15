@@ -1,11 +1,13 @@
 import { Box, GlobalStyles } from '@bigcommerce/big-design';
+import { theme as defaultTheme } from '@bigcommerce/big-design-theme';
 import type { AppProps } from 'next/app';
+import { ThemeProvider } from 'styled-components';
 import Header from '../components/header';
 import SessionProvider from '../context/session';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
-        <>
+        <ThemeProvider theme={defaultTheme}>
             <GlobalStyles />
             <Box marginHorizontal="xxxLarge" marginVertical="xxLarge">
                 <Header />
@@ -13,7 +15,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                     <Component {...pageProps} />
                 </SessionProvider>
             </Box>
-        </>
+        </ThemeProvider>
     );
 };
 
