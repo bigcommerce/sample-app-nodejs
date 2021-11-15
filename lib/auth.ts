@@ -23,15 +23,16 @@ const bigcommerceSigned = new BigCommerce({
     responseType: 'json',
 });
 
-export function bigcommerceClient(accessToken: string, storeHash: string) {
+export function bigcommerceClient(accessToken: string, storeHash: string, apiVersion = 'v3') {
     return new BigCommerce({
         clientId: CLIENT_ID,
         accessToken,
         storeHash,
         responseType: 'json',
-        apiVersion: 'v3',
+        apiVersion,
     });
 }
+
 // Authorizes app on install
 export function getBCAuth(query: QueryParams) {
     return bigcommerce.authorize(query);

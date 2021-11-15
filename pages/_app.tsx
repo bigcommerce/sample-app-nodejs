@@ -9,7 +9,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
         <ThemeProvider theme={defaultTheme}>
             <GlobalStyles />
-            <Box marginHorizontal="xxxLarge" marginVertical="xxLarge">
+            <Box
+                marginHorizontal={{ mobile: 'none', tablet: 'xxxLarge' }}
+                marginVertical={{ mobile: 'none', tablet: "xxLarge" }}
+            >
                 <Header />
                 <SessionProvider>
                     <Component {...pageProps} />

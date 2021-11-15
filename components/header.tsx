@@ -13,6 +13,11 @@ export const TabRoutes = {
     [TabIds.PRODUCTS]: '/products',
 };
 
+const HeaderlessRoutes = [
+    '/orders/[orderId]/labels',
+    '/orders/[orderId]/modal',
+]
+
 const InnerRoutes = [
     '/products/[pid]',
 ];
@@ -20,6 +25,7 @@ const InnerRoutes = [
 const HeaderTypes = {
     GLOBAL: 'global',
     INNER: 'inner',
+    HEADERLESS: 'headerless',
 };
 
 const Header = () => {
@@ -32,6 +38,8 @@ const Header = () => {
         if (InnerRoutes.includes(pathname)) {
             // Use InnerHeader if route matches inner routes
             setHeaderType(HeaderTypes.INNER);
+        } else if (HeaderlessRoutes.includes(pathname)) {
+            setHeaderType(HeaderTypes.HEADERLESS);
         } else {
             // Check if new route matches TabRoutes
             const tabKey = Object.keys(TabRoutes).find(key => TabRoutes[key] === pathname);
@@ -59,6 +67,7 @@ const Header = () => {
         return router.push(TabRoutes[tabId]);
     };
 
+    if (headerType === HeaderTypes.HEADERLESS) return null;
     if (headerType === HeaderTypes.INNER) return <InnerHeader />;
 
     return (
