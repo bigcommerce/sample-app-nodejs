@@ -8,7 +8,7 @@ This demo includes all of the files necessary to get started with a basic, hello
 
 To get the app running locally, follow these instructions:
 
-1. [Use Node 10+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#checking-your-version-of-npm-and-node-js)
+1. [Use Node 10+ and NPM 7+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#checking-your-version-of-npm-and-node-js)
 2. Install npm packages
     - `npm install`
 3. [Add and start ngrok.](https://www.npmjs.com/package/ngrok#usage) Note: use port 3000 to match Next's server.
