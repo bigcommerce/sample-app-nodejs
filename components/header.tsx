@@ -14,9 +14,10 @@ export const TabRoutes = {
 };
 
 const HeaderlessRoutes = [
+    '/orders/[orderId]',
     '/orders/[orderId]/labels',
     '/orders/[orderId]/modal',
-]
+];
 
 const InnerRoutes = [
     '/products/[pid]',

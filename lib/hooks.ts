@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { useSession } from '../context/session';
-import { ErrorProps, ListItem, Order, QueryParams } from '../types';
+import { ErrorProps, ListItem, Order, QueryParams, ShippingAndProductsInfo } from '../types';
 
 async function fetcher(url: string, query: string) {
     const res = await fetch(`${url}?${query}`);
@@ -68,6 +68,23 @@ export const useOrder = (orderId: number) => {
 
     // Conditionally fetch orderId is defined
     const { data, error } = useSWR<Order, ErrorProps>(shouldFetch ? [`/api/orders/${orderId}`, params] : null, fetcher);
+
+    return {
+        order: data,
+        isLoading: !data && !error,
+        error,
+    };
+}
+
+export const useShippingAndProductsInfo = (orderId: number) => {
+    const { context } = useSession();
+    const params = new URLSearchParams({ context }).toString();
+    const shouldFetch = context && orderId !== undefined;
+
+    // Shipping addresses and products are not included in the order data and need to be fetched separately
+    const { data, error } = useSWR<ShippingAndProductsInfo, ErrorProps>(
+        shouldFetch ? [`/api/orders/${orderId}/shipping_products`, params] : null, fetcher
+    );
 
     return {
         order: data,

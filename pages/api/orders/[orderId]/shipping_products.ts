@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { bigcommerceClient, getSession } from '../../../../lib/auth';
 
-export default async function orderId(req: NextApiRequest, res: NextApiResponse) {
+export default async function shippingAddressesAndProducts(req: NextApiRequest, res: NextApiResponse) {
     const {
         query: { orderId },
         method,
@@ -13,9 +13,10 @@ export default async function orderId(req: NextApiRequest, res: NextApiResponse)
 
         switch (method) {
             case 'GET': {
-                const data = await bigcommerce.get(`/orders/${orderId}`);
+                const shipping_addresses = await bigcommerce.get(`/orders/${orderId}/shipping_addresses`);
+                const products =  await bigcommerce.get(`/orders/${orderId}/products`);
 
-                res.status(200).json(data);
+                res.status(200).json({ shipping_addresses, products });
 
                 break;
             }
