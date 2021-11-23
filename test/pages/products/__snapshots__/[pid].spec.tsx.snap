@@ -2,38 +2,38 @@
 
 exports[`Product Info Form renders correctly 1`] = `
 <form
-  class="styled__StyledForm-qzey9b-0 fcYVUB"
+  class="styled__StyledForm-sc-qzey9b-0 zFNrn"
 >
   <div
-    class="styled__StyledBox-sj5f1m-0 htmbUi styled__StyledPanel-sc-1h6ef3q-0 jooDHr"
+    class="styled__StyledBox-sc-sj5f1m-0 enCgpJ styled__StyledPanel-sc-1h6ef3q-0 ckPgGY"
   >
     <div
-      class="styled__StyledBox-sj5f1m-0 jvmRZj styled__StyledFlex-hcvk8l-0 kObzyk"
+      class="styled__StyledBox-sc-sj5f1m-0 gpwFUN styled__StyledFlex-sc-hcvk8l-0 dLyzVq"
     >
       <h2
-        class="styled__StyledH2-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 fJTAEy"
+        class="styled__StyledH2-sc-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 knwcSP ctLPEl"
       >
         Basic Information
       </h2>
     </div>
     <div
-      class="styled__StyledInlineGroup-sc-1a6yr6l-2 jCnZYy"
+      class="styled__StyledInlineGroup-sc-1a6yr6l-2 grBQKM"
     >
       <div>
         <label
-          class="styled__StyledH4-tqnj75-4 styled__StyledLabel-m3fyue-0 dXrVUw"
+          class="styled__StyledH4-sc-tqnj75-4 styled__StyledLabel-sc-m3fyue-0 XWDyH fvPiaY"
           for="bd-input-1"
         >
           Product name
         </label>
         <span
-          class="styled__StyledInputWrapper-g32raa-0 DGFME"
+          class="styled__StyledInputWrapper-sc-g32raa-0 glaetd"
         >
           <div
-            class="styled__StyledInputContent-g32raa-3 dZqoEc"
+            class="styled__StyledInputContent-sc-g32raa-3 gAOwyA"
           >
             <input
-              class="styled__StyledInput-g32raa-1 guXifo"
+              class="styled__StyledInput-sc-g32raa-1 hplKoP"
               id="bd-input-1"
               name="name"
               required=""
@@ -44,11 +44,11 @@ exports[`Product Info Form renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="styled__StyledInlineGroup-sc-1a6yr6l-2 jCnZYy"
+      class="styled__StyledInlineGroup-sc-1a6yr6l-2 grBQKM"
     >
       <div>
         <label
-          class="styled__StyledH4-tqnj75-4 styled__StyledLabel-m3fyue-0 dXrVUw"
+          class="styled__StyledH4-sc-tqnj75-4 styled__StyledLabel-sc-m3fyue-0 XWDyH fvPiaY"
           for="bd-select-2-input"
           id="bd-select-2-label"
         >
@@ -61,21 +61,21 @@ exports[`Product Info Form renders correctly 1`] = `
           role="combobox"
         >
           <div
-            class="styled__StyledInputContainer-sc-1v66t78-2 hYKybX"
+            class="styled__StyledInputContainer-sc-1v66t78-2 iRiZWs"
           >
             <div>
               <span
-                class="styled__StyledInputWrapper-g32raa-0 DGFME"
+                class="styled__StyledInputWrapper-sc-g32raa-0 glaetd"
               >
                 <div
-                  class="styled__StyledInputContent-g32raa-3 dZqoEc"
+                  class="styled__StyledInputContent-sc-g32raa-3 gAOwyA"
                 >
                   <input
                     aria-autocomplete="list"
                     aria-controls="bd-select-2-menu"
                     aria-labelledby="bd-select-2-label"
                     autocomplete="off"
-                    class="styled__StyledInput-g32raa-1 bmlNhQ"
+                    class="styled__StyledInput-sc-g32raa-1 emgCNX"
                     id="bd-select-2-input"
                     name="type"
                     required=""
@@ -83,71 +83,78 @@ exports[`Product Info Form renders correctly 1`] = `
                   />
                 </div>
                 <div
-                  class="styled__StyledIconWrapper-g32raa-2 crTPTg"
+                  class="styled__StyledIconWrapper-sc-g32raa-2 gARrkz"
                 >
                   <button
                     aria-label="toggle menu"
-                    class="styled__StyledButton-sc-3yq204-0 styled__DropdownButton-sc-1v66t78-3 jaofCM"
+                    class="styled__StyledButton-sc-3yq204-0 eqhTYT styled__DropdownButton-sc-1v66t78-3 iLDoPU"
                     id="bd-select-2-toggle-button"
                     tabindex="-1"
                     type="button"
                   >
-                    <svg
-                      class="base__StyledIcon-a9u0e1-0 gqewKr styled__StyledDropdownIcon-sc-1v66t78-1 cseddx"
-                      fill="currentColor"
-                      height="24"
-                      stroke="currentColor"
-                      stroke-width="0"
-                      viewBox="0 0 24 24"
-                      width="24"
+                    <span
+                      class="styled__ContentWrapper-sc-3yq204-1 cUjwBq"
                     >
-                      <path
-                        d="M0 0h24v24H0V0z"
-                        fill="none"
-                      />
-                      <path
-                        d="M8.71 11.71l2.59 2.59c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.18-1.71-.71-1.71H9.41c-.89 0-1.33 1.08-.7 1.71z"
-                      />
-                    </svg>
+                      <svg
+                        class="base__StyledIcon-sc-a9u0e1-0 cvBUKU styled__StyledDropdownIcon-sc-1v66t78-1 kXlJek"
+                        fill="currentColor"
+                        height="24"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 24 24"
+                        width="24"
+                      >
+                        <path
+                          d="M0 0h24v24H0V0z"
+                          fill="none"
+                        />
+                        <path
+                          d="M8.71 11.71l2.59 2.59c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.18-1.71-.71-1.71H9.41c-.89 0-1.33 1.08-.7 1.71z"
+                        />
+                      </svg>
+                    </span>
                   </button>
                 </div>
               </span>
             </div>
           </div>
         </div>
-        <ul
-          aria-labelledby="bd-select-2-label"
-          class="styled__StyledList-sc-5w3dcq-0 pzdvE"
-          data-placement="bottom-start"
-          id="bd-select-2-menu"
-          role="listbox"
+        <div
+          class="styled__StyledBox-sc-sj5f1m-0 cHtRki"
           style="position: absolute; left: 0px; top: 0px; transform: translate(0px, 4px);"
-        />
+        >
+          <ul
+            aria-labelledby="bd-select-2-label"
+            class="styled__StyledList-sc-5w3dcq-0 eMCzaV"
+            id="bd-select-2-menu"
+            role="listbox"
+          />
+        </div>
       </div>
     </div>
     <div
-      class="styled__StyledInlineGroup-sc-1a6yr6l-2 jCnZYy"
+      class="styled__StyledInlineGroup-sc-1a6yr6l-2 grBQKM"
     >
       <div>
         <label
-          class="styled__StyledH4-tqnj75-4 styled__StyledLabel-m3fyue-0 dXrVUw"
+          class="styled__StyledH4-sc-tqnj75-4 styled__StyledLabel-sc-m3fyue-0 XWDyH fvPiaY"
           for="bd-input-5"
         >
           Default price (excluding tax)
         </label>
         <span
-          class="styled__StyledInputWrapper-g32raa-0 DGFME"
+          class="styled__StyledInputWrapper-sc-g32raa-0 glaetd"
         >
           <div
-            class="styled__StyledIconWrapper-g32raa-2 hMLXGI"
+            class="styled__StyledIconWrapper-sc-g32raa-2 fEPRss"
           >
             $
           </div>
           <div
-            class="styled__StyledInputContent-g32raa-3 dZqoEc"
+            class="styled__StyledInputContent-sc-g32raa-3 gAOwyA"
           >
             <input
-              class="styled__StyledInput-g32raa-1 bzntjL"
+              class="styled__StyledInput-sc-g32raa-1 iNmSrs"
               id="bd-input-5"
               name="price"
               placeholder="10.00"
@@ -161,25 +168,25 @@ exports[`Product Info Form renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="styled__StyledGroup-sc-1a6yr6l-1 llfHep"
+      class="styled__StyledGroup-sc-1a6yr6l-1 iSdXQG"
     >
       <div
-        class="styled__CheckboxContainer-s1u0st-1 kzragh"
+        class="styled__CheckboxContainer-sc-s1u0st-1 gsuNDM"
       >
         <input
           aria-labelledby="bd-checkbox_label-7"
-          class="styled__HiddenCheckbox-s1u0st-2 bDurHK"
+          class="styled__HiddenCheckbox-sc-s1u0st-2 jCQYLs"
           id="bd-checkbox-6"
           name="isVisible"
           type="checkbox"
         />
         <label
           aria-hidden="true"
-          class="styled__StyledCheckbox-s1u0st-3 qxpOx"
+          class="styled__StyledCheckbox-sc-s1u0st-3 dXkOUh"
           for="bd-checkbox-6"
         >
           <svg
-            class="base__StyledIcon-a9u0e1-0 gqewKr"
+            class="base__StyledIcon-sc-a9u0e1-0 cvBUKU"
             fill="currentColor"
             height="24"
             stroke="currentColor"
@@ -197,10 +204,10 @@ exports[`Product Info Form renders correctly 1`] = `
           </svg>
         </label>
         <div
-          class="styled__CheckboxLabelContainer-s1u0st-0 jFHYyI"
+          class="styled__CheckboxLabelContainer-sc-s1u0st-0 iZbWtB"
         >
           <label
-            class="styled__StyledText-tqnj75-5 styled__StyledLabel-sc-3soea9-0 hEjIUC"
+            class="styled__StyledText-sc-tqnj75-5 styled__StyledLabel-sc-3soea9-0 dqSGNW bBytMX"
             for="bd-checkbox-6"
             id="bd-checkbox_label-7"
           >
@@ -211,32 +218,32 @@ exports[`Product Info Form renders correctly 1`] = `
     </div>
   </div>
   <div
-    class="styled__StyledBox-sj5f1m-0 htmbUi styled__StyledPanel-sc-1h6ef3q-0 jooDHr"
+    class="styled__StyledBox-sc-sj5f1m-0 enCgpJ styled__StyledPanel-sc-1h6ef3q-0 ckPgGY"
   >
     <div
-      class="styled__StyledBox-sj5f1m-0 jvmRZj styled__StyledFlex-hcvk8l-0 kObzyk"
+      class="styled__StyledBox-sc-sj5f1m-0 gpwFUN styled__StyledFlex-sc-hcvk8l-0 dLyzVq"
     >
       <h2
-        class="styled__StyledH2-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 fJTAEy"
+        class="styled__StyledH2-sc-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 knwcSP ctLPEl"
       >
         Description
       </h2>
     </div>
     <div
-      class="styled__StyledInlineGroup-sc-1a6yr6l-2 jCnZYy"
+      class="styled__StyledInlineGroup-sc-1a6yr6l-2 grBQKM"
     >
       <div>
         <label
-          class="styled__StyledH4-tqnj75-4 styled__StyledLabel-m3fyue-0 eGzlfW"
+          class="styled__StyledH4-sc-tqnj75-4 styled__StyledLabel-sc-m3fyue-0 XWDyH kTMEuw"
           for="bd-textarea-9"
         >
           Description
         </label>
         <span
-          class="styled__StyledTextareaWrapper-c1uos0-0 ebteIa"
+          class="styled__StyledTextareaWrapper-sc-c1uos0-0 jJqctx"
         >
           <textarea
-            class="styled__StyledTextarea-c1uos0-1 hFnLEN"
+            class="styled__StyledTextarea-sc-c1uos0-1 eWYxKT"
             id="bd-textarea-9"
             name="description"
             placeholder="Product info"
@@ -249,28 +256,24 @@ exports[`Product Info Form renders correctly 1`] = `
     </div>
   </div>
   <div
-    class="styled__StyledBox-sj5f1m-0 jvmRZj styled__StyledFlex-hcvk8l-0 iUvuyy"
+    class="styled__StyledBox-sc-sj5f1m-0 gpwFUN styled__StyledFlex-sc-hcvk8l-0 hraVTH"
   >
     <button
-      class="styled__StyledButton-sc-3yq204-0 fWTCew bd-button"
-      role="button"
-      tabindex="0"
+      class="styled__StyledButton-sc-3yq204-0 lfMfIe bd-button"
       type="button"
     >
       <span
-        class="styled__ContentWrapper-sc-3yq204-1 cUnSLq"
+        class="styled__ContentWrapper-sc-3yq204-1 cUjwBq"
       >
         Cancel
       </span>
     </button>
     <button
-      class="styled__StyledButton-sc-3yq204-0 keKQsv bd-button"
-      role="button"
-      tabindex="0"
+      class="styled__StyledButton-sc-3yq204-0 jcOdZP bd-button"
       type="submit"
     >
       <span
-        class="styled__ContentWrapper-sc-3yq204-1 cUnSLq"
+        class="styled__ContentWrapper-sc-3yq204-1 cUjwBq"
       >
         Save
       </span>
