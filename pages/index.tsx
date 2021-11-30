@@ -1,21 +1,14 @@
 import { Box, Flex, H1, H4, Panel } from '@bigcommerce/big-design';
-import { useEffect } from 'react';
 import styled from 'styled-components';
 import ErrorMessage from '../components/error';
 import Loading from '../components/loading';
-import { useSession } from '../context/session';
 import { useProducts } from '../lib/hooks';
 
-const Index = ({ context }: { context: string }) => {
-    const { isError, isLoading, summary } = useProducts();
-    const { setContext } = useSession();
-
-    useEffect(() => {
-        if (context) setContext(context);
-    }, [context, setContext]);
+const Index = () => {
+    const { error, isLoading, summary } = useProducts();
 
     if (isLoading) return <Loading />;
-    if (isError) return <ErrorMessage />;
+    if (error) return <ErrorMessage />;
 
     return (
         <Panel header="Homepage">
