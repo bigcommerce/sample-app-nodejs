@@ -15,7 +15,7 @@ export function useProducts() {
     return {
         summary: data,
         isLoading: !data && !error,
-        isError: error,
+        error,
     };
 }
 
