@@ -24,3 +24,8 @@ export interface SessionContextProps {
 export interface QueryParams {
     [key: string]: string | string[];
 }
+
+export interface ApiConfig {
+    apiUrl?: string;
+    loginUrl?: string;
+}

@@ -1,10 +1,17 @@
 import * as jwt from 'jsonwebtoken';
 import { NextApiRequest } from 'next';
 import * as BigCommerce from 'node-bigcommerce';
-import { QueryParams, SessionContextProps, SessionProps } from '../types';
+import { ApiConfig, QueryParams, SessionContextProps, SessionProps } from '../types';
 import db from './db';
 
-const { AUTH_CALLBACK, CLIENT_ID, CLIENT_SECRET, JWT_KEY } = process.env;
+const { API_URL, AUTH_CALLBACK, CLIENT_ID, CLIENT_SECRET, JWT_KEY, LOGIN_URL } = process.env;
+
+// Used for internal configuration; 3rd party apps may remove
+const apiConfig: ApiConfig = {};
+if (API_URL && LOGIN_URL) {
+    apiConfig.apiUrl = API_URL;
+    apiConfig.loginUrl = LOGIN_URL;
+}
 
 // Create BigCommerce instance
 // https://github.com/bigcommerce/node-bigcommerce/
@@ -16,6 +23,7 @@ const bigcommerce = new BigCommerce({
     responseType: 'json',
     headers: { 'Accept-Encoding': '*' },
     apiVersion: 'v3',
+    ...apiConfig,
 });
 
 const bigcommerceSigned = new BigCommerce({
@@ -30,6 +38,7 @@ export function bigcommerceClient(accessToken: string, storeHash: string, apiVer
         storeHash,
         responseType: 'json',
         apiVersion,
+        ...apiConfig,
     });
 }
 
