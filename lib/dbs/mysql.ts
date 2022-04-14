@@ -11,9 +11,9 @@ const MYSQL_CONFIG = {
 };
 
 // For use with Heroku ClearDB
-// Other mysql: https://www.npmjs.com/package/mysql#establishing-connections
-const connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL ? process.env.CLEARDB_DATABASE_URL : MYSQL_CONFIG);
-const query = promisify(connection.query.bind(connection));
+// Other mysql: https://www.npmjs.com/package/mysql#pooling-connections
+const pool = mysql.createPool(process.env.CLEARDB_DATABASE_URL ? process.env.CLEARDB_DATABASE_URL : MYSQL_CONFIG);
+const query = promisify(pool.query.bind(pool));
 
 // Use setUser for storing global user data (persists between installs)
 export async function setUser({ user }: SessionProps) {
