@@ -26,7 +26,7 @@ To get the app running locally, follow these instructions:
     - JWT key should be at least 32 random characters (256 bits) for HS256
 9. Specify DB_TYPE in `.env`
     - If using Firebase, enter your firebase config keys. See [Firebase quickstart](https://firebase.google.com/docs/firestore/quickstart)
-    - If using MySQL, enter your mysql database config keys (host, database, user/pass and optionally port). Note: if using Heroku with ClearDB, the DB should create the necessary `Config Var`, i.e. `CLEARDB_DATABASE_URL`.
+    - If using MySQL, enter your mysql database config keys (host, database, user/pass and optionally port). If not using the heroku deploy button above, you will now want to run `npm run db:setup` to perform the initial database setup. Note: if using Heroku with ClearDB, the DB should create the necessary `Config Var`, i.e. `CLEARDB_DATABASE_URL`.
 10. Start your dev environment in a **separate** terminal from `ngrok`. If `ngrok` restarts, update callbacks in steps 4 and 7 with the new ngrok_id.
     - `npm run dev`
 11. [Install the app and launch.](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app)
