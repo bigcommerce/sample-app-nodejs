@@ -84,10 +84,10 @@ export function decodePayload(encodedContext: string) {
     return jwt.verify(encodedContext, JWT_KEY);
 }
 
-// Removes store and storeUser on uninstall
+// Removes store and storeUsers on uninstall
 export async function removeDataStore(session: SessionProps) {
     await db.deleteStore(session);
-    await db.deleteUser(session);
+    await db.deleteStoreUsers(session);
 }
 
 // Removes users from app - getSession() for user will fail after user is removed

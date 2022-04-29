@@ -1,5 +1,17 @@
 import { initializeApp } from 'firebase/app';
-import { deleteDoc, doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import {
+    collection,
+    deleteDoc,
+    doc,
+    getDoc,
+    getDocs,
+    getFirestore,
+    query,
+    setDoc,
+    updateDoc,
+    where,
+    writeBatch,
+} from 'firebase/firestore';
 import { SessionProps, UserData } from '../../types';
 
 // Firebase config and initialization
@@ -91,6 +103,20 @@ export async function deleteUser({ context, user, sub }: SessionProps) {
     await deleteDoc(ref);
 }
 
+export async function deleteStoreUsers({ context, sub }: SessionProps) {
+    const contextString = context ?? sub;
+    const storeHash = contextString?.split('/')[1] || '';
+    const storeUsersRef = query(collection(db, 'storeUsers'), where('storeHash', '==', storeHash));
+    const storeUsers = await getDocs(storeUsersRef);
+    const batch = writeBatch(db);
+
+    storeUsers.docs.forEach(doc => {
+        batch.delete(doc.ref);
+    });
+
+    await batch.commit();
+}
+
 export async function hasStoreUser(storeHash: string, userId: string) {
     if (!storeHash || !userId) return false;
 
@@ -107,7 +133,9 @@ export async function getStoreToken(storeHash: string) {
     return storeDoc.data()?.accessToken ?? null;
 }
 
-export async function deleteStore({ store_hash: storeHash }: SessionProps) {
+export async function deleteStore({ context, sub }: SessionProps) {
+    const contextString = context ?? sub;
+    const storeHash = contextString?.split('/')[1] || '';
     const ref = doc(db, 'store', storeHash);
 
     await deleteDoc(ref);
