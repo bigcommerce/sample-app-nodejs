@@ -71,12 +71,6 @@ export async function deleteUser({ context, user, sub }: SessionProps) {
     await query('DELETE FROM storeUsers WHERE userId = ? AND storeHash = ?', values);
 }
 
-export async function deleteStoreUsers({ context, sub }: SessionProps) {
-    const contextString = context ?? sub;
-    const storeHash = contextString?.split('/')[1] || '';
-    await query('DELETE FROM storeUsers WHERE storeHash = ?', storeHash);
-}
-
 export async function hasStoreUser(storeHash: string, userId: string) {
     if (!storeHash || !userId) return false;
 
@@ -94,8 +88,6 @@ export async function getStoreToken(storeHash: string) {
     return results.length ? results[0].accessToken : null;
 }
 
-export async function deleteStore({ context, sub }: SessionProps) {
-    const contextString = context ?? sub;
-    const storeHash = contextString?.split('/')[1] || '';
+export async function deleteStore({ store_hash: storeHash }: SessionProps) {
     await query('DELETE FROM stores WHERE storeHash = ?', storeHash);
 }
