@@ -20,5 +20,4 @@ export interface Db {
     getStoreToken(storeId: string): string | null;
     deleteStore(session: SessionProps): Promise<void>;
     deleteUser(session: SessionProps): Promise<void>;
-    deleteStoreUsers(session: SessionProps): Promise<void>;
 }
