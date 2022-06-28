@@ -2,58 +2,59 @@
 
 exports[`Homepage renders correctly 1`] = `
 <div
-  class="styled__StyledBox-sc-sj5f1m-0 enCgpJ styled__StyledPanel-sc-1h6ef3q-0 ckPgGY"
+  class="styled__StyledBox-sc-sj5f1m-0 odkmb styled__StyledPanel-sc-1h6ef3q-0 gyZFEm"
+  id="home"
 >
   <div
-    class="styled__StyledBox-sc-sj5f1m-0 gpwFUN styled__StyledFlex-sc-hcvk8l-0 dLyzVq"
+    class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 hPcIGA"
   >
     <h2
-      class="styled__StyledH2-sc-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 knwcSP ctLPEl"
+      class="styled__StyledH2-sc-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 kEGvNd fjdBDH"
     >
       Homepage
     </h2>
   </div>
   <div
-    class="styled__StyledBox-sc-sj5f1m-0 gpwFUN styled__StyledFlex-sc-hcvk8l-0 ehkSnw"
+    class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 fGdfxW"
   >
     <div
-      class="styled__StyledBox-sc-sj5f1m-0 eIgohU pages__StyledBox-sc-jwwna7-0 NXloA"
+      class="styled__StyledBox-sc-sj5f1m-0 hdrjpG pages__StyledBox-sc-jwwna7-0 kfGRKK"
     >
       <h4
-        class="styled__StyledH4-sc-tqnj75-4 XWDyH"
+        class="styled__StyledH4-sc-tqnj75-4 XRfzZ"
       >
         Inventory count
       </h4>
       <h1
-        class="styled__StyledH1-sc-tqnj75-1 gMdvEW"
+        class="styled__StyledH1-sc-tqnj75-1 hetgrk"
       >
         3
       </h1>
     </div>
     <div
-      class="styled__StyledBox-sc-sj5f1m-0 eIgohU pages__StyledBox-sc-jwwna7-0 NXloA"
+      class="styled__StyledBox-sc-sj5f1m-0 hdrjpG pages__StyledBox-sc-jwwna7-0 kfGRKK"
     >
       <h4
-        class="styled__StyledH4-sc-tqnj75-4 XWDyH"
+        class="styled__StyledH4-sc-tqnj75-4 XRfzZ"
       >
         Variant count
       </h4>
       <h1
-        class="styled__StyledH1-sc-tqnj75-1 gMdvEW"
+        class="styled__StyledH1-sc-tqnj75-1 hetgrk"
       >
         2
       </h1>
     </div>
     <div
-      class="styled__StyledBox-sc-sj5f1m-0 USQGy pages__StyledBox-sc-jwwna7-0 NXloA"
+      class="styled__StyledBox-sc-sj5f1m-0 bNGvkM pages__StyledBox-sc-jwwna7-0 kfGRKK"
     >
       <h4
-        class="styled__StyledH4-sc-tqnj75-4 XWDyH"
+        class="styled__StyledH4-sc-tqnj75-4 XRfzZ"
       >
         Primary category
       </h4>
       <h1
-        class="styled__StyledH1-sc-tqnj75-1 gMdvEW"
+        class="styled__StyledH1-sc-tqnj75-1 hetgrk"
       >
         widgets
       </h1>
