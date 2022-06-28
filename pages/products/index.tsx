@@ -64,7 +64,7 @@ const Products = () => {
     if (error) return <ErrorMessage error={error} />;
 
     return (
-        <Panel id="products">
+        <Panel>
             <Table
                 columns={[
                     { header: 'Product name', hash: 'name', render: ({ id, name }) => renderName(id, name), isSortable: true },

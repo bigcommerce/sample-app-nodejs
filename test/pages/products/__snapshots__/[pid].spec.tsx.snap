@@ -5,10 +5,10 @@ exports[`Product Info Form renders correctly 1`] = `
   class="styled__StyledForm-sc-qzey9b-0 haqnpB"
 >
   <div
-    class="styled__StyledBox-sc-sj5f1m-0 odkmb styled__StyledPanel-sc-1h6ef3q-0 gyZFEm"
+    class="styled__StyledBox-sc-sj5f1m-0 LVJrL styled__StyledPanel-sc-1h6ef3q-0 gyZFEm"
   >
     <div
-      class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 hPcIGA"
+      class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 bmxJbg"
     >
       <h2
         class="styled__StyledH2-sc-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 kEGvNd fjdBDH"
@@ -87,16 +87,15 @@ exports[`Product Info Form renders correctly 1`] = `
                 >
                   <button
                     aria-label="toggle menu"
-                    class="styled__StyledButton-sc-3yq204-0 gOcBkn styled__DropdownButton-sc-1v66t78-3 fhvqti"
+                    class="styled__StyledButton-sc-3yq204-0 jNqJzF styled__DropdownButton-sc-1v66t78-3 fhvqti"
                     id="bd-select-2-toggle-button"
                     tabindex="-1"
                     type="button"
                   >
                     <span
-                      class="styled__ContentWrapper-sc-3yq204-1 fwkbqi"
+                      class="styled__ContentWrapper-sc-3yq204-1 cDAvMI"
                     >
                       <svg
-                        aria-hidden="true"
                         class="base__StyledIcon-sc-a9u0e1-0 bwFIuO styled__StyledDropdownIcon-sc-1v66t78-1 erQgzy"
                         fill="currentColor"
                         height="24"
@@ -183,11 +182,10 @@ exports[`Product Info Form renders correctly 1`] = `
         />
         <label
           aria-hidden="true"
-          class="styled__StyledCheckbox-sc-s1u0st-3 Brufm"
+          class="styled__StyledCheckbox-sc-s1u0st-3 bCwdBT"
           for="bd-checkbox-6"
         >
           <svg
-            aria-hidden="true"
             class="base__StyledIcon-sc-a9u0e1-0 bwFIuO"
             fill="currentColor"
             height="24"
@@ -220,10 +218,10 @@ exports[`Product Info Form renders correctly 1`] = `
     </div>
   </div>
   <div
-    class="styled__StyledBox-sc-sj5f1m-0 odkmb styled__StyledPanel-sc-1h6ef3q-0 gyZFEm"
+    class="styled__StyledBox-sc-sj5f1m-0 LVJrL styled__StyledPanel-sc-1h6ef3q-0 gyZFEm"
   >
     <div
-      class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 hPcIGA"
+      class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 bmxJbg"
     >
       <h2
         class="styled__StyledH2-sc-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 kEGvNd fjdBDH"
@@ -258,24 +256,24 @@ exports[`Product Info Form renders correctly 1`] = `
     </div>
   </div>
   <div
-    class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 fmsDOt"
+    class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 glZUWt"
   >
     <button
-      class="styled__StyledButton-sc-3yq204-0 cwQPcK bd-button"
+      class="styled__StyledButton-sc-3yq204-0 hFhzpE bd-button"
       type="button"
     >
       <span
-        class="styled__ContentWrapper-sc-3yq204-1 fwkbqi"
+        class="styled__ContentWrapper-sc-3yq204-1 cDAvMI"
       >
         Cancel
       </span>
     </button>
     <button
-      class="styled__StyledButton-sc-3yq204-0 imcJOf bd-button"
+      class="styled__StyledButton-sc-3yq204-0 gNEAQl bd-button"
       type="submit"
     >
       <span
-        class="styled__ContentWrapper-sc-3yq204-1 fwkbqi"
+        class="styled__ContentWrapper-sc-3yq204-1 cDAvMI"
       >
         Save
       </span>
