@@ -26,8 +26,4 @@ const Index = () => {
     );
 };
 
-export const getServerSideProps = async ({ query }) => ({
-    props: { context: query?.context ?? '' }
-});
-
 export default Index;
