@@ -34,8 +34,4 @@ const StyledBox = styled(Box)`
     min-width: 10rem;
 `;
 
-export const getServerSideProps = async ({ query }) => ({
-    props: { context: query?.context ?? '' }
-});
-
 export default Index;
