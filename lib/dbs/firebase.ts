@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { deleteDoc, doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { SessionProps, UserData } from '../../types';
 
 // Firebase config and initialization
@@ -12,51 +12,50 @@ const firebaseConfig = {
     projectId: FIRE_PROJECT_ID,
 };
 
-if (!firebase.apps.length) {
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-} else {
-    firebase.app();
-}
-
-const db = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 // Firestore data management functions
 export async function setUser({ user }: SessionProps) {
     if (!user) return null;
 
-    const { email, id, username } = user;
-    const ref = db.collection('users').doc(String(id));
+    const { email, id, username } = user;
+    const ref = doc(db, 'users', String(id));
     const data: UserData = { email };
 
     if (username) {
         data.username = username;
     }
 
-    await ref.set(data, { merge: true });
+    await setDoc(ref, data, { merge: true });
 }
 
 export async function setStore(session: SessionProps) {
-    const { access_token: accessToken, context, scope } = session;
+    const {
+        access_token: accessToken,
+        context,
+        scope,
+        user: { id },
+    } = session;
     // Only set on app install or update
     if (!accessToken || !scope) return null;
 
     const storeHash = context?.split('/')[1] || '';
-    const ref = db.collection('store').doc(storeHash);
-    const data = { accessToken, scope };
+    const ref = doc(db, 'store', storeHash);
+    const data = { accessToken, adminId: id, scope };
 
-    await ref.set(data);
+    await setDoc(ref, data);
 }
 
 export async function getStoreToken(storeHash: string) {
     if (!storeHash) return null;
-    const storeDoc = await db.collection('store').doc(storeHash).get();
+    const storeDoc = await getDoc(doc(db, 'store', storeHash));
 
-    return storeDoc.exists ? storeDoc.data()?.accessToken : null;
+    return storeDoc.data()?.accessToken ?? null;
 }
 
 export async function deleteStore({ store_hash: storeHash }: SessionProps) {
-    const ref = db.collection('store').doc(storeHash);
+    const ref = doc(db, 'store', storeHash);
 
-    await ref.delete();
+    await deleteDoc(ref);
 }
