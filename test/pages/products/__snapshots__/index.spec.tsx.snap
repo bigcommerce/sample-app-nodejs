@@ -2,11 +2,12 @@
 
 exports[`Product List renders correctly 1`] = `
 <div
-  class="styled__StyledBox-sc-sj5f1m-0 LVJrL styled__StyledPanel-sc-1h6ef3q-0 gyZFEm"
+  class="styled__StyledBox-sc-sj5f1m-0 odkmb styled__StyledPanel-sc-1h6ef3q-0 gyZFEm"
+  id="products"
 >
   <div
     aria-controls="bd-table-1"
-    class="styled__StyledFlex-sc-yxkzj0-0 huaTwg"
+    class="styled__StyledFlex-sc-yxkzj0-0 fPtbUC"
   >
     <div
       class="styled__StyledBox-sc-sj5f1m-0 ijVOG styled__StyledFlexItem-sc-smjqtt-0 detsCw"
@@ -22,7 +23,7 @@ exports[`Product List renders correctly 1`] = `
     >
       <div
         aria-label="pagination"
-        class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 bmxJbg"
+        class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 hPcIGA"
         role="navigation"
       >
         <div
@@ -35,14 +36,15 @@ exports[`Product List renders correctly 1`] = `
               aria-expanded="false"
               aria-haspopup="listbox"
               aria-labelledby="bd-dropdown-2-label bd-dropdown-2-toggle-button"
-              class="styled__StyledButton-sc-3yq204-0 emgOrB styled__StyledButton-sc-12shuvi-0 gQQcyA"
+              class="styled__StyledButton-sc-3yq204-0 kPIPAr styled__StyledButton-sc-12shuvi-0 gQQcyA"
               id="bd-dropdown-2-toggle-button"
             >
               <span
-                class="styled__ContentWrapper-sc-3yq204-1 cDAvMI"
+                class="styled__ContentWrapper-sc-3yq204-1 fwkbqi"
               >
                 1 - 5 of 5
                 <svg
+                  aria-hidden="true"
                   class="base__StyledIcon-sc-a9u0e1-0 qCCje"
                   fill="currentColor"
                   height="24"
@@ -79,11 +81,11 @@ exports[`Product List renders correctly 1`] = `
           class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlexItem-sc-smjqtt-0 jMEPcV"
         >
           <button
-            class="styled__StyledButton-sc-3yq204-0 jzsydw styled__StyledButton-sc-12shuvi-0 gQQcyA"
+            class="styled__StyledButton-sc-3yq204-0 jbZfIC styled__StyledButton-sc-12shuvi-0 gQQcyA"
             disabled=""
           >
             <span
-              class="styled__ContentWrapper-sc-3yq204-1 cDAvMI"
+              class="styled__ContentWrapper-sc-3yq204-1 fwkbqi"
             >
               <svg
                 aria-labelledby="bd-icon-4"
@@ -111,11 +113,11 @@ exports[`Product List renders correctly 1`] = `
             </span>
           </button>
           <button
-            class="styled__StyledButton-sc-3yq204-0 jzsydw styled__StyledButton-sc-12shuvi-0 gQQcyA"
+            class="styled__StyledButton-sc-3yq204-0 jbZfIC styled__StyledButton-sc-12shuvi-0 gQQcyA"
             disabled=""
           >
             <span
-              class="styled__ContentWrapper-sc-3yq204-1 cDAvMI"
+              class="styled__ContentWrapper-sc-3yq204-1 fwkbqi"
             >
               <svg
                 aria-labelledby="bd-icon-5"
@@ -155,37 +157,41 @@ exports[`Product List renders correctly 1`] = `
     >
       <tr>
         <th
-          class="styled__StyledTableHeaderCell-sc-1opnvtt-0 ftrrey"
+          class="styled__StyledTableHeaderCell-sc-1opnvtt-0 epVfVz"
+          id="header-cell-0"
         >
           <div
-            class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 iWqGEw styled__StyledFlex-sc-1opnvtt-2 gLjYX"
+            class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 dGCTow styled__StyledFlex-sc-1opnvtt-2 gLjYX"
           >
             Product name
           </div>
         </th>
         <th
-          class="styled__StyledTableHeaderCell-sc-1opnvtt-0 ftrrey"
+          class="styled__StyledTableHeaderCell-sc-1opnvtt-0 epVfVz"
+          id="header-cell-1"
         >
           <div
-            class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 iWqGEw styled__StyledFlex-sc-1opnvtt-2 gLjYX"
+            class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 dGCTow styled__StyledFlex-sc-1opnvtt-2 gLjYX"
           >
             Stock
           </div>
         </th>
         <th
-          class="styled__StyledTableHeaderCell-sc-1opnvtt-0 ftrrey"
+          class="styled__StyledTableHeaderCell-sc-1opnvtt-0 epVfVz"
+          id="header-cell-2"
         >
           <div
-            class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 iWqGEw styled__StyledFlex-sc-1opnvtt-2 gLjYX"
+            class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 dGCTow styled__StyledFlex-sc-1opnvtt-2 gLjYX"
           >
             Price
           </div>
         </th>
         <th
-          class="styled__StyledTableHeaderCell-sc-1opnvtt-0 htnjK"
+          class="styled__StyledTableHeaderCell-sc-1opnvtt-0 lfWqzr"
+          id="header-cell-3"
         >
           <div
-            class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 iWqGEw styled__StyledFlex-sc-1opnvtt-2 cnzNTE"
+            class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 dGCTow styled__StyledFlex-sc-1opnvtt-2 cnzNTE"
           >
             Action
           </div>
@@ -199,7 +205,7 @@ exports[`Product List renders correctly 1`] = `
         class="styled__StyledTableRow-sc-xq0hr0-0 hbJcdW"
       >
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <a
             class="styled__StyledLink-sc-n9mww9-0 kRORmJ"
@@ -208,7 +214,7 @@ exports[`Product List renders correctly 1`] = `
           </a>
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <p
             class="styled__StyledSmall-sc-tqnj75-6 cAmSDK"
@@ -218,12 +224,12 @@ exports[`Product List renders correctly 1`] = `
           </p>
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           $10.00
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <div
             class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledBox-sc-2535c9-0 edhgUr"
@@ -232,13 +238,14 @@ exports[`Product List renders correctly 1`] = `
               aria-expanded="false"
               aria-haspopup="listbox"
               aria-labelledby="bd-dropdown-10-label bd-dropdown-10-toggle-button"
-              class="styled__StyledButton-sc-3yq204-0 jzsydw bd-button"
+              class="styled__StyledButton-sc-3yq204-0 jbZfIC bd-button"
               id="bd-dropdown-10-toggle-button"
             >
               <span
-                class="styled__ContentWrapper-sc-3yq204-1 cDAvMI"
+                class="styled__ContentWrapper-sc-3yq204-1 fwkbqi"
               >
                 <svg
+                  aria-hidden="true"
                   class="base__StyledIcon-sc-a9u0e1-0 bSOAMm"
                   color="secondary60"
                   fill="currentColor"
@@ -277,7 +284,7 @@ exports[`Product List renders correctly 1`] = `
         class="styled__StyledTableRow-sc-xq0hr0-0 hbJcdW"
       >
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <a
             class="styled__StyledLink-sc-n9mww9-0 kRORmJ"
@@ -286,7 +293,7 @@ exports[`Product List renders correctly 1`] = `
           </a>
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <p
             class="styled__StyledSmall-sc-tqnj75-6 cAmSDK"
@@ -296,12 +303,12 @@ exports[`Product List renders correctly 1`] = `
           </p>
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           $20.00
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <div
             class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledBox-sc-2535c9-0 edhgUr"
@@ -310,13 +317,14 @@ exports[`Product List renders correctly 1`] = `
               aria-expanded="false"
               aria-haspopup="listbox"
               aria-labelledby="bd-dropdown-12-label bd-dropdown-12-toggle-button"
-              class="styled__StyledButton-sc-3yq204-0 jzsydw bd-button"
+              class="styled__StyledButton-sc-3yq204-0 jbZfIC bd-button"
               id="bd-dropdown-12-toggle-button"
             >
               <span
-                class="styled__ContentWrapper-sc-3yq204-1 cDAvMI"
+                class="styled__ContentWrapper-sc-3yq204-1 fwkbqi"
               >
                 <svg
+                  aria-hidden="true"
                   class="base__StyledIcon-sc-a9u0e1-0 bSOAMm"
                   color="secondary60"
                   fill="currentColor"
@@ -355,7 +363,7 @@ exports[`Product List renders correctly 1`] = `
         class="styled__StyledTableRow-sc-xq0hr0-0 hbJcdW"
       >
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <a
             class="styled__StyledLink-sc-n9mww9-0 kRORmJ"
@@ -364,7 +372,7 @@ exports[`Product List renders correctly 1`] = `
           </a>
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <p
             class="styled__StyledSmall-sc-tqnj75-6 cAmSDK"
@@ -374,12 +382,12 @@ exports[`Product List renders correctly 1`] = `
           </p>
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           $30.00
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <div
             class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledBox-sc-2535c9-0 edhgUr"
@@ -388,13 +396,14 @@ exports[`Product List renders correctly 1`] = `
               aria-expanded="false"
               aria-haspopup="listbox"
               aria-labelledby="bd-dropdown-14-label bd-dropdown-14-toggle-button"
-              class="styled__StyledButton-sc-3yq204-0 jzsydw bd-button"
+              class="styled__StyledButton-sc-3yq204-0 jbZfIC bd-button"
               id="bd-dropdown-14-toggle-button"
             >
               <span
-                class="styled__ContentWrapper-sc-3yq204-1 cDAvMI"
+                class="styled__ContentWrapper-sc-3yq204-1 fwkbqi"
               >
                 <svg
+                  aria-hidden="true"
                   class="base__StyledIcon-sc-a9u0e1-0 bSOAMm"
                   color="secondary60"
                   fill="currentColor"
@@ -433,7 +442,7 @@ exports[`Product List renders correctly 1`] = `
         class="styled__StyledTableRow-sc-xq0hr0-0 hbJcdW"
       >
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <a
             class="styled__StyledLink-sc-n9mww9-0 kRORmJ"
@@ -442,7 +451,7 @@ exports[`Product List renders correctly 1`] = `
           </a>
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <p
             class="styled__StyledSmall-sc-tqnj75-6 cAmSDK"
@@ -452,12 +461,12 @@ exports[`Product List renders correctly 1`] = `
           </p>
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           $40.00
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <div
             class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledBox-sc-2535c9-0 edhgUr"
@@ -466,13 +475,14 @@ exports[`Product List renders correctly 1`] = `
               aria-expanded="false"
               aria-haspopup="listbox"
               aria-labelledby="bd-dropdown-16-label bd-dropdown-16-toggle-button"
-              class="styled__StyledButton-sc-3yq204-0 jzsydw bd-button"
+              class="styled__StyledButton-sc-3yq204-0 jbZfIC bd-button"
               id="bd-dropdown-16-toggle-button"
             >
               <span
-                class="styled__ContentWrapper-sc-3yq204-1 cDAvMI"
+                class="styled__ContentWrapper-sc-3yq204-1 fwkbqi"
               >
                 <svg
+                  aria-hidden="true"
                   class="base__StyledIcon-sc-a9u0e1-0 bSOAMm"
                   color="secondary60"
                   fill="currentColor"
@@ -511,7 +521,7 @@ exports[`Product List renders correctly 1`] = `
         class="styled__StyledTableRow-sc-xq0hr0-0 hbJcdW"
       >
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <a
             class="styled__StyledLink-sc-n9mww9-0 kRORmJ"
@@ -520,7 +530,7 @@ exports[`Product List renders correctly 1`] = `
           </a>
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <p
             class="styled__StyledSmall-sc-tqnj75-6 cAmSDK"
@@ -530,12 +540,12 @@ exports[`Product List renders correctly 1`] = `
           </p>
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           $50.00
         </td>
         <td
-          class="styled__StyledTableDataCell-sc-16y6nzi-0 hHgnCt"
+          class="styled__StyledTableDataCell-sc-16y6nzi-0 iCJJdf"
         >
           <div
             class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledBox-sc-2535c9-0 edhgUr"
@@ -544,13 +554,14 @@ exports[`Product List renders correctly 1`] = `
               aria-expanded="false"
               aria-haspopup="listbox"
               aria-labelledby="bd-dropdown-18-label bd-dropdown-18-toggle-button"
-              class="styled__StyledButton-sc-3yq204-0 jzsydw bd-button"
+              class="styled__StyledButton-sc-3yq204-0 jbZfIC bd-button"
               id="bd-dropdown-18-toggle-button"
             >
               <span
-                class="styled__ContentWrapper-sc-3yq204-1 cDAvMI"
+                class="styled__ContentWrapper-sc-3yq204-1 fwkbqi"
               >
                 <svg
+                  aria-hidden="true"
                   class="base__StyledIcon-sc-a9u0e1-0 bSOAMm"
                   color="secondary60"
                   fill="currentColor"
