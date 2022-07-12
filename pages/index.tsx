@@ -11,7 +11,7 @@ const Index = () => {
     if (error) return <ErrorMessage />;
 
     return (
-        <Panel header="Homepage">
+        <Panel header="Homepage" id="home">
             <Flex>
                 <StyledBox border="box" borderRadius="normal" marginRight="xLarge" padding="medium">
                     <H4>Inventory count</H4>

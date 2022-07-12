@@ -43,7 +43,7 @@ const Products = () => {
     if (isError) return <ErrorMessage />;
 
     return (
-        <Panel>
+        <Panel id="products">
             <StatefulTable
                 columns={[
                     { header: 'Product name', hash: 'name', render: ({ id, name }) => renderName(id, name), sortKey: 'name' },
