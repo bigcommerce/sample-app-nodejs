@@ -19,7 +19,7 @@ const Form = ({ formData, onCancel, onSubmit }: FormProps) => {
     const [errors, setErrors] = useState<StringKeyValue>({});
 
     const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name: formName, value } = event?.target;
+        const { name: formName, value } = event.target || {};
         setForm(prevForm => ({ ...prevForm, [formName]: value }));
 
         // Add error if it exists in FormErrors and the input is empty, otherwise remove from errors
@@ -33,7 +33,7 @@ const Form = ({ formData, onCancel, onSubmit }: FormProps) => {
     };
 
     const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const { checked, name: formName } = event?.target;
+        const { checked, name: formName } = event.target || {};
         setForm(prevForm => ({ ...prevForm, [formName]: checked }));
     };
 

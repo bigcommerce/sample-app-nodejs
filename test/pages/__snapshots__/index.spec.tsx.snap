@@ -2,10 +2,11 @@
 
 exports[`Homepage renders correctly 1`] = `
 <div
-  class="styled__StyledBox-sc-sj5f1m-0 LVJrL styled__StyledPanel-sc-1h6ef3q-0 gyZFEm"
+  class="styled__StyledBox-sc-sj5f1m-0 odkmb styled__StyledPanel-sc-1h6ef3q-0 gyZFEm"
+  id="home"
 >
   <div
-    class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 bmxJbg"
+    class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 hPcIGA"
   >
     <h2
       class="styled__StyledH2-sc-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 kEGvNd fjdBDH"
@@ -14,7 +15,7 @@ exports[`Homepage renders correctly 1`] = `
     </h2>
   </div>
   <div
-    class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 bsAzTi"
+    class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 iYaJla"
   >
     <div
       class="styled__StyledBox-sc-sj5f1m-0 hdrjpG pages__StyledBox-sc-jwwna7-0 kfGRKK"
