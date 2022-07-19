@@ -12,9 +12,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=14 <19",
+    "npm": ">=7.20.x <8.14"
+  },
   "dependencies": {
-    "@bigcommerce/big-design": "^0.30.2",
-    "next": "^12.2.0",
+    "@bigcommerce/big-design": "^0.32.1",
+    "next": "^12.2.2",
     "node-bigcommerce": "github:bigcommerce/node-bigcommerce",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
