@@ -5,12 +5,12 @@ import InnerHeader from './innerHeader';
 
 export const TabIds = {
     HOME: 'home',
-    PRODUCTS: 'products',
+    TRANSLATIONS: 'translations',
 };
 
 export const TabRoutes = {
     [TabIds.HOME]: '/',
-    [TabIds.PRODUCTS]: '/products',
+    [TabIds.TRANSLATIONS]: '/translations',
 };
 
 const HeaderlessRoutes = [
@@ -59,7 +59,7 @@ const Header = () => {
 
     const items = [
         { ariaControls: 'home', id: TabIds.HOME, title: 'Home' },
-        { ariaControls: 'products', id: TabIds.PRODUCTS, title: 'Products' },
+        { ariaControls: 'translations', id: TabIds.TRANSLATIONS, title: 'Translations' },
     ];
 
     const handleTabClick = (tabId: string) => {
@@ -73,6 +73,7 @@ const Header = () => {
 
     return (
         <Box marginBottom="xxLarge">
+            <h1>BigCommerce Translations App Hackathon</h1>
             <Tabs
                 activeTab={activeTab}
                 items={items}

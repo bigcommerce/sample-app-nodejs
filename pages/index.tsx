@@ -1,31 +1,29 @@
-import { Box, Flex, H1, H4, Panel } from '@bigcommerce/big-design';
+import { Box, Flex, H1, H3, H4, Panel, HR, Text } from '@bigcommerce/big-design';
 import styled from 'styled-components';
 import ErrorMessage from '../components/error';
 import Loading from '../components/loading';
 import { useProducts } from '../lib/hooks';
 
 const Index = () => {
-    const { error, isLoading, summary } = useProducts();
+    // const { error, isLoading, summary } = useProducts();
 
-    if (isLoading) return <Loading />;
-    if (error) return <ErrorMessage error={error} />;
+    // if (isLoading) return <Loading />;
+    // if (error) return <ErrorMessage error={error} />;
 
     return (
-        <Panel header="Homepage" id="home">
-            <Flex>
-                <StyledBox border="box" borderRadius="normal" marginRight="xLarge" padding="medium">
-                    <H4>Inventory count</H4>
-                    <H1 marginBottom="none">{summary.inventory_count}</H1>
-                </StyledBox>
-                <StyledBox border="box" borderRadius="normal" marginRight="xLarge" padding="medium">
-                    <H4>Variant count</H4>
-                    <H1 marginBottom="none">{summary.variant_count}</H1>
-                </StyledBox>
-                <StyledBox border="box" borderRadius="normal" padding="medium">
-                    <H4>Primary category</H4>
-                    <H1 marginBottom="none">{summary.primary_category_name}</H1>
-                </StyledBox>
-            </Flex>
+        <Panel header="What is this app?" id="home">
+                <Text>
+                    Welcome to our Translations App, we've developed this during the BigCommerce Hackathon 2022.
+                    On review of the app marketplace for translations we discovered there isn't a lot of offerings
+                    which allow users to select any number of languages rather they are set at set increments. 
+                    We've had clients in the past getting by with 'Google Translate' widget, however as that is
+                    coming to end of life this year, we believe we could offer an alternative.
+                </Text>
+                <HR/>
+                <H3>Who are we?</H3>
+                <Text>
+                    We are two developers and a project manager from Space48.
+                </Text>
         </Panel>
     );
 };
