@@ -10,7 +10,7 @@ const InnerHeader = () => {
     const { list = [] } = useProductList();
     const { name } = list.find(item => item.id === Number(pid)) ?? {};
 
-    const handleBackClick = () => router.push(TabRoutes[TabIds.PRODUCTS]);
+    const handleBackClick = () => router.push(TabRoutes[TabIds.TRANSLATIONS]);
 
     return (
         <Box marginBottom="xxLarge">
