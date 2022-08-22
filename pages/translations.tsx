@@ -12,6 +12,7 @@ const Translations = ({ data }) => {
     // if (isLoading) return <Loading />;
     // if (error) return <ErrorMessage error={error} />;
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [exampleWebpage, setExampleWebPage] = useState('');
     const [savedLanguages, setSavedLanguages] = useState([]);
     const [value, setValue] = useState([]);
