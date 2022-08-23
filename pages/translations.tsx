@@ -17,9 +17,11 @@ const Translations = ({ data }) => {
     const [defaultLanguage, setDefaultLanguage] = useState('');
     const [savedLanguages, setSavedLanguages] = useState([]);
     const [value, setValue] = useState([]);
-    const [leftLanguage, setLeftLanguage] = useState([]);
-    const [rightLanguage, setRightLanguage] = useState([]);
-    const [webPageTranslationLanguage, setWebPageTranslationLanguage] = useState([]);
+    const [leftLanguage, setLeftLanguage] = useState('');
+    const [rightLanguage, setRightLanguage] = useState('');
+    const [webPageTranslationLanguage, setWebPageTranslationLanguage] = useState('');
+    const [textToBeTranslated, setTextToBeTranslated] = useState('');
+    const [translatedText, setTranslatedText] = useState('');
 
     const listOfLanguages = [
         { value: 'en-English', content: 'English', disabled: false },
@@ -73,6 +75,56 @@ const Translations = ({ data }) => {
         setLeftLanguage(newLeft);
         setRightLanguage(newRight);
     }
+
+    const generateTranslationBody = (text, to, from = '') => {
+
+        return {
+            to,
+            from,
+            translate: [{
+                text,
+                id: '10',
+            }]
+        }
+    }
+
+
+    const translateText = async () => {
+        const leftLanguageCode = leftLanguage.split('-')[0]
+        const rightLanguageCode = rightLanguage.split('-')[0]
+
+        const body = generateTranslationBody(textToBeTranslated, leftLanguageCode, rightLanguageCode);
+
+        const translatedText = await fetch('https://translation-cloud-functions.vercel.app/translate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        }).then((response) => response.json())
+            .then((data) => data.translations[0])
+
+        setTranslatedText(translatedText);
+    }
+
+    const updateWebPagePreview = async () => {
+        const languageCode = webPageTranslationLanguage.split('-')[0];
+
+        const body = generateTranslationBody(textToBeTranslated, languageCode);
+
+        const translatedWebPage = await fetch('https://translation-cloud-functions.vercel.app/translate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        }).then((response) => response.json())
+            .then((data) => data.translations[0])
+
+        const fragment = document.createRange().createContextualFragment(translatedWebPage);
+        document.querySelector('.example-box')?.replaceChildren(fragment);
+    }
+
 
     return (
         <>
@@ -154,6 +206,7 @@ const Translations = ({ data }) => {
                         <Form
                             onSubmit={(e) => {
                                 e.preventDefault()
+                                translateText()
                             }}
                         >
                             <Flex alignItems="center" flexColumnGap="10px" marginBottom="large">
@@ -199,11 +252,13 @@ const Translations = ({ data }) => {
                                 <FlexItem flexGrow={2} marginRight="small">
                                     <FormGroup>
                                         <Textarea
+                                            onChange={(e) => setTextToBeTranslated(e.target.value)}
                                             label="Input"
                                             placeholder="Enter some text..."
                                             resize={false}
                                             required
                                             rows={7}
+                                            value={textToBeTranslated}
                                         />
                                     </FormGroup>
                                 </FlexItem>
@@ -215,6 +270,7 @@ const Translations = ({ data }) => {
                                             disabled
                                             required
                                             rows={7}
+                                            value={translatedText}
                                         />
                                     </FormGroup>
                                 </FlexItem>
@@ -230,22 +286,25 @@ const Translations = ({ data }) => {
                         <StyledBox border="box" borderRadius="normal" marginRight="xLarge" padding="medium" >
                             <H4>Webpage Preview</H4>
                             <FlexItem>
-                                    <FormGroup>
-                                        <Select
-                                            filterable={true}
-                                            label="Language"
-                                            maxHeight={300}
-                                            onOptionChange={(value) => setWebPageTranslationLanguage(value)}
-                                            options={savedLanguages.map((language) => {
-                                                return { value: language, content: language.split('-')[1] }
-                                            })}
-                                            placeholder={'Choose a language'}
-                                            placement={'bottom-start'}
-                                            required
-                                            value={webPageTranslationLanguage}
-                                        />
-                                    </FormGroup>
-                                </FlexItem>
+                                <FormGroup>
+                                    <Select
+                                        filterable={true}
+                                        label="Language"
+                                        maxHeight={300}
+                                        onOptionChange={(value) => {
+                                            setWebPageTranslationLanguage(value)
+                                            updateWebPagePreview()
+                                        }}
+                                        options={savedLanguages.map((language) => {
+                                            return { value: language, content: language.split('-')[1] }
+                                        })}
+                                        placeholder={'Choose a language'}
+                                        placement={'bottom-start'}
+                                        required
+                                        value={webPageTranslationLanguage}
+                                    />
+                                </FormGroup>
+                            </FlexItem>
                             <Box backgroundColor="secondary10" padding="xxLarge" shadow="floating" className='example-box'>
                             </Box>
                         </StyledBox>
