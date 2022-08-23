@@ -21,7 +21,7 @@
   "dependencies": {
     "@bigcommerce/big-design": "^0.32.0",
     "@bigcommerce/big-design-theme": "^0.14.1",
-    "firebase": "^9.6.11",
+    "firebase": "^9.8.4",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "next": "^12.2.1",
