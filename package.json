@@ -19,8 +19,8 @@
     "npm": ">=7.20.x <8.14"
   },
   "dependencies": {
-    "@bigcommerce/big-design": "^0.32.0",
-    "@bigcommerce/big-design-theme": "^0.14.1",
+    "@bigcommerce/big-design": "^0.32.1",
+    "@bigcommerce/big-design-theme": "^0.15.0",
     "firebase": "^9.9.1",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
