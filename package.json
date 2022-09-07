@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@bigcommerce/big-design": "^0.32.1",
-    "@bigcommerce/big-design-theme": "^0.15.0",
+    "@bigcommerce/big-design-theme": "^0.16.0",
     "firebase": "^9.9.2",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
