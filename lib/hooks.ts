@@ -33,8 +33,9 @@ export function useAlerts() {
 }
 
 export function useSubscription() {
-    const encodedContext = useSession()?.context;
-    const { data, error } = useSWR(encodedContext ? ['/api/subscription', encodedContext] : null, fetcher);
+    const { context } = useSession();
+    const params = new URLSearchParams({ context }).toString();
+    const { data, error } = useSWR(context ? ['/api/subscription', params] : null, fetcher);
 
     return {
         subscription: data,

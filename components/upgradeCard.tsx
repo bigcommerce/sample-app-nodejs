@@ -22,8 +22,9 @@ export const UpgradeCard = ({ description, name, pid, popular, price }: UpgradeC
     const handleChoosePlan = async () => {
         setIsLoading(true);
 
+        // TODO: Add error handling
         const response = await fetch(`/api/checkout/${pid}?context=${encodedContext}`);
-        const { checkout_url: url = '' } = await response.json();
+        const { checkoutUrl: url = '' } = await response.json();
 
         if (url && window) window.location.assign(url);
     };
@@ -78,7 +79,7 @@ export const UpgradeCard = ({ description, name, pid, popular, price }: UpgradeC
 };
 
 const StyledCard = styled(Box)<BoxProps>`
-    width: 17.25rem;
+    width: 18.5rem;
 `;
 
 const StyledFlexItem = styled(FlexItem)<FlexItemProps>`

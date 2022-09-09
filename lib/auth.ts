@@ -86,9 +86,7 @@ export async function getSubscriptionById(pid: string) {
 }
 
 export async function getSubscriptionInfo(storeHash: string) {
-    const subscriptionPlan = await db.getStorePlan(storeHash);
-
-    return subscriptionPlan;
+    return await db.getStorePlan(storeHash);
 }
 
 // JWT functions to sign/ verify 'context' query param from /api/auth||load

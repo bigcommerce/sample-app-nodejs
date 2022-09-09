@@ -3,7 +3,6 @@ import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import ErrorMessage from '../components/error';
 import Loading from '../components/loading';
-import { useProducts } from '../lib/hooks';
 import { plans } from '../lib/checkout';
 import { useAlerts, useProducts, useSubscription } from '../lib/hooks';
 

@@ -6,7 +6,12 @@ export default async function subscription(req: NextApiRequest, res: NextApiResp
         const { plan, storeHash } = await getSession(req);
         const data = plan ?? await getSubscriptionInfo(storeHash);
 
-        if (data?.showPaidWelcome) setWelcome(storeHash, false);
+        if (data?.showPaidWelcome) {
+            // TODO: setWelcome after alert has shown
+            setTimeout(() => {
+                setWelcome(storeHash, false);
+            }, 1000);
+        }
 
         res.status(200).json(data);
     } catch (error) {

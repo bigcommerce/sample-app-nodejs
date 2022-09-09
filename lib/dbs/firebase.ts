@@ -20,8 +20,9 @@ const db = getFirestore(app);
 export async function setSubscriptionId(pid: string, subscriptionId: string) {
     if (!pid || !subscriptionId) return null;
 
-    const ref = db.collection('subscription').doc(pid);
-    await ref.set({ subscriptionId });
+    const ref = doc(db, 'subscription', pid);
+
+    await setDoc(ref, { subscriptionId });
 }
 
 // Use setUser for storing global user data (persists between installs)
@@ -63,22 +64,19 @@ export async function setStorePlan(session: SessionProps) {
 
     const contextString = context ?? sub;
     const storeHash = contextString?.split('/')[1] || '';
-
-    if (!plan?.pid && await getStorePlan(storeHash)) return null; // Return early if set
-
     const defaultEnd = Date.now() + (trialDays * 24 * 60 * 60 * 1000);
-    const { pid = '', isPaidApp = false, showPaidWelcome = false, trialEndDate = defaultEnd } = plan ?? {};
-    const ref = db.collection('plan').doc(storeHash);
-    const data = { pid, isPaidApp, showPaidWelcome, trialEndDate };
+    const ref = doc(db, 'plan', storeHash);
+    const data = { pid: '', isPaidApp: false, showPaidWelcome: false, trialEndDate: defaultEnd, ...plan };
 
-    await ref.set(data);
+    await setDoc(ref, data);
 }
 
 export async function setStoreWelcome(storeHash: string, show: boolean) {
     if (!storeHash) return null;
-    const ref = db.collection('plan').doc(storeHash);
 
-    await ref.set({ showPaidWelcome: show }, { merge: true });
+    const ref = doc(db, 'plan', storeHash);
+
+    await setDoc(ref, { showPaidWelcome: show }, { merge: true });
 }
 
 // User management for multi-user apps
@@ -138,23 +136,25 @@ export async function hasStoreUser(storeHash: string, userId: string) {
 export async function getStorePlan(storeHash: string) {
     if (!storeHash) return null;
 
-    const doc = await db.collection('plan').doc(storeHash).get();
+    const planDoc = await getDoc(doc(db, 'plan', storeHash));
 
-    return doc?.exists ? doc.data() : null;
+    return planDoc.exists() ? planDoc.data() : null;
 }
 
 export async function getStoreToken(storeHash: string) {
     if (!storeHash) return null;
+
     const storeDoc = await getDoc(doc(db, 'store', storeHash));
 
-    return storeDoc.data()?.accessToken ?? null;
+    return storeDoc.exists() ? storeDoc.data()?.accessToken : null;
 }
 
 export async function getSubscriptionId(pid: string) {
     if (!pid) return null;
-    const doc = await db.collection('subscription').doc(pid).get();
 
-    return doc?.exists ? doc.data()?.subscriptionId : null;
+    const subDoc = await getDoc(doc(db, 'subscription', pid));
+
+    return subDoc.exists() ? subDoc.data()?.subscriptionId : null;
 }
 
 export async function deleteStore({ store_hash: storeHash }: SessionProps) {

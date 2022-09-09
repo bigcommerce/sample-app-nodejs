@@ -1,11 +1,16 @@
-const appId = process.env.APP_ID;
+const checkoutAppId = process.env.CHECKOUT_APP_ID;
+const appId = process.env.CURRENT_APP_ID ?? checkoutAppId;
+const merchantUuid = process.env.CHECKOUT_MERCHANT;
+const environment = process.env.ENVIRONMENT;
+const isProd = environment === 'bigcommerce.com';
+const hostName = isProd ? environment : `-${environment}`;
 
 export const trialDays = 7;
 
 export const plans = [
     {
         name: 'Standard',
-        price: '29.95',
+        price: '40.00',
         description: `Start out with inventory tracking, product variant lists,
             and more. Perfect for businesses with fewer than 1,000 SKUs.`,
         popular: false,
@@ -23,41 +28,147 @@ export const plans = [
 
 // TODO: place data inside of a DB and create an API call
 const planItems = {
-    '2': {
-        product: {
-            id: '2',
-            type: 'app',
-        },
-        pricing_plan: {
-            interval: 'monthly',
-            price: {
-                amount: 79.95,
-                currency_code: 'USD',
-            },
-        },
-        trial_days: trialDays,
-    },
     '1': {
         product: {
             id: '1',
             type: 'app',
         },
-        pricing_plan: {
-            interval: 'monthly',
+        pricingPlan: {
+            interval: "MONTH",
             price: {
-                amount: 29.95,
-                currency_code: 'USD'
+                value: 40.00,
+                currencyCode: 'USD'
+            },
+        },
+        trial_days: trialDays,
+    },
+    '2': {
+        product: {
+            id: '2',
+            type: 'app',
+        },
+        pricingPlan: {
+            interval: 'MONTH',
+            price: {
+                value: 79.95,
+                currencyCode: 'USD',
             },
         },
         trial_days: trialDays,
     },
 };
 
+const checkoutGraphQuery = `
+  mutation ($checkout: CreateCheckoutInput!) {
+    checkout {
+      createCheckout(input: $checkout) {
+        checkout {
+          id
+          accountId
+          status
+          checkoutUrl
+          items(first: 2) {
+            edges {
+              node {
+                subscriptionId
+                status
+                product {
+                  entityId
+                  type
+                }
+                scope {
+                  entityId
+                  type
+                }
+                pricingPlan {
+                  interval
+                  price {
+                    value
+                    currencyCode
+                  }
+                  trialDays
+                }
+                redirectUrl
+                description
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export function getCheckoutBody(productId: string, storeHash: string) {
     return {
-        account_id: '3d12cf3b-1c2a-4731-8049-730d5dee8ed8', // TODO: replace with actual auth
-        line_items: [planItems[productId]],
-        notification_url: 'https://8eb69c8ea36a9d3eafe7f05625577609.m.pipedream.net',
-        redirect_url: `https://store-${storeHash}.mybigcommerce.com/manage/app/${appId}/upgrade/${productId}`,
+        query: checkoutGraphQuery,
+        variables: {
+            checkout: {
+                accountId: `bc/account/account/${merchantUuid}`,
+                items: [
+                    {
+                    product: {
+                        entityId: `${checkoutAppId}`,
+                        type: 'APPLICATION'
+                    },
+                    scope: {
+                        entityId: `${storeHash}`,
+                        type: 'STORE'
+                    },
+                    pricingPlan: planItems[productId].pricingPlan,
+                    redirectUrl: `https://store-${storeHash}.my${hostName}/manage/app/${appId}/${productId}`,
+                    description: 'application'
+                    }
+                ]
+            }
+        },
+    };
+}
+
+const subscriptionQuery = `
+  query q1($id: ID!) {
+    account {
+      checkout(id: $id) {
+        id
+        accountId
+        status
+        checkoutUrl
+        items(first: 2) {
+            edges {
+                node {
+                  subscriptionId
+                  status
+                  product {
+                      entityId
+                      type
+                  }
+                  scope {
+                      entityId
+                      type
+                  }
+                  pricingPlan {
+                  interval
+                  price {
+                      value
+                      currencyCode
+                  }
+                  trialDays
+                  }
+                  redirectUrl
+                  description
+                }
+              }
+          }
+      }
+    }
+  }
+`;
+
+export function getSubscriptionBody(subscriptionId: string) {
+    return {
+        query: subscriptionQuery,
+        variables: {
+            "id": `bc/account/checkout/${subscriptionId}`
+        }
     };
 }
