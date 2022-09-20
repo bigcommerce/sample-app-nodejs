@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { deleteDoc, doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { SessionProps, UserData } from '../../types';
+import { trialDays } from '../checkout';
 
 // Firebase config and initialization
 // Prod applications might use config file
@@ -14,6 +15,15 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Firestore data management functions
+
+// Persist subscription info
+export async function setSubscriptionId(pid: string, subscriptionId: string) {
+    if (!pid || !subscriptionId) return null;
+
+    const ref = doc(db, 'subscription', pid);
+
+    await setDoc(ref, { subscriptionId });
+}
 
 // Use setUser for storing global user data (persists between installs)
 export async function setUser({ user }: SessionProps) {
@@ -45,6 +55,28 @@ export async function setStore(session: SessionProps) {
     const data = { accessToken, adminId: id, scope };
 
     await setDoc(ref, data);
+}
+
+export async function setStorePlan(session: SessionProps) {
+    const { access_token: accessToken, context, plan, sub } = session;
+    // Only set on app install or subscription verification (load)
+    if ((!accessToken && !plan?.pid) || (plan && !plan.isPaidApp)) return null;
+
+    const contextString = context ?? sub;
+    const storeHash = contextString?.split('/')[1] || '';
+    const defaultEnd = Date.now() + (trialDays * 24 * 60 * 60 * 1000);
+    const ref = doc(db, 'plan', storeHash);
+    const data = { pid: '', isPaidApp: false, showPaidWelcome: false, trialEndDate: defaultEnd, ...plan };
+
+    await setDoc(ref, data);
+}
+
+export async function setStoreWelcome(storeHash: string, show: boolean) {
+    if (!storeHash) return null;
+
+    const ref = doc(db, 'plan', storeHash);
+
+    await setDoc(ref, { showPaidWelcome: show }, { merge: true });
 }
 
 // User management for multi-user apps
@@ -82,6 +114,7 @@ export async function setStoreUser(session: SessionProps) {
     }
 }
 
+
 export async function deleteUser({ context, user, sub }: SessionProps) {
     const contextString = context ?? sub;
     const storeHash = contextString?.split('/')[1] || '';
@@ -100,11 +133,28 @@ export async function hasStoreUser(storeHash: string, userId: string) {
     return userDoc.exists();
 }
 
+export async function getStorePlan(storeHash: string) {
+    if (!storeHash) return null;
+
+    const planDoc = await getDoc(doc(db, 'plan', storeHash));
+
+    return planDoc.exists() ? planDoc.data() : null;
+}
+
 export async function getStoreToken(storeHash: string) {
     if (!storeHash) return null;
+
     const storeDoc = await getDoc(doc(db, 'store', storeHash));
 
-    return storeDoc.data()?.accessToken ?? null;
+    return storeDoc.exists() ? storeDoc.data()?.accessToken : null;
+}
+
+export async function getSubscriptionId(pid: string) {
+    if (!pid) return null;
+
+    const subDoc = await getDoc(doc(db, 'subscription', pid));
+
+    return subDoc.exists() ? subDoc.data()?.subscriptionId : null;
 }
 
 export async function deleteStore({ store_hash: storeHash }: SessionProps) {

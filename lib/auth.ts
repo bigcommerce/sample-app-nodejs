@@ -54,12 +54,21 @@ export function getBCVerify({ signed_payload_jwt }: QueryParams) {
 export function setSession(session: SessionProps) {
     db.setUser(session);
     db.setStore(session);
+    db.setStorePlan(session);
     db.setStoreUser(session);
+}
+
+export function setSubscription(pid: string, subId: string) {
+    db.setSubscriptionId(pid, subId);
+}
+
+export function setWelcome(storeHash: string, show: boolean) {
+    db.setStoreWelcome(storeHash, show);
 }
 
 export async function getSession({ query: { context = '' } }: NextApiRequest) {
     if (typeof context !== 'string') return;
-    const { context: storeHash, user } = decodePayload(context);
+    const { context: storeHash, plan, user } = decodePayload(context);
     const hasUser = await db.hasStoreUser(storeHash, user?.id);
 
     // Before retrieving session/ hitting APIs, check user
@@ -69,7 +78,15 @@ export async function getSession({ query: { context = '' } }: NextApiRequest) {
 
     const accessToken = await db.getStoreToken(storeHash);
 
-    return { accessToken, storeHash, user };
+    return { accessToken, ...(plan && { plan }), storeHash, user };
+}
+
+export async function getSubscriptionById(pid: string) {
+    return await db.getSubscriptionId(pid);
+}
+
+export async function getSubscriptionInfo(storeHash: string) {
+    return await db.getStorePlan(storeHash);
 }
 
 // JWT functions to sign/ verify 'context' query param from /api/auth||load

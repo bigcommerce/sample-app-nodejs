@@ -1,6 +1,6 @@
 import { ROW_NUMBERS } from '@mocks/hooks';
 import Products from '@pages/products/index';
-import { render, screen } from '@test/utils';
+import { render, screen, waitFor } from '@test/utils';
 
 jest.mock('@lib/hooks', () => require('@mocks/hooks'));
 
@@ -8,7 +8,7 @@ describe('Product List', () => {
     test('renders correctly', async () => {
         const { container } = render(<Products />);
         // Wait for table to be rendered
-        await screen.findByRole('table');
+        await waitFor(() => screen.getByRole('table'));
 
         expect(container.firstChild).toMatchSnapshot();
     });

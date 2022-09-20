@@ -4,6 +4,13 @@ export interface User {
     username?: string;
 }
 
+export interface Plan {
+    pid: string;
+    isPaidApp: boolean;
+    showPaidWelcome: boolean;
+    trialEndDate: string;
+}
+
 export interface SessionProps {
     access_token?: string;
     context: string;
@@ -13,6 +20,7 @@ export interface SessionProps {
     sub?: string;
     timestamp?: number;
     user: User;
+    plan?: Plan;
 }
 
 export interface SessionContextProps {
