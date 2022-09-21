@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { encodePayload, getBCVerify, getSubscriptionById, setSession } from '../../lib/auth';
+import { encodePayload, getBCVerify, getCheckoutById, setSession } from '../../lib/auth';
 import { getSubscriptionBody } from '../../lib/checkout';
 
 const buildRedirectUrl = (url: string, encodedContext: string) => {
@@ -18,7 +18,7 @@ export default async function load(req: NextApiRequest, res: NextApiResponse) {
 
         // If redirected from checkout, verify checkout
         if (pid) {
-            const subId = await getSubscriptionById(pid);
+            const subId = await getCheckoutById(pid);
             if (subId !== null) {
                 const subscriptionBody = getSubscriptionBody(String(subId));
                 const response = await fetch(`${process.env.CHECKOUT_URL}`, {

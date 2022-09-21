@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession, setSubscription } from '../../../lib/auth';
+import { getSession, setCheckout } from '../../../lib/auth';
 import { getCheckoutBody } from '../../../lib/checkout';
 
 export default async function checkout(req: NextApiRequest, res: NextApiResponse) {
@@ -24,8 +24,8 @@ export default async function checkout(req: NextApiRequest, res: NextApiResponse
             throw new Error(errors[0]?.message);
         }
 
-        const subId = data?.checkout?.createCheckout?.checkout?.id.split('/')[3] ?? '';
-        if (subId) setSubscription(String(pid), subId);
+        const checkoutId = data?.checkout?.createCheckout?.checkout?.id.split('/')[3] ?? '';
+        if (checkoutId) setCheckout(String(pid), checkoutId);
 
         res.status(200).json(data?.checkout?.createCheckout?.checkout);
     } catch (error) {
