@@ -1,6 +1,7 @@
 import * as mysql from 'mysql';
 import { promisify } from 'util';
 import { SessionProps, StoreData } from '../../types';
+import { trialDays } from '../checkout';
 
 const MYSQL_CONFIG = {
     host: process.env.MYSQL_HOST,
@@ -26,12 +27,17 @@ export async function setUser({ user }: SessionProps) {
 }
 
 export async function setStore(session: SessionProps) {
-    const { access_token: accessToken, context, scope } = session;
+    const {
+        access_token: accessToken,
+        context,
+        scope,
+        user: { id },
+    } = session;
     // Only set on app install or update
     if (!accessToken || !scope) return null;
 
     const storeHash = context?.split('/')[1] || '';
-    const storeData: StoreData = { accessToken, scope, storeHash };
+    const storeData: StoreData = { accessToken, adminId: id, scope, storeHash };
 
     await query('REPLACE INTO stores SET ?', storeData);
 }
@@ -90,4 +96,55 @@ export async function getStoreToken(storeHash: string) {
 
 export async function deleteStore({ store_hash: storeHash }: SessionProps) {
     await query('DELETE FROM stores WHERE storeHash = ?', storeHash);
+}
+
+// CHECKOUT Functions
+export async function setStorePlan(session: SessionProps) {
+    const { access_token: accessToken, context, plan, sub } = session;
+    // Only set on app install or subscription verification (load)
+    if ((!accessToken && !plan?.pid) || (plan && !plan.isPaidApp)) return null;
+
+    const contextString = context ?? sub;
+    const storeHash = contextString?.split('/')[1] || '';
+    const defaultEnd = new Date(Date.now() + (trialDays * 24 * 60 * 60 * 1000));
+    const data = {
+        pid: '',
+        isPaidApp: false,
+        showPaidWelcome: false,
+        storeHash,
+        trialEndDate: defaultEnd,
+        ...plan,
+    };
+
+    await query('REPLACE INTO plan SET ?', data);
+}
+
+export async function getStorePlan(storeHash: string) {
+    if (!storeHash) return null;
+
+    const results = await query('SELECT * FROM plan WHERE storeHash = ? LIMIT 1', storeHash);
+
+    return results.length ? results[0] : null;
+}
+
+export async function setStoreWelcome(storeHash: string, show: boolean) {
+    if (!storeHash) return null;
+
+    const values = [show, storeHash];
+
+    await query('UPDATE plan SET showPaidWelcome = ? WHERE storeHash = ?', values);
+}
+
+export async function setCheckoutId(pid: string, checkoutId: string) {
+    if (!pid || !checkoutId) return null;
+
+    await query('REPLACE INTO checkout SET ?', { pid, checkoutId });
+}
+
+export async function getCheckoutId(pid: string) {
+    if (!pid) return null;
+
+    const results = await query('SELECT checkoutId FROM checkout WHERE pid = ?', pid);
+
+    return results.length ? results[0].checkoutId : null;
 }

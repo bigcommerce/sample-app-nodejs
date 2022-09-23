@@ -4,6 +4,7 @@ import { SessionProps } from './index';
 
 export interface StoreData {
     accessToken?: string;
+    adminId: number;
     scope?: string;
     storeHash: string;
 }
