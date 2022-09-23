@@ -58,14 +58,6 @@ export function setSession(session: SessionProps) {
     db.setStoreUser(session);
 }
 
-export function setSubscription(pid: string, subId: string) {
-    db.setSubscriptionId(pid, subId);
-}
-
-export function setWelcome(storeHash: string, show: boolean) {
-    db.setStoreWelcome(storeHash, show);
-}
-
 export async function getSession({ query: { context = '' } }: NextApiRequest) {
     if (typeof context !== 'string') return;
     const { context: storeHash, plan, user } = decodePayload(context);
@@ -79,14 +71,6 @@ export async function getSession({ query: { context = '' } }: NextApiRequest) {
     const accessToken = await db.getStoreToken(storeHash);
 
     return { accessToken, ...(plan && { plan }), storeHash, user };
-}
-
-export async function getSubscriptionById(pid: string) {
-    return await db.getSubscriptionId(pid);
-}
-
-export async function getSubscriptionInfo(storeHash: string) {
-    return await db.getStorePlan(storeHash);
 }
 
 // JWT functions to sign/ verify 'context' query param from /api/auth||load
@@ -116,4 +100,21 @@ export async function removeUserData(session: SessionProps) {
 export async function logoutUser({ storeHash, user }: SessionContextProps) {
     const session = { context: `store/${storeHash}`, user };
     await db.deleteUser(session);
+}
+
+// CHECKOUT functions
+export function setCheckout(pid: string, subId: string) {
+    db.setCheckoutId(pid, subId);
+}
+
+export async function getCheckoutById(pid: string) {
+    return await db.getCheckoutId(pid);
+}
+
+export function setWelcome(storeHash: string, show: boolean) {
+    db.setStoreWelcome(storeHash, show);
+}
+
+export async function getSubscriptionInfo(storeHash: string) {
+    return await db.getStorePlan(storeHash);
 }

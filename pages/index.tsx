@@ -3,17 +3,19 @@ import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import ErrorMessage from '../components/error';
 import Loading from '../components/loading';
+import { useSession } from '../context/session';
 import { plans } from '../lib/checkout';
 import { useAlerts, useProducts, useSubscription } from '../lib/hooks';
 
 const Index = () => {
     const alertsManager = useAlerts();
     const { error, isLoading, summary } = useProducts();
+    const encodedContext = useSession()?.context;
     const { subscription } = useSubscription();
-    const { pid: appPID, showPaidWelcome } = subscription ?? {};
+    const { pid: planId, showPaidWelcome } = subscription ?? {};
 
-    const getUpgradeAlert = useCallback(() => {
-        const planName = plans.find(plan => plan.pid === appPID)?.name;
+    const handleUpgradeMsg = useCallback(async () => {
+        const planName = plans.find(plan => plan.pid === planId)?.name;
         if (!planName) return;
 
         alertsManager.add({
@@ -30,11 +32,14 @@ const Index = () => {
             type: 'success',
             autoDismiss: true,
         });
-    }, [alertsManager, appPID]);
+
+        // Remove alert once shown
+        await fetch(`/api/checkout/removeWelcome?context=${encodedContext}`);
+    }, [alertsManager, encodedContext, planId]);
 
     useEffect(() => {
-        if (showPaidWelcome) getUpgradeAlert();
-    }, [showPaidWelcome, getUpgradeAlert]);
+        if (showPaidWelcome) handleUpgradeMsg();
+    }, [showPaidWelcome, handleUpgradeMsg]);
 
     if (isLoading) return <Loading />;
     if (error) return <ErrorMessage error={error} />;

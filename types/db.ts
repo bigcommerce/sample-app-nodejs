@@ -23,7 +23,7 @@ export interface Db {
     deleteUser(session: SessionProps): Promise<void>;
     setStorePlan?(session: SessionProps): Promise<void>;
     setStoreWelcome?(storeHash: string, show: boolean): Promise<void>;
-    setSubscriptionId?(pid: string, subscriptionId: string): Promise<void>;
+    setCheckoutId?(pid: string, subscriptionId: string): Promise<void>;
     getStorePlan?(storeHash: string): Promise<DocumentData>;
-    getSubscriptionId?(pid: string): Promise<void> | null;
+    getCheckoutId?(pid: string): Promise<void> | null;
 }

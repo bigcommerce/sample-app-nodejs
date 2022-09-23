@@ -116,7 +116,7 @@ export function getCheckoutBody(productId: string, storeHash: string) {
                         type: 'STORE'
                     },
                     pricingPlan: planItems[productId].pricingPlan,
-                    redirectUrl: `https://store-${storeHash}.my${hostName}/manage/app/${appId}/${productId}`,
+                    redirectUrl: `https://store-${storeHash}.my${hostName}/manage/app/${appId}/upgrade/${productId}`,
                     description: 'application'
                     }
                 ]
