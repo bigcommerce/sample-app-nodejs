@@ -106,8 +106,15 @@ export async function setStorePlan(session: SessionProps) {
 
     const contextString = context ?? sub;
     const storeHash = contextString?.split('/')[1] || '';
-    const defaultEnd = Date.now() + (trialDays * 24 * 60 * 60 * 1000);
-    const data = { pid: '', isPaidApp: false, showPaidWelcome: false, storeHash, trialEndDate: defaultEnd, ...plan };
+    const defaultEnd = new Date(Date.now() + (trialDays * 24 * 60 * 60 * 1000));
+    const data = {
+        pid: '',
+        isPaidApp: false,
+        showPaidWelcome: false,
+        storeHash,
+        trialEndDate: defaultEnd,
+        ...plan,
+    };
 
     await query('REPLACE INTO plan SET ?', data);
 }

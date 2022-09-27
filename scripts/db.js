@@ -49,7 +49,7 @@ const planCreate = query('CREATE TABLE `plan` (\n' +
     '  `pid` varchar(20) NOT NULL,\n' +
     '  `isPaidApp` boolean,\n' +
     '  `showPaidWelcome` boolean,\n' +
-    '  `trialEndDate` bigint(20),\n' +
+    '  `trialEndDate` datetime,\n' +
     '  PRIMARY KEY (`id`),\n' +
     '  UNIQUE KEY `storeHash` (`storeHash`)\n' +
     ') ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;'
