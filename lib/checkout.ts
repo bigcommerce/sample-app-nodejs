@@ -1,6 +1,5 @@
 const checkoutAppId = process.env.CHECKOUT_APP_ID;
 const appId = process.env.CURRENT_APP_ID ?? checkoutAppId;
-const merchantUuid = process.env.CHECKOUT_MERCHANT;
 const environment = process.env.ENVIRONMENT;
 const isProd = environment === 'bigcommerce.com';
 const hostName = isProd ? environment : `-${environment}`;
@@ -99,7 +98,7 @@ const checkoutGraphQuery = `
   }
 `;
 
-export function getCheckoutBody(productId: string, storeHash: string) {
+export function getCheckoutBody(productId: string, storeHash: string, merchantUuid: string) {
     return {
         query: checkoutGraphQuery,
         variables: {
