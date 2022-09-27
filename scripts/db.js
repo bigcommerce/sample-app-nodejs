@@ -26,6 +26,7 @@ const storesCreate = query('CREATE TABLE `stores` (\n' +
     '  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,\n' +
     '  `storeHash` varchar(10) NOT NULL,\n' +
     '  `accessToken` text,\n' +
+    '  `adminId` int(11) NOT NULL,\n' +
     '  `scope` text,\n' +
     '  PRIMARY KEY (`id`),\n' +
     '  UNIQUE KEY `storeHash` (`storeHash`)\n' +
@@ -42,6 +43,27 @@ const storeUsersCreate = query('CREATE TABLE `storeUsers` (\n' +
     ') ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;\n'
 );
 
-Promise.all([usersCreate, storesCreate]).then(() => {
+const planCreate = query('CREATE TABLE `plan` (\n' +
+    '  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,\n' +
+    '  `storeHash` varchar(10) NOT NULL,\n' +
+    '  `pid` varchar(20) NOT NULL,\n' +
+    '  `isPaidApp` boolean,\n' +
+    '  `showPaidWelcome` boolean,\n' +
+    '  `trialEndDate` datetime,\n' +
+    '  PRIMARY KEY (`id`),\n' +
+    '  UNIQUE KEY `storeHash` (`storeHash`)\n' +
+    ') ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;'
+);
+
+const checkoutCreate = query('CREATE TABLE `checkout` (\n' +
+    '  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,\n' +
+    '  `pid` varchar(20) NOT NULL,\n' +
+    '  `checkoutId` varchar(40) NOT NULL,\n' +
+    '  PRIMARY KEY (`id`),\n' +
+    '  UNIQUE KEY `pid` (`pid`)\n' +
+    ') ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;\n'
+);
+
+Promise.all([usersCreate, storesCreate, storeUsersCreate, planCreate, checkoutCreate]).then(() => {
     connection.end();
 });
