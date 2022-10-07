@@ -4,7 +4,10 @@ import { getSession, setWelcome } from '../../../lib/auth';
 export default async function removeWelcome(req: NextApiRequest, res: NextApiResponse) {
     try {
         const { storeHash } = await getSession(req);
-        setWelcome(storeHash, false);
+
+        setTimeout(() => {
+            setWelcome(storeHash, false);
+        }, 1000);
 
         res.status(200).json({});
     } catch (error) {
