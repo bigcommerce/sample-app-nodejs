@@ -7,7 +7,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start -p $PORT",
-    "test": "jest",
+    "test": "jest --updateSnapshot",
     "lint": "eslint . --ext .ts,.tsx,.js",
     "db:setup": "node scripts/db.js"
   },
@@ -19,16 +19,16 @@
     "npm": ">=7.20.x <8.14"
   },
   "dependencies": {
-    "@bigcommerce/big-design": "^0.32.1",
+    "@bigcommerce/big-design": "^0.34.2",
     "@bigcommerce/big-design-theme": "^0.16.0",
-    "firebase": "^9.9.2",
+    "firebase": "^9.9.4",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "next": "^12.2.5",
     "node-bigcommerce": "github:bigcommerce/node-bigcommerce",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "styled-components": "^5.3.5",
+    "styled-components": "^5.3.6",
     "swr": "^0.5.7"
   },
   "devDependencies": {
@@ -38,7 +38,7 @@
     "@types/jest": "^27.5.2",
     "@types/node": "^18.0.0",
     "@types/react": "^17.0.2",
-    "@types/styled-components": "^5.1.25",
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.30.0",
     "@typescript-eslint/parser": "^5.30.0",
     "babel-jest": "^27.5.1",
