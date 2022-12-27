@@ -17,6 +17,7 @@ const HeaderlessRoutes = [
     '/orders/[orderId]',
     '/orders/[orderId]/labels',
     '/orders/[orderId]/modal',
+    '/product/[productId]',
 ];
 
 const InnerRoutes = [
