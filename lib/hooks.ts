@@ -47,10 +47,16 @@ export function useProductList(query?: QueryParams) {
     };
 }
 
-export function useProductInfo(pid: number, list: ListItem[]) {
+export function useProductInfo(pid: number, list?:ListItem[]) {
     const { context } = useSession();
     const params = new URLSearchParams({ context }).toString();
-    const product = list.find(item => item.id === pid);
+
+    let product: ListItem; 
+
+    if (list?.length) { 
+       product = list.find(item => item.id === pid);
+    }
+
     // Conditionally fetch product if it doesn't exist in the list (e.g. deep linking)
     const { data, error } = useSWR(!product && context ? [`/api/products/${pid}`, params] : null, fetcher);
 

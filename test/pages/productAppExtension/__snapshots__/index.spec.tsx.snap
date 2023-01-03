@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductAppExtension renders correctly 1`] = `
+<div
+  class="styled__StyledBox-sc-sj5f1m-0 iiczML styled__StyledPanel-sc-1h6ef3q-0 gyZFEm"
+>
+  <div
+    class="styled__StyledBox-sc-sj5f1m-0 gHBxjL styled__StyledFlex-sc-hcvk8l-0 hPcIGA"
+  >
+    <h2
+      class="styled__StyledH2-sc-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 kEGvNd fjdBDH"
+    >
+      Basic Information
+    </h2>
+  </div>
+  <h4
+    class="styled__StyledH4-sc-tqnj75-4 XRfzZ"
+  >
+    Product name
+  </h4>
+  <p
+    class="styled__StyledText-sc-tqnj75-5 dCOwSk"
+  >
+    Product 1
+  </p>
+  <h4
+    class="styled__StyledH4-sc-tqnj75-4 XRfzZ"
+  >
+    Product type
+  </h4>
+  <p
+    class="styled__StyledText-sc-tqnj75-5 dCOwSk"
+  >
+    Physical
+  </p>
+  <h4
+    class="styled__StyledH4-sc-tqnj75-4 XRfzZ"
+  >
+    Default price (excluding tax)
+  </h4>
+  <p
+    class="styled__StyledText-sc-tqnj75-5 dCOwSk"
+  >
+    $
+    20
+  </p>
+  <h4
+    class="styled__StyledH4-sc-tqnj75-4 XRfzZ"
+  >
+    Visible on storefront
+  </h4>
+  <p
+    class="styled__StyledText-sc-tqnj75-5 dCOwSk"
+  />
+</div>
+`;
