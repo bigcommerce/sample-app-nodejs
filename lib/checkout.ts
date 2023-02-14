@@ -39,7 +39,7 @@ const planItems = {
                 currencyCode: 'USD'
             },
         },
-        trial_days: trialDays,
+        trialDays: trialDays,
     },
     '2': {
         product: {
@@ -53,7 +53,7 @@ const planItems = {
                 currencyCode: 'USD',
             },
         },
-        trial_days: trialDays,
+        trialDays: trialDays,
     },
 };
 
