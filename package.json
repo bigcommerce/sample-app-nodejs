@@ -19,17 +19,18 @@
     "npm": ">=7.20.x <8.14"
   },
   "dependencies": {
-    "@bigcommerce/big-design": "^0.34.3",
-    "@bigcommerce/big-design-theme": "^0.17.0",
+    "@bigcommerce/big-design": "^0.36.0",
+    "@bigcommerce/big-design-icons": "^0.23.0",
+    "@bigcommerce/big-design-theme": "^0.19.0",
     "firebase": "^9.14.0",
     "jsonwebtoken": "^9.0.0",
     "mysql": "^2.18.1",
     "next": "^12.3.3",
     "node-bigcommerce": "github:bigcommerce/node-bigcommerce",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "styled-components": "^5.3.6",
-    "swr": "^0.5.7"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.10",
+    "swr": "^1.1.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^7.31.2",
@@ -37,7 +38,8 @@
     "@testing-library/react": "^11.2.7",
     "@types/jest": "^27.5.2",
     "@types/node": "^18.0.0",
-    "@types/react": "^17.0.2",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.1",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.30.0",
     "@typescript-eslint/parser": "^5.30.0",
