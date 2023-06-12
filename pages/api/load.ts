@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { createAppExtension, getAppExtensions } from '@lib/appExtensions';
-import { getStoreToken } from '@lib/dbs/firebase';
+import db from '@lib/db';
 import { encodePayload, getBCVerify, setSession } from '../../lib/auth';
 
 const buildRedirectUrl = (url: string, encodedContext: string) => {
@@ -21,7 +21,7 @@ export default async function load(req: NextApiRequest, res: NextApiResponse) {
         const { sub } = session;
         const storeHash = sub?.split('/')[1] || '';
 
-        const accessToken = await getStoreToken(storeHash);
+        const accessToken = await db.getStoreToken(storeHash);
 
         await setSession(session);
 
