@@ -3,6 +3,8 @@ import { createAppExtension } from '@lib/appExtensions';
 import { encodePayload, getBCAuth, setSession } from '../../lib/auth';
 
 export default async function auth(req: NextApiRequest, res: NextApiResponse) {
+    const isAppExtensionsScopeEnabled = req.query.scope.includes('store_app_extensions_manage');
+
     try {
         // Authenticate the app on install
         const session = await getBCAuth(req.query);
@@ -18,21 +20,10 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
          * installed.
          */
 
-        const response = await fetch(
-            `https://${process.env.API_URL}/stores/${storeHash}/graphql`,
-            {
-                method: 'POST',
-                headers: {
-                    accept: 'application/json',
-                    'content-type': 'application/json',
-                    'x-auth-token': accessToken,
-                },
-                body: JSON.stringify(createAppExtension()),
-            }
-        );
-        const { errors } = await response.json();
-        if (errors && errors.length > 0) {
-            throw new Error(errors[0]?.message);
+        if (isAppExtensionsScopeEnabled) {
+            await createAppExtension({accessToken, storeHash})
+        } else {
+          console.warn("WARNING: App extensions scope is not enabled yet. To register app extensions update the scope in Developer Portal: https://devtools.bigcommerce.com");
         }
 
         res.redirect(302, `/?context=${encodedContext}`);

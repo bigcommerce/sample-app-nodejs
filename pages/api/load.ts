@@ -30,6 +30,15 @@ export default async function load(req: NextApiRequest, res: NextApiResponse) {
          * loaded
          */
 
+        const isAppExtensionsScopeEnabled = await db.hasAppExtensionsScope(storeHash);
+
+        if (!isAppExtensionsScopeEnabled) {
+          console.warn(
+            "WARNING: App extensions scope is not enabled yet. To register app extensions update the scope in Developer Portal: https://devtools.bigcommerce.com");
+          
+          return res.redirect(302, buildRedirectUrl(session.url, encodedContext));
+        }
+
         const existingAppExtensions = await fetch(
             `https://${process.env.API_URL}/stores/${storeHash}/graphql`,
             {
@@ -49,28 +58,9 @@ export default async function load(req: NextApiRequest, res: NextApiResponse) {
 
         // If there are no app extensions returned, we assume we have not
         // installed app extensions on this store, so we must install them.
+        
         if (!existingAppExtensionIds?.length) {
-            const createAppExtensionRequest = await createAppExtension();
-
-            // Make fetch to create the app extensions
-            const createResponse = await fetch(
-                `${process.env.API_BASE_URL}/stores/${storeHash}/graphql`,
-                {
-                    method: 'POST',
-                    headers: {
-                        accept: 'application/json',
-                        'content-type': 'application/json',
-                        'x-auth-token': accessToken,
-                    },
-                    body: JSON.stringify(createAppExtensionRequest),
-                }
-            );
-            const response = await createResponse.json();
-
-            // Handel error if app extension creation fails
-            if (response.data === null && response.errors?.length > 0) {
-                throw new Error(response.errors[0]?.message);
-            }
+          await createAppExtension({ accessToken, storeHash });
         }
 
         res.redirect(302, buildRedirectUrl(session.url, encodedContext));
