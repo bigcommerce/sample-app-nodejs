@@ -91,3 +91,10 @@ export async function getStoreToken(storeHash: string) {
 export async function deleteStore({ store_hash: storeHash }: SessionProps) {
     await query('DELETE FROM stores WHERE storeHash = ?', storeHash);
 }
+
+export async function hasAppExtensionsScope(storeHash: string): Promise<boolean> {
+    const scopes = await query('SELECT scope FROM stores WHERE storeHash = ?', storeHash);
+    const row = scopes[0];
+
+    return row?.scope?.includes('store_app_extensions_manage') ?? false;
+}

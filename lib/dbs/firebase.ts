@@ -112,3 +112,10 @@ export async function deleteStore({ store_hash: storeHash }: SessionProps) {
 
     await deleteDoc(ref);
 }
+
+export async function hasAppExtensionsScope(storeHash: string): Promise<boolean> {
+    const storeDoc = await getDoc(doc(db, 'store', storeHash));
+    const scopes = storeDoc.data()?.scope ?? '';
+
+    return scopes.includes('store_app_extensions_manage');
+}

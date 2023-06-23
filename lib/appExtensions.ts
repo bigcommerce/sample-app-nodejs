@@ -1,5 +1,26 @@
+export const createAppExtension = async ({ accessToken, storeHash }: { accessToken: string, storeHash: string }) => {
+    const response = await fetch(
+        `https://${process.env.API_URL}/stores/${storeHash}/graphql`,
+        {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            "content-type": "application/json",
+            "x-auth-token": accessToken,
+          },
+          body: JSON.stringify(createAppExtensionMutation()),
+        }
+    );
+
+    const { errors } = await response.json();
+  
+    if (errors && errors.length > 0) {
+      throw new Error(errors[0]?.message);
+    }
+}
+
 //  Builds the GraphQL mutation required to create a new App Extension
-export function createAppExtension() {
+export function createAppExtensionMutation() {
     const body = {
         query: `
         mutation AppExtension($input: CreateAppExtensionInput!) {

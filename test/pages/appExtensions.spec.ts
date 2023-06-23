@@ -1,5 +1,5 @@
 import { FetchMock } from 'jest-fetch-mock';
-import { createAppExtension, getAppExtensions } from '@lib/appExtensions';
+import { createAppExtensionMutation, getAppExtensions } from '@lib/appExtensions';
 
 const customGlobal: any = global;
 
@@ -16,7 +16,7 @@ describe('App Extensions', () => {
     });
 
     test('createAppExtension should return a new App Extension request body', async () => {
-        const requestBody = await createAppExtension();
+        const requestBody = await createAppExtensionMutation();
 
         expect(requestBody).toEqual(
             expect.objectContaining({
