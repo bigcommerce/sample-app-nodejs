@@ -26,7 +26,7 @@
     "firebase": "^9.22.2",
     "jsonwebtoken": "^9.0.0",
     "mysql": "^2.18.1",
-    "next": "^12.3.3",
+    "next": "^12.3.4",
     "node-bigcommerce": "github:bigcommerce/node-bigcommerce",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
