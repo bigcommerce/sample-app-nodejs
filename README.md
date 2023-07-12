@@ -6,7 +6,7 @@ This demo includes all of the files necessary to get started with a basic, hello
 
 To get the app running locally, follow these instructions:
 
-1. [Use Node 18.16 and NPM 9.5.1](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#checking-your-version-of-npm-and-node-js)
+1. [Use Node 16+ and NPM 8+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#checking-your-version-of-npm-and-node-js)
     - `node -v`
     - `npm -v`
 2. Install npm packages
