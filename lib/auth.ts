@@ -55,8 +55,9 @@ export async function getSession({ query: { context = '' } }: NextApiRequest) {
 }
 
 // Removes store and storeUser on uninstall
-export async function removeDataStore(res: NextApiResponse, session: SessionProps) {
+export async function removeDataStore(session: SessionProps) {
     await db.deleteStore(session);
+    await db.deleteUser(session);
 }
 
 export function encodePayload({ ...session }: SessionProps) {

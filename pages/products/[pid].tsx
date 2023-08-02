@@ -3,15 +3,15 @@ import ErrorMessage from '../../components/error';
 import Form from '../../components/form';
 import Loading from '../../components/loading';
 import { useSession } from '../../context/session';
-import { useProductList } from '../../lib/hooks';
+import { useProductInfo, useProductList } from '../../lib/hooks';
 import { FormData } from '../../types';
 
 const ProductInfo = () => {
     const router = useRouter();
     const encodedContext = useSession()?.context;
-    const { pid } = router.query;
-    const { isError, isLoading, list = [], mutateList } = useProductList();
-    const product = list.find(item => item.id === Number(pid));
+    const pid = Number(router.query?.pid);
+    const { error, isLoading, list = [], mutateList } = useProductList();
+    const { isLoading: isInfoLoading, product } = useProductInfo(pid, list);
     const { description, is_visible: isVisible, name, price, type } = product ?? {};
     const formData = { description, isVisible, name, price, type };
 
@@ -19,7 +19,7 @@ const ProductInfo = () => {
 
     const handleSubmit = async (data: FormData) => {
         try {
-            const filteredList = list.filter(item => item.id !== Number(pid));
+            const filteredList = list.filter(item => item.id !== pid);
             const { description, isVisible, name, price, type } = data;
             const apiFormattedData = { description, is_visible: isVisible, name, price, type };
 
@@ -42,8 +42,8 @@ const ProductInfo = () => {
         }
     };
 
-    if (isLoading) return <Loading />;
-    if (isError) return <ErrorMessage />;
+    if (isLoading || isInfoLoading) return <Loading />;
+    if (error) return <ErrorMessage error={error} />;
 
     return (
         <Form formData={formData} onCancel={handleCancel} onSubmit={handleSubmit} />
