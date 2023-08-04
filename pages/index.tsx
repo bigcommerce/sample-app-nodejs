@@ -8,7 +8,7 @@ const Index = () => {
     const { error, isLoading, summary } = useProducts();
 
     if (isLoading) return <Loading />;
-    if (error) return <ErrorMessage error={error} />;
+    if (error) return <ErrorMessage />;
 
     return (
         <Panel header="Homepage" id="home">

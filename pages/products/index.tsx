@@ -61,7 +61,7 @@ const Products = () => {
     );
 
     if (isLoading) return <Loading />;
-    if (error) return <ErrorMessage error={error} />;
+    if (error) return <ErrorMessage />;
 
     return (
         <Panel id="products">

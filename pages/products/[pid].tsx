@@ -43,7 +43,7 @@ const ProductInfo = () => {
     };
 
     if (isLoading || isInfoLoading) return <Loading />;
-    if (error) return <ErrorMessage error={error} />;
+    if (error) return <ErrorMessage />;
 
     return (
         <Form formData={formData} onCancel={handleCancel} onSubmit={handleSubmit} />
