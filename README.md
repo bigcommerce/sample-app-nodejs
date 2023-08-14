@@ -7,7 +7,7 @@ This starter app includes all the files necessary to get started with a basic, h
 To get the app running locally, follow these instructions:
 
 1. [Use Node 16+ and NPM 8+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#checking-your-version-of-npm-and-node-js). To check the running versions, use the following commands:
-   
+
 ```shell
 node -v
 npm -v
@@ -23,19 +23,19 @@ npm install
 
 3. To expose your app server using an HTTP tunnel, install [ngrok](https://www.npmjs.com/package/ngrok#usage) globally, then start the ngrok service.
 
-    You can use `npm` to install ngrok:
+You can use `npm` to install ngrok:
 
 ```shell
 npm install -g ngrok
 ```
 
-    Alternatively, MacOS users can use the [homebrew](https://brew.sh/) package manager:
+Alternatively, MacOS users can use the [homebrew](https://brew.sh/) package manager:
 
 ```shell
 brew install ngrok
 ```
 
-    Start ngrok on port `3000` to expose the default Next.js server:
+Start ngrok on port `3000` to expose the default Next.js server:
 
 ```shell
 ngrok http 3000
@@ -57,18 +57,17 @@ cp .env-sample .env
 
 6. In the `.env` file, replace the `CLIENT_ID` and `CLIENT_SECRET` variables with the API account credentials in the app profile. To locate the credentials, find the app's profile in the [Developer Portal](https://devtools.bigcommerce.com/my/apps), then click **View Client ID**.
 
-
 7. In the `.env` file, update the `AUTH_CALLBACK` variable with the `ngrok_url` from step 4.
 
 8. In the `.env` file, enter a secret `JWT_KEY`. To support HS256 encryption, the JWT key must be at least 32 random characters (256 bits).
 
 9. **Configure the data store.** In the `.env` file, specify the `DB_TYPE`.
 
-    > The DB type must be either `firebase` or `mysql`.
+   > The DB type must be either `firebase` or `mysql`.
 
-    If using Firebase, supply the `FIRE_` config keys listed in the `.env` file. See the [Firebase quickstart (Google)](https://firebase.google.com/docs/firestore/quickstart).
+   If using Firebase, supply the `FIRE_` config keys listed in the `.env` file. See the [Firebase quickstart (Google)](https://firebase.google.com/docs/firestore/quickstart).
 
-    If using MySQL, supply the `MYSQL_` config keys listed in the `.env` file, then do the initial database migration by running the following npm script:
+   If using MySQL, supply the `MYSQL_` config keys listed in the `.env` file, then do the initial database migration by running the following npm script:
 
 ```shell
 npm run db:setup
@@ -81,6 +80,5 @@ npm run dev
 ```
 
 > If `ngrok` expires, update the callbacks in steps 4 and 7 with the new `ngrok_url`. You can learn more about [persisting ngrok tunnels longer (ngrok)](https://ngrok.com/docs/getting-started/#step-3-connect-your-agent-to-your-ngrok-account).
-
 
 11. Consult our developer documentation to [install and launch the app](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app).
