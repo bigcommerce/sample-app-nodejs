@@ -24,7 +24,7 @@
     "@bigcommerce/big-design-theme": "^0.19.1",
     "dotenv": "^16.3.0",
     "firebase": "^9.23.0",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.1",
     "mysql2": "^3.5.2",
     "next": "^12.3.4",
     "node-bigcommerce": "github:bigcommerce/node-bigcommerce",
