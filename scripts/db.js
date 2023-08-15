@@ -1,7 +1,16 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const util = require('util');
+require('dotenv').config();
 
-const connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+const MYSQL_CONFIG = {
+    host: process.env.MYSQL_HOST,
+    database: process.env.MYSQL_DATABASE,
+    user: process.env.MYSQL_USERNAME,
+    password: process.env.MYSQL_PASSWORD,
+    ...(process.env.MYSQL_PORT && { port: process.env.MYSQL_PORT }),
+};
+
+const connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL ? process.env.CLEARDB_DATABASE_URL : MYSQL_CONFIG);
 const query = util.promisify(connection.query.bind(connection));
 
 const usersCreate = query('CREATE TABLE `users` (\n' +
