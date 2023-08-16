@@ -13,11 +13,9 @@ node -v
 npm -v
 ```
 
-2. Clone and/or fork the repo and install npm packages:
+2. Install npm packages
 
 ```shell
-git clone git@github.com:bigcommerce/sample-app-nodejs.git my-bigcommerce-app
-cd my-bigcommerce-app
 npm install
 ```
 
