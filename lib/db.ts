@@ -1,6 +1,6 @@
+import { Db } from '../types';
 import * as firebaseDB from './dbs/firebase';
 import * as sqlDB from './dbs/mysql';
-import { Db } from '../types';
 
 const { DB_TYPE } = process.env;
 
