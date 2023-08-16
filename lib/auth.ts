@@ -1,5 +1,17 @@
 import * as BigCommerce from 'node-bigcommerce';
 
+interface ApiConfig {
+    apiUrl?: string;
+    loginUrl?: string;
+}
+
+// Used for internal configuration; 3rd party apps may remove
+const apiConfig: ApiConfig = {};
+if (process.env.API_URL && process.env.LOGIN_URL) {
+    apiConfig.apiUrl = process.env.API_URL;
+    apiConfig.loginUrl = process.env.LOGIN_URL;
+}
+
 // Create BigCommerce instance
 // https://github.com/bigcommerce/node-bigcommerce
 const bigcommerce = new BigCommerce({
@@ -10,6 +22,7 @@ const bigcommerce = new BigCommerce({
     responseType: 'json',
     headers: { 'Accept-Encoding': '*' },
     apiVersion: 'v3',
+    ...apiConfig,
 });
 
 const bigcommerceSigned = new BigCommerce({

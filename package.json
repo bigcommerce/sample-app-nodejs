@@ -13,16 +13,16 @@
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": ">=14 <19",
-    "npm": ">=7.20.x <8.14"
+    "node": ">=16 <20",
+    "npm": ">=8 <10"
   },
   "dependencies": {
-    "@bigcommerce/big-design": "^0.36.0",
-    "next": "^12.3.3",
+    "@bigcommerce/big-design": "^0.36.2",
+    "next": "^12.3.4",
     "node-bigcommerce": "github:bigcommerce/node-bigcommerce",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.10"
+    "styled-components": "^5.3.11"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
