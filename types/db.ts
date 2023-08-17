@@ -12,8 +12,11 @@ export interface UserData {
 }
 
 export interface Db {
+    hasStoreUser(storeHash: string, userId: string): Promise<boolean> | boolean;
     setUser(session: SessionProps): Promise<void>;
     setStore(session: SessionProps): Promise<void>;
-    getStoreToken(storeHash: string): Promise<string> | null;
+    setStoreUser(session: SessionProps): Promise<void>;
+    getStoreToken(storeId: string): Promise<string> | null;
     deleteStore(session: SessionProps): Promise<void>;
+    deleteUser(session: SessionProps): Promise<void>;
 }
