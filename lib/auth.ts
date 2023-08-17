@@ -1,10 +1,17 @@
 import * as jwt from 'jsonwebtoken';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest } from 'next';
 import * as BigCommerce from 'node-bigcommerce';
-import { QueryParams, SessionProps } from '../types';
+import { ApiConfig, QueryParams, SessionProps } from '../types';
 import db from './db';
 
-const { AUTH_CALLBACK, CLIENT_ID, CLIENT_SECRET, JWT_KEY } = process.env;
+const { API_URL, AUTH_CALLBACK, CLIENT_ID, CLIENT_SECRET, JWT_KEY, LOGIN_URL } = process.env;
+
+// Used for internal configuration; 3rd party apps may remove
+const apiConfig: ApiConfig = {};
+if (API_URL && LOGIN_URL) {
+    apiConfig.apiUrl = API_URL;
+    apiConfig.loginUrl = LOGIN_URL;
+}
 
 // Create BigCommerce instance
 // https://github.com/bigcommerce/node-bigcommerce
@@ -16,6 +23,7 @@ const bigcommerce = new BigCommerce({
     responseType: 'json',
     headers: { 'Accept-Encoding': '*' },
     apiVersion: 'v3',
+    ...apiConfig,
 });
 
 const bigcommerceSigned = new BigCommerce({
@@ -29,7 +37,8 @@ export function bigcommerceClient(accessToken: string, storeHash: string) {
         accessToken,
         storeHash,
         responseType: 'json',
-        apiVersion: 'v3'
+        apiVersion: 'v3',
+        ...apiConfig,
     });
 }
 
@@ -44,14 +53,22 @@ export function getBCVerify({ signed_payload_jwt }: QueryParams) {
 export function setSession(session: SessionProps) {
     db.setUser(session);
     db.setStore(session);
+    db.setStoreUser(session);
 }
 
 export async function getSession({ query: { context = '' } }: NextApiRequest) {
     if (typeof context !== 'string') return;
-    const decodedContext = decodePayload(context)?.context;
-    const accessToken = await db.getStoreToken(decodedContext);
+    const { context: storeHash, user } = decodePayload(context);
+    const hasUser = await db.hasStoreUser(storeHash, user?.id);
 
-    return { accessToken, storeHash: decodedContext };
+    // Before retrieving session/ hitting APIs, check user
+    if (!hasUser) {
+        throw new Error('User is not available. Please login or ensure you have access permissions.');
+    }
+
+    const accessToken = await db.getStoreToken(storeHash);
+
+    return { accessToken, storeHash };
 }
 
 // Removes store and storeUser on uninstall
@@ -60,11 +77,11 @@ export async function removeDataStore(session: SessionProps) {
     await db.deleteUser(session);
 }
 
-export function encodePayload({ ...session }: SessionProps) {
+export function encodePayload({ user, owner, ...session }: SessionProps) {
     const contextString = session?.context ?? session?.sub;
     const context = contextString.split('/')[1] || '';
 
-    return jwt.sign({ context }, JWT_KEY, { expiresIn: '24h' });
+    return jwt.sign({ context, user, owner }, JWT_KEY, { expiresIn: '24h' });
 }
 
 export function decodePayload(encodedContext: string) {
