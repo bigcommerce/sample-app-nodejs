@@ -10,7 +10,7 @@ const MYSQL_CONFIG = {
     ...(process.env.MYSQL_PORT && { port: process.env.MYSQL_PORT }),
 };
 
-const connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL ? process.env.CLEARDB_DATABASE_URL : MYSQL_CONFIG);
+const connection = mysql.createConnection(process.env.DATABASE_URL ? process.env.DATABASE_URL : MYSQL_CONFIG);
 const query = util.promisify(connection.query.bind(connection));
 
 const usersCreate = query('CREATE TABLE `users` (\n' +
