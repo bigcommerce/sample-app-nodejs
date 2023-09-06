@@ -81,4 +81,13 @@ npm run dev
 
 > If `ngrok` expires, update the callbacks in steps 4 and 7 with the new `ngrok_url`. You can learn more about [persisting ngrok tunnels longer (ngrok)](https://ngrok.com/docs/getting-started/#step-3-connect-your-agent-to-your-ngrok-account).
 
-11. Consult our developer documentation to [install and launch the app](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app).
+11. To create and run a production build, an optimized version of the code must be built and then run:
+
+```shell
+npm run build
+npm run start -p 3000
+```
+
+   In order to start in production mode, a port number must be specified by using the `-p` flag.
+
+12. Consult our developer documentation to [install and launch the app](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app).
