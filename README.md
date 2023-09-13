@@ -2,7 +2,7 @@
 
 This starter app includes all the files necessary to get started with a basic, hello world app. This app uses NextJS, BigDesign, Typescript, and React.
 
-## Running the app
+## Running the app in development
 
 To get the app running locally, follow these instructions:
 
@@ -81,13 +81,15 @@ npm run dev
 
 > If `ngrok` expires, update the callbacks in steps 4 and 7 with the new `ngrok_url`. You can learn more about [persisting ngrok tunnels longer (ngrok)](https://ngrok.com/docs/getting-started/#step-3-connect-your-agent-to-your-ngrok-account).
 
-11. To create and run a production build, an optimized version of the code must be built and then run:
+11. Consult our developer documentation to [install and launch the app](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app).
+
+## Production Builds
+
+In production, you must build and run optimized version of the code. Use the following commands to get started:
+
+> When you run the `start` script, specify a port number using the `-p` flag. Otherwise, the process will fail.
 
 ```shell
 npm run build
 npm run start -p 3000
 ```
-
-   In order to start in production mode, a port number must be specified by using the `-p` flag.
-
-12. Consult our developer documentation to [install and launch the app](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app).
