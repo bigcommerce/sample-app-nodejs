@@ -1,4 +1,4 @@
-import { createPool, PoolOptions } from 'mysql2';
+import mysql, { PoolOptions } from 'mysql2';
 import { promisify } from 'util';
 import { SessionProps, StoreData } from '../../types';
 
@@ -10,10 +10,10 @@ const MYSQL_CONFIG: PoolOptions = {
     ...(process.env.MYSQL_PORT && { port: Number(process.env.MYSQL_PORT) }),
 };
 
-// For use with Heroku ClearDB
+// For use with DB URLs
 // Other mysql: https://www.npmjs.com/package/mysql#pooling-connections
-const dbUrl = process.env.CLEARDB_DATABASE_URL;
-const pool = dbUrl ? createPool(dbUrl) : createPool(MYSQL_CONFIG);
+const dbUrl = process.env.DATABASE_URL;
+const pool = dbUrl ? mysql.createPool(dbUrl) : mysql.createPool(MYSQL_CONFIG);
 const query = promisify(pool.query.bind(pool));
 
 // Use setUser for storing global user data (persists between installs)
