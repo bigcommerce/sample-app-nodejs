@@ -83,7 +83,7 @@ npm run dev
 
 11. Consult our developer documentation to [install and launch the app](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app).
 
-## Production Builds
+## Production builds
 
 In production, you must build and run optimized version of the code. Use the following commands to get started:
 
