@@ -28,7 +28,7 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
 
             <div className="PackingSlip">
                 <div style={{fontSize: "2.5rem"}} className="PackingSlipTitle">
-                Zag Bijoux Bordereau d'expédition {orderId}
+                Zag Bijoux Bordereau de préparation {orderId}
                 </div><br/><br/>
 
                 <div style={{fontSize: "2rem"}} className="StoreAddress">
@@ -90,7 +90,7 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                 </div><br/><br/>
 
                 <div className="PackingSlipItems">
-                    <div style={{fontSize: "2.5rem", marginTop: "3%"}} className="PackingSlipHeading">ShippedItems</div><br /><br/>
+                    <div style={{fontSize: "2rem", marginTop: "3%"}} className="PackingSlipHeading">Shipped Items</div><br /><br/>
                     <table style={{
                         width: '100vw',
                         height: 'fit-content'
@@ -98,9 +98,9 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                         <thead style={{border: '1px solid black', borderBottom: "none"}}>
                             <tr style={{paddingTop: "30px", paddingBottom: "30px"}}>
                                 <th style={{width: "20%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center"}}></th>
-                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "2.5rem"}}>Code / SKU</th>
-                                <th style={{width: "10%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "2.5rem"}}>Qty</th>
-                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "2.5rem"}}>Bin Picking No.</th>
+                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "2rem"}}>Code / SKU</th>
+                                <th style={{width: "10%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "2rem"}}>Qty</th>
+                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "2rem"}}>Bin Picking No.</th>
                                 <th style={{width: "10%"}}></th>
                             </tr>
                         </thead>
