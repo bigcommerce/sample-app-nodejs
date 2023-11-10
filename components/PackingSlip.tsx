@@ -31,20 +31,20 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                     %%GLOBAL_StoreName%% %%GLOBAL_PackingSlipTitle%%
                 </div><br/><br/>
 
-                <div style={{fontSize: "2rem"}} className="StoreAddress">
+                <div style={{fontSize: "1.5rem"}} className="StoreAddress">
                     %%GLOBAL_StoreAddressFormatted%%
                 </div><br/><br/>
 
-                <div style={{fontSize: "2rem"}} className="AddressRow">
+                <div style={{fontSize: "1.5rem"}} className="AddressRow">
                     <div className="BillingAddress">
-                        <div style={{fontSize: "2rem"}} className="PackingSlipHeading">%%LNG_BillTo%%</div>
+                        <div style={{fontSize: "1.5rem"}} className="PackingSlipHeading">%%LNG_BillTo%%</div>
                         %%GLOBAL_BillingAddress%%
                         <div style={{/**"%%GLOBAL_HideBillingPhone%%" */}}>
                             %%LNG_Phone%%: %%GLOBAL_BillingPhone%%
                         </div>
                     </div>
                     <div className="ShippingAddress">
-                        <div style={{fontSize: "2rem"}} className="PackingSlipHeading">%%LNG_ShipTo%%</div>
+                        <div style={{fontSize: "1.5rem"}} className="PackingSlipHeading">%%LNG_ShipTo%%</div>
                         %%GLOBAL_ShippingAddress%%
                         <div style={{/**"%%GLOBAL_HideShippingPhone%%" */}}>
                             %%LNG_Phone%%: %%GLOBAL_ShippingPhone%%
@@ -52,7 +52,7 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                     </div>
                 </div><br/><br/>
 
-                <div style={{fontSize: "2rem"}} className="PackingSlipDetails">
+                <div style={{fontSize: "1.5rem"}} className="PackingSlipDetails">
                     <div className="PackingSlipDetailsLeft">
                         <div className="DetailRow">
                             <div className="Label">%%LNG_Order%%:</div>
@@ -72,34 +72,34 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                 </div><br/><br/>
 
                 <div className="PackingSlipComments" style={{/**"%%GLOBAL_HideComments%%" */}}>
-                    <div style={{fontSize: "2rem", marginTop: "3%"}} className="PackingSlipHeading">%%LNG_Comments%%</div>
-                    <blockquote style={{fontSize: "2rem"}}>
+                    <div style={{fontSize: "1.5rem", marginTop: "3%"}} className="PackingSlipHeading">%%LNG_Comments%%</div>
+                    <blockquote style={{fontSize: "1.5rem"}}>
                         %%GLOBAL_Comments%%
                     </blockquote>
                 </div><br /><br/>
 
                 <div className="PackingSlipItems">
-                    <div style={{fontSize: "2rem", marginTop: "3%"}} className="PackingSlipHeading">%%LNG_ShippedItems%%</div><br /><br/>
+                    <div style={{fontSize: "1.5rem", marginTop: "3%"}} className="PackingSlipHeading">%%LNG_ShippedItems%%</div><br /><br/>
                     <table style={{
-                        width: '100vw',
+                        width: '1400px',
                         height: 'fit-content'
                     }}>
                         <thead style={{border: '1px solid black', borderBottom: "none"}}>
                             <tr style={{paddingTop: "30px", paddingBottom: "30px"}}>
                                 <th style={{width: "20%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center"}}></th>
-                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "2rem"}}>%%LNG_Code%%</th>
-                                <th style={{width: "10%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "2rem"}}>%%LNG_Quantity%%</th>
-                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "2rem"}}>%%LNG_ProdBin%%</th>
+                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "1.5rem"}}>%%LNG_Code%%</th>
+                                <th style={{width: "10%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "1.5rem"}}>%%LNG_Quantity%%</th>
+                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "1.5rem"}}>%%LNG_ProdBin%%</th>
                                 <th style={{width: "10%"}}></th>
                             </tr>
                         </thead>
                         <tbody style={{border: '1px solid black'}}>
                             {products && products.map((product: any, index: number) => (
                                 <tr style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
-                                    <td style={{width: "20%", textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "2rem"}}><img src={product.data.image_url} style={{width: "168px", height: "196px"}} /></td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "2rem"}}>{product.data.sku}</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "2rem"}}>12</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "2rem"}}>jhvjlhcvlmzV54645</td>
+                                    <td style={{width: "20%", textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}><img src={product.data.image_url} style={{width: "168px", height: "196px"}} /></td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.data.sku}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.qty}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.bin_picking_number}</td>
                                     <td></td>
                                 </tr>
                             ))}
