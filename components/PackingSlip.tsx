@@ -28,57 +28,54 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
 
             <div className="PackingSlip">
                 <div className="PackingSlipTitle">
-                Zag Bijoux Bordereau d'expédition {orderId}
+                    %%GLOBAL_StoreName%% %%GLOBAL_PackingSlipTitle%%
                 </div>
 
                 <div className="StoreAddress">
-                    {storeAdress}
+                    %%GLOBAL_StoreAddressFormatted%%
                 </div>
 
                 <div className="AddressRow">
                     <div className="BillingAddress">
-                        <div className="PackingSlipHeading">Billing Details</div>
-                            <div>
-                                <div>{billingAdress.first_name} {billingAdress.last_name}</div>
-                                <div>{billingAdress.company}</div>
-                                <div>{billingAdress.street_1}, {billingAdress.street_2 && billingAdress.street_2}</div>
-                                <div>{billingAdress.city}, {billingAdress.zip}</div>
-                                <div>{billingAdress.country}</div>
-                                <div>Phone: {billingAdress.phone}</div>
-                            </div>
+                        <div className="PackingSlipHeading">%%LNG_BillTo%%</div>
+                        %%GLOBAL_BillingAddress%%
+                        <div style={{/**"%%GLOBAL_HideBillingPhone%%" */}}>
+                            %%LNG_Phone%%: %%GLOBAL_BillingPhone%%
+                        </div>
                     </div>
                     <div className="ShippingAddress">
-                        <div className="PackingSlipHeading">Shipping Details</div>
-                        {shippingAdress.map((detail: any) => {
-                            return <div>
-                                <div>{detail.first_name} {detail.last_name}</div>
-                                <div>{detail.company}</div>
-                                <div>{detail.street_1} {detail.street_2 && detail.street_2}</div>
-                                <div>{detail.city}, {detail.zip}</div>
-                                <div>{detail.country}</div>
-                                <div>Phone: {detail.phone}</div>
-                            </div>
-                        })}
+                        <div className="PackingSlipHeading">%%LNG_ShipTo%%</div>
+                        %%GLOBAL_ShippingAddress%%
+                        <div style={{/**"%%GLOBAL_HideShippingPhone%%" */}}>
+                            %%LNG_Phone%%: %%GLOBAL_ShippingPhone%%
+                        </div>
                     </div>
                 </div>
 
                 <div className="PackingSlipDetails">
                     <div className="PackingSlipDetailsLeft">
                         <div className="DetailRow">
-                            <div className="Label">Order:</div>
-                            <div className="Value"> {orderId}</div>
+                            <div className="Label">%%LNG_Order%%:</div>
+                            <div className="Value">#%%GLOBAL_OrderId%%</div>
                         </div>
                         <div className="DetailRow">
-                            <div className="Label">Order date:</div>
-                            <div className="Value">{orderDate}</div>
+                            <div className="Label">%%LNG_ShipmentOrderDate%%:</div>
+                            <div className="Value">%%GLOBAL_OrderDate%%</div>
                         </div>
                     </div>
                     <div className="PackingSlipDetailsRight">
                         <div className="DetailRow" style={{/**"%%GLOBAL_HideShippingMethod%%" */}}>
-                            <div className="Label">Shipping method:</div>
-                            <div className="Value">{shippingMethod}</div>
+                            <div className="Label">%%LNG_ShippingMethod%%:</div>
+                            <div className="Value">%%GLOBAL_ShippingMethod%%</div>
                         </div>
-                        
+                        <div className="DetailRow" style={{/**"%%GLOBAL_HideShippingDate%%" */}}>
+                            <div className="Label">%%LNG_DateShipped%%:</div>
+                            <div className="Value">%%GLOBAL_DateShipped%%</div>
+                        </div>
+                        <div className="DetailRow" style={{/**"%%GLOBAL_HideTrackingNo%%" */}}>
+                            <div className="Label">%%LNG_TrackingNumber%%:</div>
+                            <div className="Value">%%GLOBAL_TrackingNo%%</div>
+                        </div>
                     </div>
                 </div>
 
@@ -90,7 +87,7 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                 </div>
 
                 <div className="PackingSlipItems">
-                    <div className="PackingSlipHeading">ShippedItems</div>
+                    <div className="PackingSlipHeading">%%LNG_ShippedItems%%</div>
                     <table style={{
                         width: '100%',
                         height: 'fit-content'
@@ -108,8 +105,8 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                                 <tr style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
                                     <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%"}}><img src={product.data.image_url} style={{width: "90px", height: "105px"}} /></td>
                                     <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%"}}>{product.data.sku}</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%"}}>{product.data.qty}</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%"}}>{product.data.bin_picking_number}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%"}}>12</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%"}}>hfxfgx5641654569415</td>
                                 </tr>
                             ))}
                         </tbody>
