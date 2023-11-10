@@ -27,17 +27,17 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
             </div>
 
             <div className="PackingSlip">
-                <div className="PackingSlipTitle">
+                <div style={{fontSize: "2.5rem"}} className="PackingSlipTitle">
                 Zag Bijoux Bordereau d'expédition {orderId}
-                </div>
+                </div><br/><br/>
 
-                <div className="StoreAddress">
+                <div style={{fontSize: "2rem"}} className="StoreAddress">
                     {storeAdress}
-                </div>
+                </div><br /><br/>
 
-                <div className="AddressRow">
+                <div style={{fontSize: "2rem"}} className="AddressRow">
                     <div className="BillingAddress">
-                        <div className="PackingSlipHeading">Billing Details</div>
+                        <div style={{fontSize: "2rem"}} className="PackingSlipHeading">Billing Details</div>
                             <div>
                                 <div>{billingAdress.first_name} {billingAdress.last_name}</div>
                                 <div>{billingAdress.company}</div>
@@ -48,7 +48,7 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                             </div>
                     </div>
                     <div className="ShippingAddress">
-                        <div className="PackingSlipHeading">Shipping Details</div>
+                        <div style={{fontSize: "2rem"}} className="PackingSlipHeading">Shipping Details</div>
                         {shippingAdress.map((detail: any) => {
                             return <div>
                                 <div>{detail.first_name} {detail.last_name}</div>
@@ -60,56 +60,58 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                             </div>
                         })}
                     </div>
-                </div>
+                </div><br /><br/>
 
-                <div className="PackingSlipDetails">
+                <div style={{fontSize: "2rem"}} className="PackingSlipDetails">
                     <div className="PackingSlipDetailsLeft">
                         <div className="DetailRow">
                             <div className="Label">Order:</div>
                             <div className="Value"> {orderId}</div>
                         </div>
-                        <div className="DetailRow">
-                            <div className="Label">Order date:</div>
-                            <div className="Value">{orderDate}</div>
+                        <div style={{display: "flex"}}>
+                            <div style={{fontWeight: 'bold'}}>Order date:</div>
+                            <div style={{marginLeft: "5%"}}>09.11.23</div>
                         </div>
                     </div>
                     <div className="PackingSlipDetailsRight">
-                        <div className="DetailRow" style={{/**"%%GLOBAL_HideShippingMethod%%" */}}>
-                            <div className="Label">Shipping method:</div>
-                            <div className="Value">{shippingMethod}</div>
+                        <div style={{display: "flex"}}>
+                            <div style={{fontWeight: 'bold'}}>Shipping method: </div>
+                            <div style={{marginLeft: "5%"}}>{shippingMethod}</div>
                         </div>
                         
                     </div>
-                </div>
+                </div><br /><br/>
 
                 <div className="PackingSlipComments" style={{/**"%%GLOBAL_HideComments%%" */}}>
-                    <div className="PackingSlipHeading">%%LNG_Comments%%</div>
-                    <blockquote>
-                        %%GLOBAL_Comments%%
+                    <div style={{fontSize: "2rem"}} className="PackingSlipHeading">Comments:</div>
+                    <blockquote style={{fontSize: "2rem"}}>
+                        Ajouter présentoir + commande vrac
                     </blockquote>
-                </div>
+                </div><br/><br/>
 
                 <div className="PackingSlipItems">
-                    <div className="PackingSlipHeading">ShippedItems</div>
+                    <div style={{fontSize: "2.5rem", marginTop: "3%"}} className="PackingSlipHeading">ShippedItems</div><br /><br/>
                     <table style={{
-                        width: '100%',
+                        width: '100vw',
                         height: 'fit-content'
                     }}>
                         <thead style={{border: '1px solid black', borderBottom: "none"}}>
                             <tr style={{paddingTop: "30px", paddingBottom: "30px"}}>
-                                <th style={{borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center"}}></th>
-                                <th style={{width: "40%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center"}}>%%LNG_Code%%</th>
-                                <th style={{width: "5%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center"}}>%%LNG_Quantity%%</th>
-                                <th style={{width: "40%", paddingTop: "1%", paddingBottom: "1%", textAlign: "center"}}>%%LNG_ProdBin%%</th>
+                                <th style={{width: "20%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center"}}></th>
+                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "2.5rem"}}>Code / SKU</th>
+                                <th style={{width: "10%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "2.5rem"}}>Qty</th>
+                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "2.5rem"}}>Bin Picking No.</th>
+                                <th style={{width: "10%"}}></th>
                             </tr>
                         </thead>
                         <tbody style={{border: '1px solid black'}}>
                             {products && products.map((product: any, index: number) => (
                                 <tr style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%"}}><img src={product.data.image_url} style={{width: "90px", height: "105px"}} /></td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%"}}>{product.data.sku}</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%"}}>{product.data.qty}</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%"}}>{product.data.bin_picking_number}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "2rem"}}><img src={product.data.image_url} style={{width: "168px", height: "196px"}} /></td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "2rem"}}>{product.data.sku}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "2rem"}}>12</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "2rem"}}>hfxfgx5641654569415</td>
+                                    <td></td>
                                 </tr>
                             ))}
                         </tbody>
