@@ -109,8 +109,8 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                                 <tr style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
                                     <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}><img src={product.data.image_url} style={{width: "168px", height: "196px"}} /></td>
                                     <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.data.sku}</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>12</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>hfxfgx5641654569415</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.qty}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.bin_picking_number}</td>
                                     <td></td>
                                 </tr>
                             ))}
