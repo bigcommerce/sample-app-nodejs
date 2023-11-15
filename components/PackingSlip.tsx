@@ -37,6 +37,7 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
  
             <div className="PackingSlip">
                 <div style={{fontSize: "2.5rem"}} className="PackingSlipTitle">
+
                 Zag Bijoux Bordereau de préparation {orderId}
                 </div><br/><br/>
 
@@ -71,24 +72,29 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                     </div>
                 </div><br /><br/>
 
+
                 <div style={{fontSize: "1.5rem"}} className="PackingSlipDetails">
                     <div className="PackingSlipDetailsLeft">
                         <div className="DetailRow">
-                            <div className="Label">Order:</div>
-                            <div className="Value"> {orderId}</div>
+                            <div className="Label">%%LNG_Order%%:</div>
+                            <div className="Value">#%%GLOBAL_OrderId%%</div>
                         </div>
                         <div style={{display: "flex"}}>
+
                             <div style={{fontWeight: 'bold'}}>Order date:</div>
                             <div style={{marginLeft: "5%"}}>{orderDate}</div>
+
                         </div>
                     </div>
                     <div className="PackingSlipDetailsRight">
                         <div style={{display: "flex"}}>
+
                             <div style={{fontWeight: 'bold'}}>Shipping method: </div>
                             <div style={{marginLeft: "5%"}}>{shippingMethod}</div>
+
                         </div>
-                        
                     </div>
+
                 </div><br /><br/>
 
                 <div className="PackingSlipComments" style={{/**"%%GLOBAL_HideComments%%" */}}>
@@ -102,21 +108,26 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                     <div style={{fontSize: "1.5rem", marginTop: "3%"}} className="PackingSlipHeading">Shipped Items</div><br /><br/>
                     <table style={{
                         width: '100vw',
+
                         height: 'fit-content'
                     }}>
                         <thead style={{border: '1px solid black', borderBottom: "none"}}>
                             <tr style={{paddingTop: "30px", paddingBottom: "30px"}}>
                                 <th style={{width: "20%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center"}}></th>
+
                                 <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "1.5rem"}}>Code / SKU</th>
                                 <th style={{width: "10%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "1.5rem"}}>Qty</th>
                                 <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "1.5rem"}}>Bin Picking No.</th>
+
                                 <th style={{width: "10%"}}></th>
                             </tr>
                         </thead>
                         <tbody style={{border: '1px solid black'}}>
                             {products && products.map((product: any, index: number) => (
+
                                 <tr key={index} style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
                                     <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}><img src={product.data.image_url} style={{width: "168px", height: "196px"}} /></td>
+
                                     <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.data.sku}</td>
                                     <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.qty}</td>
                                     <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.bin_picking_number}</td>
