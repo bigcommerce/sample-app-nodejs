@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import Header from '../components/header';
 import SessionProvider from '../context/session';
+import '../css/global.css'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (

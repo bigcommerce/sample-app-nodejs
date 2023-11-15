@@ -1,5 +1,7 @@
 import { Flex, H3, Panel } from '@bigcommerce/big-design';
 import { useEffect } from 'react';
+import Logo from '../assets/img/logo-zag-bijoux.png'
+import Image from 'next/image';
 
 type PackingSlipProps = {
     order: any;
@@ -23,9 +25,9 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
         <Panel>
             <link href="https://cdn11.bigcommerce.com/r-4b20dad619e29ebf3490f7f35369a8220637ce48/themes/ClassicNext/Styles/printinvoice.css" rel="stylesheet" type="text/css" />
             <div id="Logo">
-                %%GLOBAL_HeaderLogo%%
+                {/* <Image src={Logo} alt="Logo" width={200} height={200} /> */}
             </div>
-
+ 
             <div className="PackingSlip">
                 <div style={{fontSize: "2.5rem"}} className="PackingSlipTitle">
                 Zag Bijoux Bordereau de préparation {orderId}
@@ -49,8 +51,8 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                     </div>
                     <div className="ShippingAddress">
                         <div style={{fontSize: "1.5rem"}} className="PackingSlipHeading">Shipping Details</div>
-                        {shippingAdress.map((detail: any) => {
-                            return <div>
+                        {shippingAdress.map((detail: any, index: number) => {
+                            return <div key={index}>
                                 <div>{detail.first_name} {detail.last_name}</div>
                                 <div>{detail.company}</div>
                                 <div>{detail.street_1} {detail.street_2 && detail.street_2}</div>
@@ -106,7 +108,7 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                         </thead>
                         <tbody style={{border: '1px solid black'}}>
                             {products && products.map((product: any, index: number) => (
-                                <tr style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
+                                <tr key={index} style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
                                     <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}><img src={product.data.image_url} style={{width: "168px", height: "196px"}} /></td>
                                     <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.data.sku}</td>
                                     <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.qty}</td>
