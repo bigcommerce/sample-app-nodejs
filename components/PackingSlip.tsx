@@ -76,8 +76,8 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                 <div style={{fontSize: "1.5rem"}} className="PackingSlipDetails">
                     <div className="PackingSlipDetailsLeft">
                         <div className="DetailRow">
-                            <div className="Label">%%LNG_Order%%:</div>
-                            <div className="Value">#%%GLOBAL_OrderId%%</div>
+                            <div className="Label">Order:</div>
+                            <div className="Value">{orderId}</div>
                         </div>
                         <div style={{display: "flex"}}>
 
