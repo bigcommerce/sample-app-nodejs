@@ -17,9 +17,16 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
     const orderId = currentOrder.id
     const billingAdress = currentOrder.billing_address
     const shippingAdress = currentOrder.shippingAddresses
-    const orderDate = currentOrder.date_modified
     const shippingMethod = shippingAdress[0].shipping_method
     const products = currentOrder.products
+    const rawDate = currentOrder.date_modified
+    const orderDay = new Date(rawDate).getDay()
+    const orderMonth = new Date(rawDate).getMonth()
+    const orderYear = new Date(rawDate).getFullYear()
+    const orderDate = `${orderDay}.${orderMonth}.${orderYear}`
+
+
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@', orderYear)
 
     return (
         <Panel>
@@ -72,7 +79,7 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                         </div>
                         <div style={{display: "flex"}}>
                             <div style={{fontWeight: 'bold'}}>Order date:</div>
-                            <div style={{marginLeft: "5%"}}>09.11.23</div>
+                            <div style={{marginLeft: "5%"}}>{orderDate}</div>
                         </div>
                     </div>
                     <div className="PackingSlipDetailsRight">
@@ -87,7 +94,7 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                 <div className="PackingSlipComments" style={{/**"%%GLOBAL_HideComments%%" */}}>
                     <div style={{fontSize: "1.5rem"}} className="PackingSlipHeading">Comments:</div>
                     <blockquote style={{fontSize: "1.5rem"}}>
-                        Ajouter présentoir + commande vrac
+                        
                     </blockquote>
                 </div><br/><br/>
 
