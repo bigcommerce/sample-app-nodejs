@@ -18,6 +18,7 @@ const Orders = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const router = useRouter();
     const { error, isLoading, list = [], meta = {} } = useOrderList({
+        status_id: String(11),
         page: String(currentPage),
         limit: String(itemsPerPage),
         include: String('consignments.line_items'),
