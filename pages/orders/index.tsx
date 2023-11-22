@@ -3,10 +3,10 @@ import { MoreHorizIcon } from '@bigcommerce/big-design-icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactElement, useState } from 'react';
-import ErrorMessage from '@components/error';
-import Loading from '@components/loading';
-import { useOrderList, useProductList } from '@lib/hooks';
-import { TableItemOrder } from '@types';
+import ErrorMessage from '../../components/error';
+import Loading from '../../components/loading';
+import { useOrderList, useProductList } from '../../lib/hooks';
+import { TableItemOrder } from '../../types';
 import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 import PackingSlip from '@components/PackingSlip';
 

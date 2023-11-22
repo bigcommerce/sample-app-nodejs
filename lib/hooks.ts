@@ -47,6 +47,25 @@ export function useProductList(query?: QueryParams) {
     };
 }
 
+export function useOrderList(query?: QueryParams) {
+    const { context } = useSession();
+    const params = new URLSearchParams({ ...query, context }).toString();
+
+    console.log('useOrderList: params', params);
+    // Use an array to send multiple arguments to fetcher
+    const { data, error, mutate: mutateList } = useSWR(context ? ['/api/orders/list', params] : null, fetcher);
+
+    console.log('useOrderList: data', data);
+
+    return {
+        list: data,
+        meta: undefined,
+        isLoading: !data && !error,
+        error,
+        mutateList,
+    };
+}
+
 export function useProductInfo(pid: number, list?:ListItem[]) {
     const { context } = useSession();
     const params = new URLSearchParams({ context }).toString();
