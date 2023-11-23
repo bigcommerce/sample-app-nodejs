@@ -12,21 +12,23 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
         console.log('order ::: ', order);
     }, [])
 
-    const currentOrder = order.order
+    const currentOrder = order && order.order
     const storeAdress = "177 rue du temple - 75003 - Paris"
-    const orderId = currentOrder.id
-    const billingAdress = currentOrder.billing_address
-    const shippingAdress = currentOrder.shippingAddresses
-    const shippingMethod = shippingAdress[0].shipping_method
-    const products = currentOrder.products
-    const rawDate = currentOrder.date_modified
-    const orderDay = new Date(rawDate).getDay()
-    const orderMonth = new Date(rawDate).getMonth()
-    const orderYear = new Date(rawDate).getFullYear()
+    const orderId = currentOrder.id && currentOrder.id
+    const billingAdress = currentOrder.billing_address && currentOrder.billing_address
+    const shippingAdress = currentOrder.shippingAddresses && currentOrder.shippingAddresses
+    const shippingMethod = shippingAdress[0].shipping_method && shippingAdress[0].shipping_method
+    const products = currentOrder.products && currentOrder.products
+    const rawDate = currentOrder.date_modified && currentOrder.date_modified
+    const orderDay = rawDate && new Date(rawDate).getDay()
+    const orderMonth = rawDate && new Date(rawDate).getMonth()
+    const orderYear = rawDate && new Date(rawDate).getFullYear()
     const orderDate = `${orderDay}.${orderMonth}.${orderYear}`
+    const sortedProductsArray = products && products.sort(function(a: { data: { sku_id: number; }; }, b: { data: { sku_id: number; }; }) {
+        return a.data.sku_id - b.data.sku_id;
+    });
 
-
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@', orderYear)
+    // console.log('@@@@@@@@@@@@@@@@@@@@@@@@', sortedProductsArray)
 
     return (
         <Panel>
@@ -77,7 +79,7 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                     <div className="PackingSlipDetailsLeft">
                         <div className="DetailRow">
                             <div className="Label">Order:</div>
-                            <div className="Value">{orderId}</div>
+                            <div style={{marginLeft: "4%"}}>{orderId}</div>
                         </div>
                         <div style={{display: "flex"}}>
 
@@ -88,10 +90,12 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                     </div>
                     <div className="PackingSlipDetailsRight">
                         <div style={{display: "flex"}}>
-
                             <div style={{fontWeight: 'bold'}}>Shipping method: </div>
-                            <div style={{marginLeft: "5%"}}>{shippingMethod}</div>
-
+                            <div style={{marginLeft: "15%"}}>{shippingMethod}</div>
+                        </div>
+                        <div style={{display: "flex"}}>
+                            <div style={{fontWeight: 'bold'}}>Total quantity of items: </div>
+                            <div style={{marginLeft: "5%"}}>{products.length}</div>
                         </div>
                     </div>
 
@@ -105,10 +109,9 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                 </div><br/><br/>
 
                 <div className="PackingSlipItems">
-                    <div style={{fontSize: "1.5rem", marginTop: "3%"}} className="PackingSlipHeading">Shipped Items</div><br /><br/>
+                    <div style={{fontSize: "1.5rem", marginTop: "2%"}} className="PackingSlipHeading">Shipped Items</div><br /><br/>
                     <table style={{
                         width: '100vw',
-
                         height: 'fit-content'
                     }}>
                         <thead style={{border: '1px solid black', borderBottom: "none"}}>
@@ -123,10 +126,10 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                             </tr>
                         </thead>
                         <tbody style={{border: '1px solid black'}}>
-                            {products && products.map((product: any, index: number) => (
+                            {sortedProductsArray && sortedProductsArray.map((product: any, index: number) => (
 
                                 <tr key={index} style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}><img src={product.data.image_url} style={{width: "168px", height: "196px"}} /></td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}><img src={product.data.image_url} style={{width: "84px", height: "98px"}} /></td>
 
                                     <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.data.sku}</td>
                                     <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.qty}</td>
