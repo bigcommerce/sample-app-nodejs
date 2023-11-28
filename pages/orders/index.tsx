@@ -3,10 +3,10 @@ import { MoreHorizIcon } from '@bigcommerce/big-design-icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactElement, useState } from 'react';
-import ErrorMessage from '@components/error';
-import Loading from '@components/loading';
-import { useOrderList, useProductList } from '@lib/hooks';
-import { TableItemOrder } from '@types';
+import ErrorMessage from '../../components/error';
+import Loading from '../../components/loading';
+import { useOrderList, useProductList } from '../../lib/hooks';
+import { TableItemOrder } from '../../types';
 import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 import PackingSlip from '@components/PackingSlip';
 
@@ -17,14 +17,16 @@ const Orders = () => {
     const [direction, setDirection] = useState<TableSortDirection>('ASC');
     const [modalOpen, setModalOpen] = useState(false);
     const router = useRouter();
-    const { error, isLoading, list = [], meta = {} } = useOrderList({
+    const params = {
         status_id: String(11),
         page: String(currentPage),
         limit: String(itemsPerPage),
         include: String('consignments.line_items'),
         ...(columnHash && { sort: columnHash }),
         ...(columnHash && { direction: direction.toLowerCase() }),
-    });
+    };
+    console.log('params in orders ::: ', params);
+    const { error, isLoading, list = [], meta = {} } = useOrderList(params);
     const itemsPerPageOptions = [10, 20, 50, 100];
 
     console.log('list ::: ', list);
