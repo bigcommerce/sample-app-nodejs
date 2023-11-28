@@ -27,8 +27,11 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
     const sortedProductsArray = products && products.sort(function(a: { data: { sku_id: number; }; }, b: { data: { sku_id: number; }; }) {
         return a.data.sku_id - b.data.sku_id;
     });
+    const totalQty = products && products.map((product: any) => product.qty).reduce((accumulator, currentValue) => {
+        return accumulator + currentValue
+      },0);
 
-    // console.log('@@@@@@@@@@@@@@@@@@@@@@@@', sortedProductsArray)
+    // console.log('@@@@@@@@@@@@@@@@@@@@@@@@', totalQty)
 
     return (
         <Panel>
@@ -95,7 +98,7 @@ const PackingSlip = ({ order }: PackingSlipProps) => {
                         </div>
                         <div style={{display: "flex"}}>
                             <div style={{fontWeight: 'bold'}}>Total quantity of items: </div>
-                            <div style={{marginLeft: "5%"}}>{products.length}</div>
+                            <div style={{marginLeft: "5%"}}>{totalQty}</div>
                         </div>
                     </div>
 
