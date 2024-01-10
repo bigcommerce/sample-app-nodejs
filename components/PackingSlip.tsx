@@ -165,7 +165,6 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
                                 </tr>
                             ))}
                         </tbody>
-
                         {isLastBatch && <tbody style={{border: '1px solid black'}}>
                             {lastBatch && lastBatch.map((product: any, index: number) => (
                                 <>
