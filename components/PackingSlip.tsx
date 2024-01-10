@@ -48,19 +48,19 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
             </div>
  
             <div style={{marginBottom: "20px", border: "none"}} className="PackingSlip">
-                {isFirstBatch && <> <div style={{fontSize: "2.5rem"}} className="PackingSlipTitle">
+                {isFirstBatch && <> <div style={{fontSize: "2.7rem"}} className="PackingSlipTitle">
 
                 Zag Bijoux Bordereau de préparation {orderId}
                 </div><br/><br/>
 
                 
-                    <div style={{fontSize: "1.5rem"}} className="StoreAddress">
+                    <div style={{fontSize: "1.2rem"}} className="StoreAddress">
                         {storeAdress}
                     </div><br />
 
-                    <div style={{fontSize: "1.5rem"}} className="AddressRow">
+                    <div style={{fontSize: "1.2rem"}} className="AddressRow">
                         <div className="BillingAddress">
-                            <div style={{fontSize: "1.5rem"}} className="PackingSlipHeading">Billing Details</div>
+                            <div style={{fontSize: "1.2rem"}} className="PackingSlipHeading">Billing Details</div>
                                 <div>
                                     <div>{billingAdress.first_name} {billingAdress.last_name}</div>
                                     <div>{billingAdress.company}</div>
@@ -71,7 +71,7 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
                                 </div>
                         </div>
                         <div className="ShippingAddress">
-                            <div style={{fontSize: "1.5rem"}} className="PackingSlipHeading">Shipping Details</div>
+                            <div style={{fontSize: "1.2rem"}} className="PackingSlipHeading">Shipping Details</div>
                             {shippingAdress.map((detail: any, index: number) => {
                                 return <div key={index}>
                                     <div>{detail.first_name} {detail.last_name}</div>
@@ -83,10 +83,10 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
                                 </div>
                             })}
                         </div>
-                    </div><br /><br/>
+                    </div><br />
 
 
-                    <div style={{fontSize: "1.5rem"}} className="PackingSlipDetails">
+                    <div style={{fontSize: "1.2rem"}} className="PackingSlipDetails">
                         <div className="PackingSlipDetailsLeft">
                             <div className="DetailRow">
                                 <div className="Label">Order:</div>
@@ -110,31 +110,31 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
                             </div>
                         </div>
 
-                    </div><br /><br/>
+                    </div><br />
 
                     <div className="PackingSlipComments" style={{/**"%%GLOBAL_HideComments%%" */}}>
-                        <div style={{fontSize: "1.5rem"}} className="PackingSlipHeading">Comments:</div>
-                        <blockquote style={{fontSize: "1.5rem"}}>
+                        <div style={{fontSize: "1.2rem"}} className="PackingSlipHeading">Comments:</div>
+                        <blockquote style={{fontSize: "1.2rem"}}>
                             
                         </blockquote><br />
                     </div>
                 </>}
 
                 <div>
-                    {isFirstBatch && <div style={{fontSize: "1.5rem", paddingTop: "4%", borderTop: "1px solid black"}} className="PackingSlipHeading">Shipped Items</div>}
-                    {lastBatch && <div style={{fontSize: "1.5rem"}} className="PackingSlipHeading">Services</div>}
-                    <br/><br/><br/>
+                    {isFirstBatch && <div style={{fontSize: "1.2rem", paddingTop: "4%", borderTop: "1px solid black"}} className="PackingSlipHeading">Shipped Items</div>}
+                    {lastBatch && <div style={{fontSize: "1.2rem"}} className="PackingSlipHeading">Services</div>}
+                    <br/><br/>
                     <table style={{
-                        width: '100vw',
+                        width: '100%',
                         height: 'fit-content'
                     }}>
                         <thead style={{border: '1px solid black', borderBottom: "none"}}>
                             <tr style={{paddingTop: "30px", paddingBottom: "30px"}}>
                                 {!lastBatch && <th style={{width: "20%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center"}}></th>}
 
-                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "1.5rem"}}>Code / SKU</th>
-                                <th style={{width: "10%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "1.5rem"}}>Qty</th>
-                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "1.5rem"}}>Bin Picking No.</th>
+                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "1.2rem"}}>Code / SKU</th>
+                                <th style={{width: "10%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "1.2rem"}}>Qty</th>
+                                <th style={{width: "30%", borderRight: '1px solid black', paddingTop: "1%", paddingBottom: "1%", textAlign: "center", fontSize: "1.2rem"}}>Bin Picking No.</th>
 
                                 <th style={{width: "10%"}}></th>
                             </tr>
@@ -143,11 +143,11 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
                             {firstBatch && firstBatch.map((product: any, index: number) => (
 
                                 <tr key={index} style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}><img src={product.data.image_url} style={{width: "84px", height: "80px"}} /></td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}><img src={product.data.image_url} style={{width: "84px", height: "80px"}} /></td>
 
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.data.sku}</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.qty}</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.bin_picking_number}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}>{product.data.sku}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}>{product.qty}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}>{product.bin_picking_number}</td>
                                     <td></td>
                                 </tr>
                             ))}
@@ -157,11 +157,11 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
                             {batch && batch.map((product: any, index: number) => (
 
                                 <tr key={index} style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}><img src={product.data.image_url} style={{width: "84px", height: "80px"}} /></td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}><img src={product.data.image_url} style={{width: "84px", height: "80px"}} /></td>
 
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.data.sku}</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.qty}</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.bin_picking_number}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}>{product.data.sku}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}>{product.qty}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}>{product.bin_picking_number}</td>
                                     <td></td>
                                 </tr>
                             ))}
@@ -170,11 +170,11 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
                             {lastBatch && lastBatch.map((product: any, index: number) => (
                                 <>
                                 <tr key={index} style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
-                                    {/* <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}><img src={product.data.image_url} style={{width: "84px", height: "80px"}} /></td> */}
+                                    {/* <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}><img src={product.data.image_url} style={{width: "84px", height: "80px"}} /></td> */}
 
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.data.sku}</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.qty}</td>
-                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.5rem"}}>{product.bin_picking_number}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}>{product.data.sku}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}>{product.qty}</td>
+                                    <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}>{product.bin_picking_number}</td>
                                     <td></td>
                                 </tr>
                                 </>
