@@ -16,6 +16,7 @@ const Orders = () => {
     const [columnHash, setColumnHash] = useState('');
     const [direction, setDirection] = useState<TableSortDirection>('ASC');
     const [modalOpen, setModalOpen] = useState(false);
+    const [lastIndex, setLastIndex] = useState(0)
     const router = useRouter();
     const { error, isLoading, list = [], meta = {} } = useOrderList({
         status_id: String(11),
@@ -94,7 +95,7 @@ const Orders = () => {
                                 overrides: {
                                     // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
                                     pdf: {
-                                        compress: true
+                                        compress: false
                                     },
                                     // see https://html2canvas.hertzen.com/configuration for more options
                                     canvas: {
@@ -115,12 +116,47 @@ const Orders = () => {
     );
 
     const RenderPDF = ({ order }: { order: any }) => {
+        const products = order.order.products
+        const physicalProduct = products.filter(product => product.type === 'physical');
+        const digitalProduct = products.filter(product => product.type === 'digital');
+        const firstBatch = physicalProduct < 7 ? physicalProduct : physicalProduct.slice(0, 7)
+
+        let newProducts = []
+
+        function decouperEnLots(tableau, tailleLot) {
+            const newTableau = tableau.slice(7)
+            for (var i = 0; i < newTableau.length; i += tailleLot) {
+                newProducts.push(newTableau.slice(i, i + tailleLot));
+            }
+            setLastIndex(newProducts && newProducts.length - 1)
+
+            return newProducts;
+        }
+
+        decouperEnLots(physicalProduct, 13)
+
+
+        console.log("ORDER FROM INDEX@@@@@@@@@@@@@@@@", physicalProduct, digitalProduct, newProducts.length);
+
         return (
             <div id={`pdf-content-${order.id}`} style={{
                 position: 'absolute',
                 left: '-10000px',
             }}>
-                <PackingSlip order={order} />
+                <div style={{position: "relative"}}>
+                    <PackingSlip order={order} firstBatch={firstBatch} isFirstBatch={true} />
+                    <div style={{position: "absolute", bottom: "0", right: "20px"}}>1</div>
+                </div>
+                {newProducts.length > 0 && newProducts.map((product, index) => (
+                    <div key={index} style={{position: "relative"}}>
+                        <PackingSlip order={order} batch={product} isFirstBatch={false} />
+                        <div style={{position: "absolute", bottom: "0", right: "20px"}}>{index + 2}</div>
+                    </div>
+                ))}
+                <div style={{position: "relative"}}>
+                    <PackingSlip order={order} lastBatch={digitalProduct} isLastBatch={true} />
+                    <div style={{position: "absolute", bottom: "0px", right: "20px"}}>{newProducts && newProducts.length + 2}</div>
+                </div>
             </div>
         );
     };
