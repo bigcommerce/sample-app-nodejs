@@ -128,13 +128,11 @@ const Orders = () => {
             for (var i = 0; i < newTableau.length; i += tailleLot) {
                 newProducts.push(newTableau.slice(i, i + tailleLot));
             }
-            setLastIndex(newProducts && newProducts.length - 1)
 
             return newProducts;
         }
 
         decouperEnLots(physicalProduct, 13)
-
 
         console.log("ORDER FROM INDEX@@@@@@@@@@@@@@@@", physicalProduct, digitalProduct, newProducts.length);
 
@@ -155,7 +153,7 @@ const Orders = () => {
                 ))}
                 <div style={{position: "relative"}}>
                     <PackingSlip order={order} lastBatch={digitalProduct} isLastBatch={true} />
-                    <div style={{position: "absolute", bottom: "0px", right: "20px"}}>{newProducts && newProducts.length + 2}</div>
+                    {/* <div style={{position: "absolute", bottom: "0px", right: "20px"}}>{newProducts && newProducts.length + 2}</div> */}
                 </div>
             </div>
         );

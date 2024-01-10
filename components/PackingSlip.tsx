@@ -121,8 +121,9 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
                 </>}
 
                 <div>
-                    {isFirstBatch && <><div style={{fontSize: "1.5rem", paddingTop: "4%", borderTop: "1px solid black"}} className="PackingSlipHeading">Shipped Items</div><br /><br/></>}
-                    {lastBatch && <><div style={{fontSize: "1.5rem"}} className="PackingSlipHeading">Services</div><br /><br/></>}
+                    {isFirstBatch && <div style={{fontSize: "1.5rem", paddingTop: "4%", borderTop: "1px solid black"}} className="PackingSlipHeading">Shipped Items</div>}
+                    {lastBatch && <div style={{fontSize: "1.5rem"}} className="PackingSlipHeading">Services</div>}
+                    <br/><br/><br/>
                     <table style={{
                         width: '100vw',
                         height: 'fit-content'
@@ -152,7 +153,7 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
                             ))}
                         </tbody>}
 
-                        <tbody style={{border: '1px solid black'}}>
+                        <tbody style={{border: '1px solid black', marginTop: "20px"}}>
                             {batch && batch.map((product: any, index: number) => (
 
                                 <tr key={index} style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
