@@ -112,7 +112,6 @@ const Orders = () => {
             />
             <RenderPDF order={order} />
         </>
-
     );
 
     const RenderPDF = ({ order }: { order: any }) => {
@@ -132,7 +131,7 @@ const Orders = () => {
             return newProducts;
         }
 
-        decouperEnLots(physicalProduct, 13)
+        decouperEnLots(physicalProduct, 12)
 
         console.log("ORDER FROM INDEX@@@@@@@@@@@@@@@@", physicalProduct, digitalProduct, newProducts.length);
 
