@@ -13,6 +13,15 @@ export interface TableItem {
     stock: number;
 }
 
+export interface TableItemOrder {
+    id: number;
+    status: string;
+    customerId: number;
+    order: any;
+    customerName: string;
+    customerCode: number|string;
+}
+
 export interface ListItem extends FormData {
     id: number;
 }

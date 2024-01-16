@@ -9,7 +9,7 @@ import { useProductList } from '../../lib/hooks';
 import { TableItem } from '../../types';
 
 const Products = () => {
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [itemsPerPage, setItemsPerPage] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
     const [columnHash, setColumnHash] = useState('');
     const [direction, setDirection] = useState<TableSortDirection>('ASC');
