@@ -8,10 +8,10 @@ export default async function list(req: NextApiRequest, res: NextApiResponse) {
         const bigcommerce = bigcommerceClient(accessToken, storeHash, 'v2');
         const bigcommerceV3 = bigcommerceClient(accessToken, storeHash);
         const { page, limit, sort, direction, include, status_id } = req.query;
-        const params = new URLSearchParams({ page, limit, include, status_id, ...(sort && {sort, direction}) }).toString();
+        const params = decodeURIComponent(new URLSearchParams({ page, limit, include, status_id, ...(sort && {sort: `${sort}:${direction}`}) }).toString());
 
         console.log('***********************');
-        console.log('1');
+        console.log('1', params);
         console.log('***********************');
 
         let rawResponse = undefined;
@@ -29,42 +29,42 @@ export default async function list(req: NextApiRequest, res: NextApiResponse) {
         const response = await Promise.all(rawResponse.map(async (order: any) => {
             const { id } = order;
             if (id == 121) {
-                console.log('***********************');
-                console.log(`HERE .${id}`);
-                console.log('***********************');
+                // console.log('***********************');
+                // console.log(`HERE .${id}`);
+                // console.log('***********************');
             }
-            console.log('***********************');
-            console.log(`2.1.${id} -- ${order.products.resource}`);
-            console.log('***********************');
+            // console.log('***********************');
+            // console.log(`2.1.${id} -- ${order.products.resource}`);
+            // console.log('***********************');
             let rawProducts = [];
             try {
                 rawProducts = await bigcommerce.get(order.products.resource);
             } catch (error) {
                 console.log(`list on /orders/${id}/products : error`, order.products.resource, error);
             }
-            console.log('***********************');
-            console.log(`2.2.${id}`);
-            console.log('***********************');
+            // console.log('***********************');
+            // console.log(`2.2.${id}`);
+            // console.log('***********************');
             let products = [];
             try {
                 products = await Promise.all(rawProducts.map(async (product: any) => {
                 
                     if (product.variant_id == 121) {
-                        console.log('***********************');
-                        console.log(`HERE .${id} variant ${product.variant_id}`);
-                        console.log('***********************');
+                        // console.log('***********************');
+                        // console.log(`HERE .${id} variant ${product.variant_id}`);
+                        // console.log('***********************');
                     }
                     
                     if (product.product_id == 121) {
-                        console.log('***********************');
-                        console.log(`HERE .${id} product ${product.product_id}`);
-                        console.log('***********************');
+                        // console.log('***********************');
+                        // console.log(`HERE .${id} product ${product.product_id}`);
+                        // console.log('***********************');
                     }
                     if (!product.variant_id) {
                         try {
-                            console.log(`list item on /catalog/products/${product.product_id} : START`);
+                            // console.log(`list item on /catalog/products/${product.product_id} : START`);
                             const p = await bigcommerceV3.get(`/catalog/products/${product.product_id}`, { include: 'primary_image' });
-                            console.log(`list item on /catalog/products/${product.product_id} : END`);
+                            // console.log(`list item on /catalog/products/${product.product_id} : END`);
                             return {...product, ...p, qty: product.quantity};
                         } catch (error) {
                             console.log(`list item on /catalog/products/${product.product_id} : TROW ERROR`, error);
@@ -72,9 +72,9 @@ export default async function list(req: NextApiRequest, res: NextApiResponse) {
                         }
                     } else {
                         try{
-                            console.log(`list item on /catalog/products/${product.product_id}/variants/${product.variant_id} : START`);
+                            // console.log(`list item on /catalog/products/${product.product_id}/variants/${product.variant_id} : START`);
                             const p = await bigcommerceV3.get(`/catalog/products/${product.product_id}/variants/${product.variant_id}`, { include: 'primary_image' });
-                            console.log(`list item on /catalog/products/${product.product_id}/variants/${product.variant_id} : END`);
+                            // console.log(`list item on /catalog/products/${product.product_id}/variants/${product.variant_id} : END`);
                             return {...product, ...p, qty: product.quantity};
                         } catch (error) {
                             console.log(`list item on /catalog/products/${product.product_id}/variants/${product.variant_id} : TROW ERROR`, error);
@@ -85,9 +85,9 @@ export default async function list(req: NextApiRequest, res: NextApiResponse) {
             } catch (error) {
                 console.log(`list on /orders/${id}/products : error`, error);
             }
-            console.log('***********************');
-            console.log(`2.3.${id} -- ${order.shipping_addresses.resource} -- ${order.coupons.resource}`);
-            console.log('***********************');
+            // console.log('***********************');
+            // console.log(`2.3.${id} -- ${order.shipping_addresses.resource} -- ${order.coupons.resource}`);
+            // console.log('***********************');
             let shippingAddresses = [];
             try {
                 shippingAddresses = await bigcommerce.get(order.shipping_addresses.resource);
@@ -100,7 +100,27 @@ export default async function list(req: NextApiRequest, res: NextApiResponse) {
             } catch (error) {
                 console.log(`list on /orders/${id}/coupons : error`);
             }
-            return { ...order, products: products.filter(p => !!p), shippingAddresses, coupons };
+
+            const customerID = order.customer_id;
+            let rawCustomerGroupResponse = null;
+            try {
+                const rawCustomerResponse = await bigcommerceV3.get(`/customers?id:in=${customerID}`);
+                if (rawCustomerResponse && rawCustomerResponse.data && rawCustomerResponse.data[0]) {
+                    const customer = rawCustomerResponse.data[0];
+                    const customerGroupId = customer.customer_group_id;
+                    const name = customer.company || `${customer.first_name} ${customer.last_name}`;
+                    if (!customerGroupId) {
+                        rawCustomerGroupResponse = {code: "N/A", name};
+                    } else {
+                        rawCustomerGroupResponse = await bigcommerce.get(`/customer_groups/${customerGroupId}`);
+                        const code = rawCustomerGroupResponse.name;
+                        rawCustomerGroupResponse = {code, name};
+                    }
+                }
+            } catch (error) {
+                console.log(`list on /orders/${id}/customer : error`, error);
+            }
+            return { ...order, products: products.filter(p => !!p), shippingAddresses, coupons, customer: rawCustomerGroupResponse };
         }));
 
         console.log('***********************');

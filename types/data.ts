@@ -18,6 +18,8 @@ export interface TableItemOrder {
     status: string;
     customerId: number;
     order: any;
+    customerName: string;
+    customerCode: number|string;
 }
 
 export interface ListItem extends FormData {

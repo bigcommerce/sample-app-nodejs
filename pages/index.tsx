@@ -9,12 +9,14 @@ import { useOrderList, useProductList } from '@lib/hooks';
 import { TableItemOrder } from '@types';
 import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 import PackingSlip from '@components/PackingSlip';
+import { BlobProvider } from '@react-pdf/renderer';
+import PackingSlipPdf from '@components/PackingSlipPdf';
 
 const Orders = () => {
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
-    const [columnHash, setColumnHash] = useState('');
-    const [direction, setDirection] = useState<TableSortDirection>('ASC');
+    const [columnHash, setColumnHash] = useState('id');
+    const [direction, setDirection] = useState<TableSortDirection>('DESC');
     const [modalOpen, setModalOpen] = useState(false);
     const [lastIndex, setLastIndex] = useState(0)
     const router = useRouter();
@@ -35,6 +37,8 @@ const Orders = () => {
         status: order.status,
         customerId: order.customer_id,
         order: order,
+        customerName: order && order.customer && order.customer.name || "Customer does not exists",
+        customerCode: order && order.customer && order.customer.code || "N/A"
     }));
 
     const onItemsPerPageChange = newRange => {
@@ -57,105 +61,28 @@ const Orders = () => {
         <Small>{status}</Small>
     );
 
-    const renderCustomerId = (id: number): ReactElement => (
-        <Small>{id}</Small>
+    const renderCustomerName = (name: string): ReactElement => (
+        <Small>{name}</Small>
     );
 
-    const renderAction = (order: any): ReactElement => (
-        <>
-            <Dropdown
-                items={[
-                    { content: 'View order', onItemClick: () => router.push(`/orders/${order.id}`), hash: 'view' },
-                    {
-                        content: 'Packing slip', onItemClick: () => {
-                            const options = {
-                                // default is `save`
-                                method: 'open',
-                                // default is Resolution.MEDIUM = 3, which should be enough, higher values
-                                // increases the image quality but also the size of the PDF, so be careful
-                                // using values higher than 10 when having multiple pages generated, it
-                                // might cause the page to crash or hang.
-                                resolution: Resolution.MEDIUM,
-                                page: {
-                                    // margin is in MM, default is Margin.NONE = 0
-                                    margin: Margin.SMALL,
-                                    // default is 'A4'
-                                    format: 'A4',
-                                    // default is 'portrait'
-                                    orientation: 'portrait',
-                                },
-                                canvas: {
-                                    // default is 'image/jpeg' for better size performance
-                                    mimeType: 'image/jpeg',
-                                    qualityRatio: 1
-                                },
-                                // Customize any value passed to the jsPDF instance and html2canvas
-                                // function. You probably will not need this and things can break, 
-                                // so use with caution.
-                                overrides: {
-                                    // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
-                                    pdf: {
-                                        compress: false
-                                    },
-                                    // see https://html2canvas.hertzen.com/configuration for more options
-                                    canvas: {
-                                        useCORS: true
-                                    }
-                                },
-                            } as const;
-                            const getTargetElement = () => document.getElementById(`pdf-content-${order.id}`);
-                            generatePDF(getTargetElement, options);
-                        }
-                    },
-                ]}
-                toggle={<Button iconOnly={<MoreHorizIcon color="secondary60" />} variant="subtle" />}
-            />
-            <RenderPDF order={order} />
-        </>
+    const renderCustomerCode = (code: number|string): ReactElement => (
+        <Small>{code}</Small>
     );
 
-    const RenderPDF = ({ order }: { order: any }) => {
+    const renderPackingSlip = (order: any): ReactElement => {
         const products = order.order.products
         const physicalProduct = products.filter(product => product.type === 'physical');
         const digitalProduct = products.filter(product => product.type === 'digital');
-        const firstBatch = physicalProduct < 7 ? physicalProduct : physicalProduct.slice(0, 7)
-
-        let newProducts = []
-
-        function decouperEnLots(tableau, tailleLot) {
-            const newTableau = tableau.slice(7)
-            for (var i = 0; i < newTableau.length; i += tailleLot) {
-                newProducts.push(newTableau.slice(i, i + tailleLot));
-            }
-
-            return newProducts;
-        }
-
-        decouperEnLots(physicalProduct, 12)
-
-        console.log("ORDER FROM INDEX@@@@@@@@@@@@@@@@", physicalProduct, digitalProduct, newProducts.length);
-
         return (
-            <div id={`pdf-content-${order.id}`} style={{
-                position: 'absolute',
-                left: '-10000px',
-            }}>
-                <div style={{position: "relative"}}>
-                    <PackingSlip order={order} firstBatch={firstBatch} isFirstBatch={true} />
-                    <div style={{position: "absolute", bottom: "0", right: "20px"}}>1</div>
-                </div>
-                {newProducts.length > 0 && newProducts.map((product, index) => (
-                    <div key={index} style={{position: "relative"}}>
-                        <PackingSlip order={order} batch={product} isFirstBatch={false} />
-                        <div style={{position: "absolute", bottom: "0", right: "20px"}}>{index + 2}</div>
-                    </div>
-                ))}
-                <div style={{position: "relative"}}>
-                    <PackingSlip order={order} lastBatch={digitalProduct} isLastBatch={true} />
-                    {/* <div style={{position: "absolute", bottom: "0px", right: "20px"}}>{newProducts && newProducts.length + 2}</div> */}
-                </div>
-            </div>
-        );
+            <BlobProvider document={<PackingSlipPdf order={order} products={physicalProduct} services={digitalProduct} />}>
+                {(innerProps) => {
+                    console.log("innerProps ::: ", innerProps)
+                    return (
+                        <a href={innerProps.url} target="_blank">Open in new tab</a>
+                    )
+                }}
+            </BlobProvider>
+        )
     };
 
     if (isLoading) return <Loading />;
@@ -166,10 +93,11 @@ const Orders = () => {
             <Panel id="orders">
                 <Table
                     columns={[
-                        { header: 'Order ID', hash: 'name', render: ({ id }) => renderId(id), isSortable: true },
-                        { header: 'Status', hash: 'status', render: ({ status }) => renderStatus(status), isSortable: true },
-                        { header: 'Customer ID', hash: 'customerId', render: ({ customerId }) => renderCustomerId(customerId), isSortable: true },
-                        { header: 'Action', hideHeader: true, hash: 'id', render: (order) => renderAction(order) },
+                        { header: 'Order ID', hash: 'id', render: ({ id }) => renderId(id), isSortable: true },
+                        { header: 'Status', hash: 'status', render: ({ status }) => renderStatus(status), isSortable: false },
+                        { header: 'Customer Name', hash: 'customerName', render: ({ customerName }) => renderCustomerName(customerName), isSortable: false },
+                        { header: 'Customer Code', hash: 'customerCode', render: ({ customerCode }) => renderCustomerCode(customerCode), isSortable: false },
+                        { header: 'Packing Slip', hash: 'psmp', render: (order) => renderPackingSlip(order), isSortable: false },
                     ]}
                     items={tableItems}
                     itemName="Orders"

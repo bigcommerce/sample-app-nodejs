@@ -24,19 +24,22 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
     const shippingAdress = currentOrder.shippingAddresses && currentOrder.shippingAddresses
     const shippingMethod = shippingAdress[0].shipping_method && shippingAdress[0].shipping_method
     const products = currentOrder.products && currentOrder.products
-    const rawDate = currentOrder.date_modified && currentOrder.date_modified
-    const orderDay = rawDate && new Date(rawDate).getDay()
-    const formattedorderDay = orderDay < 10 ? "0" + orderDay : orderDay
-    const orderMonth = rawDate && new Date(rawDate).getMonth() + 1
-    const formattedOrderMonth = orderMonth < 10 ? "0" + orderMonth : orderMonth
-    const orderYear = rawDate && new Date(rawDate).getFullYear()
-    const orderDate = `${formattedorderDay}.${formattedOrderMonth}.${orderYear}`
+    const rawDate = currentOrder.date_created && currentOrder.date_created
+    const inputDate = new Date(rawDate);
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' } as const;
+    const formattedDate = inputDate.toLocaleDateString('en-GB', options);
+    const orderDate = formattedDate
     const sortedProductsArray = products && products.sort(function(a: { data: { sku_id: number; }; }, b: { data: { sku_id: number; }; }) {
         return a.data.sku_id - b.data.sku_id;
     });
     const totalQty = products && products.map((product: any) => product.qty).reduce((accumulator, currentValue) => {
         return accumulator + currentValue
       },0);
+
+    const comments = currentOrder && currentOrder.customer_message;
+
+    const client = currentOrder && currentOrder.customer && currentOrder.customer.name;
+    const clientID = currentOrder && currentOrder.customer && currentOrder.customer.code;
 
     // console.log('@@@@@@@@@@@@@@@@@@@@@@@@', totalQty)
 
@@ -93,10 +96,17 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
                                 <div style={{marginLeft: "4%"}}>{orderId}</div>
                             </div>
                             <div style={{display: "flex"}}>
-
                                 <div style={{fontWeight: 'bold'}}>Order date:</div>
                                 <div style={{marginLeft: "5%"}}>{orderDate}</div>
-
+                            </div>
+                            <br />
+                            <div style={{display: "flex"}}>
+                                <div style={{fontWeight: 'bold'}}>Client:</div>
+                                <div style={{marginLeft: "5%"}}>{client}</div>
+                            </div>
+                            <div style={{display: "flex"}}>
+                                <div style={{fontWeight: 'bold'}}>Client code:</div>
+                                <div style={{marginLeft: "5%"}}>{clientID}</div>
                             </div>
                         </div>
                         <div className="PackingSlipDetailsRight">
@@ -115,9 +125,10 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
                     <div className="PackingSlipComments" style={{/**"%%GLOBAL_HideComments%%" */}}>
                         <div style={{fontSize: "1.2rem"}} className="PackingSlipHeading">Comments:</div>
                         <blockquote style={{fontSize: "1.2rem"}}>
-                            
+                            {comments}
                         </blockquote><br />
                     </div>
+
                 </>}
 
                 <div>
@@ -142,7 +153,7 @@ const PackingSlip = ({ order, batch, isFirstBatch, firstBatch, lastBatch, isLast
                         {isFirstBatch && <tbody style={{border: '1px solid black'}}>
                             {firstBatch && firstBatch.map((product: any, index: number) => (
 
-                                <tr key={index} style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black"}}>
+                                <tr key={index} style={{borderBottom: "1px solid black", borderTop: index === (products - 1) && "1px solid black", pageBreakInside: 'avoid'}}>
                                     <td style={{textAlign: "center", borderRight: "1px solid black", borderLeft: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}><img src={product.data.image_url} style={{width: "84px", height: "80px"}} /></td>
 
                                     <td style={{textAlign: "center", borderRight: "1px solid black", paddingTop: "1%", paddingBottom: "1%", fontSize: "1.2rem"}}>{product.data.sku}</td>
