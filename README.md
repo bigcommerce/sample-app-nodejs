@@ -6,7 +6,7 @@ This starter app includes all the files necessary to get started with a basic, h
 
 To get the app running locally, follow these instructions:
 
-1. [Use Node 16+ and NPM 8+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#checking-your-version-of-npm-and-node-js). To check the running versions, use the following commands:
+1. [Use Node 18+ and NPM 8+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#checking-your-version-of-npm-and-node-js). To check the running versions, use the following commands:
 
 ```shell
 node -v
