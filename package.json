@@ -21,7 +21,7 @@
   "dependencies": {
     "@bigcommerce/big-design": "^0.36.2",
     "@bigcommerce/big-design-icons": "^0.23.1",
-    "@bigcommerce/big-design-theme": "^0.19.1",
+    "@bigcommerce/big-design-theme": "^0.20.1",
     "dotenv": "^16.3.0",
     "firebase": "^9.23.0",
     "jsonwebtoken": "^9.0.1",
