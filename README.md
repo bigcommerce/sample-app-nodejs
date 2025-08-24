@@ -1,4 +1,5 @@
 # NextJS Sample App
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/bigcommerce/sample-app-nodejs)
 
 This starter app includes all the files necessary to get started with a basic, hello world app. This app uses NextJS, BigDesign, Typescript, and React.
 
