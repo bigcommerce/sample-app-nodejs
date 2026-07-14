@@ -75,7 +75,7 @@ cp .env-sample .env
    1. Creating a new project in Firebase
    2. Adding a Cloud Firestore
    3. And generating a new Private Key under Project Settings > Service Accounts
-   See the [Firebase quickstart (Google)](https://firebase.google.com/docs/firestore/quickstart) for more detailed information.
+      See the [Firebase quickstart (Google)](https://firebase.google.com/docs/firestore/quickstart) for more detailed information.
 
    If using MySQL, supply the `MYSQL_` config keys listed in the `.env` file, then do the initial database migration by running the following npm script: `npm run db:setup`
 

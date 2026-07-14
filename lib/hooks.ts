@@ -1,100 +1,171 @@
-import useSWR from 'swr';
-import { useSession } from '../context/session';
-import { ErrorProps, ListItem, Order, QueryParams, ShippingAndProductsInfo } from '../types';
+import useSWR from 'swr'
+import { useSession } from '../context/session'
+import {
+  CheckoutRecord,
+  ErrorProps,
+  ListItem,
+  Order,
+  QueryParams,
+  ShippingAndProductsInfo,
+  Subscription,
+} from '../types'
 
 async function fetcher(url: string, query: string) {
-    const res = await fetch(`${url}?${query}`);
+  const res = await fetch(`${url}?${query}`)
 
-    // If the status code is not in the range 200-299, throw an error
-    if (!res.ok) {
-        const { message } = await res.json();
-        const error: ErrorProps = new Error(message || 'An error occurred while fetching the data.');
-        error.status = res.status; // e.g. 500
-        throw error;
-    }
+  // If the status code is not in the range 200-299, throw an error
+  if (!res.ok) {
+    const { message } = await res.json()
+    const error: ErrorProps = new Error(
+      message || 'An error occurred while fetching the data.'
+    )
+    error.status = res.status // e.g. 500
+    throw error
+  }
 
-    return res.json();
+  return res.json()
+}
+
+async function simpleFetcher(url: string) {
+  const res = await fetch(url)
+  if (!res.ok) throw new Error(`${res.status}`)
+
+  return res.json()
 }
 
 // Reusable SWR hooks
 // https://swr.vercel.app/
 export function useProducts() {
-    const { context } = useSession();
-    const params = new URLSearchParams({ context }).toString();
-    // Request is deduped and cached; Can be shared across components
-    const { data, error } = useSWR(context ? ['/api/products', params] : null, fetcher);
+  const { context } = useSession()
+  const params = new URLSearchParams({ context }).toString()
+  // Request is deduped and cached; Can be shared across components
+  const { data, error } = useSWR(
+    context ? ['/api/products', params] : null,
+    fetcher
+  )
 
-    return {
-        summary: data,
-        isLoading: !data && !error,
-        error,
-    };
+  return {
+    summary: data,
+    isLoading: !data && !error,
+    error,
+  }
 }
 
 export function useProductList(query?: QueryParams) {
-    const { context } = useSession();
-    const params = new URLSearchParams({ ...query, context }).toString();
+  const { context } = useSession()
+  const params = new URLSearchParams({ ...query, context }).toString()
 
-    // Use an array to send multiple arguments to fetcher
-    const { data, error, mutate: mutateList } = useSWR(context ? ['/api/products/list', params] : null, fetcher);
+  // Use an array to send multiple arguments to fetcher
+  const {
+    data,
+    error,
+    mutate: mutateList,
+  } = useSWR(context ? ['/api/products/list', params] : null, fetcher)
 
-    return {
-        list: data?.data,
-        meta: data?.meta,
-        isLoading: !data && !error,
-        error,
-        mutateList,
-    };
+  return {
+    list: data?.data,
+    meta: data?.meta,
+    isLoading: !data && !error,
+    error,
+    mutateList,
+  }
 }
 
-export function useProductInfo(pid: number, list?:ListItem[]) {
-    const { context } = useSession();
-    const params = new URLSearchParams({ context }).toString();
+export function useProductInfo(pid: number, list?: ListItem[]) {
+  const { context } = useSession()
+  const params = new URLSearchParams({ context }).toString()
 
-    let product: ListItem; 
+  let product: ListItem
 
-    if (list?.length) { 
-       product = list.find(item => item.id === pid);
-    }
+  if (list?.length) {
+    product = list.find((item) => item.id === pid)
+  }
 
-    // Conditionally fetch product if it doesn't exist in the list (e.g. deep linking)
-    const { data, error } = useSWR(!product && context ? [`/api/products/${pid}`, params] : null, fetcher);
+  // Conditionally fetch product if it doesn't exist in the list (e.g. deep linking)
+  const { data, error } = useSWR(
+    !product && context ? [`/api/products/${pid}`, params] : null,
+    fetcher
+  )
 
-    return {
-        product: product ?? data,
-        isLoading: product ? false : (!data && !error),
-        error,
-    };
+  return {
+    product: product ?? data,
+    isLoading: product ? false : !data && !error,
+    error,
+  }
 }
 
 export const useOrder = (orderId: number) => {
-    const { context } = useSession();
-    const params = new URLSearchParams({ context }).toString();
-    const shouldFetch = context && orderId !== undefined;
+  const { context } = useSession()
+  const params = new URLSearchParams({ context }).toString()
+  const shouldFetch = context && orderId !== undefined
 
-    // Conditionally fetch orderId is defined
-    const { data, error } = useSWR<Order, ErrorProps>(shouldFetch ? [`/api/orders/${orderId}`, params] : null, fetcher);
+  // Conditionally fetch orderId is defined
+  const { data, error } = useSWR<Order, ErrorProps>(
+    shouldFetch ? [`/api/orders/${orderId}`, params] : null,
+    fetcher
+  )
 
-    return {
-        order: data,
-        isLoading: !data && !error,
-        error,
-    };
+  return {
+    order: data,
+    isLoading: !data && !error,
+    error,
+  }
+}
+
+export function useGqlCheck() {
+  const { data, error } = useSWR('/api/gql-check', simpleFetcher, {
+    revalidateOnFocus: false,
+  })
+  const status = !data && !error ? 'checking' : error ? 'error' : 'ok'
+
+  return { status }
+}
+
+export function useSubscription() {
+  const { context } = useSession()
+  const params = new URLSearchParams({ context }).toString()
+  const { data, error, mutate } = useSWR<
+    { subscription: Subscription | null },
+    ErrorProps
+  >(context ? ['/api/billing/subscription', params] : null, fetcher)
+
+  return {
+    subscription: data?.subscription ?? null,
+    isLoading: !data && !error,
+    error,
+    mutate,
+  }
 }
 
 export const useShippingAndProductsInfo = (orderId: number) => {
-    const { context } = useSession();
-    const params = new URLSearchParams({ context }).toString();
-    const shouldFetch = context && orderId !== undefined;
+  const { context } = useSession()
+  const params = new URLSearchParams({ context }).toString()
+  const shouldFetch = context && orderId !== undefined
 
-    // Shipping addresses and products are not included in the order data and need to be fetched separately
-    const { data, error } = useSWR<ShippingAndProductsInfo, ErrorProps>(
-        shouldFetch ? [`/api/orders/${orderId}/shipping_products`, params] : null, fetcher
-    );
+  // Shipping addresses and products are not included in the order data and need to be fetched separately
+  const { data, error } = useSWR<ShippingAndProductsInfo, ErrorProps>(
+    shouldFetch ? [`/api/orders/${orderId}/shipping_products`, params] : null,
+    fetcher
+  )
 
-    return {
-        order: data,
-        isLoading: !data && !error,
-        error,
-    };
+  return {
+    order: data,
+    isLoading: !data && !error,
+    error,
+  }
+}
+
+export function useCheckouts() {
+  const { context } = useSession()
+  const params = new URLSearchParams({ context }).toString()
+  const { data, error } = useSWR<{ checkouts: CheckoutRecord[] }, ErrorProps>(
+    context ? ['/api/billing/checkouts', params] : null,
+    fetcher
+  )
+
+  return {
+    checkouts: data?.checkouts ?? [],
+    isLoading: !data && !error,
+    error,
+  }
 }

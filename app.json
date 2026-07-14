@@ -8,18 +8,18 @@
     "CLIENT_ID": {
       "description": "The client id of your app, provided by the BigCommerce developer portal."
     },
-    "CLIENT_SECRET":{
+    "CLIENT_SECRET": {
       "description": "The client secret of your app, provided by the BigCommerce developer portal."
     },
-    "AUTH_CALLBACK":{
+    "AUTH_CALLBACK": {
       "description": "The fully qualified authentication endpoint provided by this app. Replace the app name with the app name chosen above.",
       "value": "https://<APP NAME>.herokuapp.com/api/auth"
     },
-    "DB_TYPE":{
+    "DB_TYPE": {
       "description": "Which type of database we are using. Options are 'mysql' or 'firebase'. Can safely leave unchanged.",
       "value": "mysql"
     },
-    "JWT_KEY":{
+    "JWT_KEY": {
       "description": "Key the app will use for signing JWT. Can safely leave unchanged.",
       "generator": "secret"
     }

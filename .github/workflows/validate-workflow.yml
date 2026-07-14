@@ -11,7 +11,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,24 +18,24 @@ jobs:
         node-version: [18.x, 20.x]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install Dependencies
-      run: |
-        npm i -g npm@8.13.1
-        npm ci
+      - name: Install Dependencies
+        run: |
+          npm i -g npm@8.13.1
+          npm ci
 
-    - name: Run Build
-      run: npm run build
+      - name: Run Build
+        run: npm run build
 
-    - name: Lint Check
-      run: npm run lint --if-present
+      - name: Lint Check
+        run: npm run lint --if-present
 
-    - name: Validate tests
-      run: npm run test --if-present
+      - name: Validate tests
+        run: npm run test --if-present

@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+    "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "./schema.graphql",
+        "tadaOutputLocation": "./graphql-env.d.ts"
+      }
     ],
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "baseUrl": ".",
     "skipLibCheck": true,
@@ -19,34 +22,15 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "paths": {
-      "@components/*": [
-        "components/*"
-      ],
-      "@lib/*": [
-        "lib/*"
-      ],
-      "@mocks/*": [
-        "test/mocks/*"
-      ],
-      "@pages/*": [
-        "pages/*"
-      ],
-      "@test/utils": [
-        "test/utils"
-      ],
-      "@types": [
-        "types"
-      ]
+      "@components/*": ["components/*"],
+      "@lib/*": ["lib/*"],
+      "@mocks/*": ["test/mocks/*"],
+      "@pages/*": ["pages/*"],
+      "@test/utils": ["test/utils"],
+      "@types": ["types"]
     },
     "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "scripts"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "scripts"]
 }

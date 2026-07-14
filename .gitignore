@@ -70,7 +70,7 @@ typings/
 
 # dotenv environment variables file
 .env
-.env.test
+.env.*
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+blobfish.db
+blobfish.db.bak
+
+.DS_Store
