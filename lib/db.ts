@@ -1,20 +1,20 @@
 import { Db } from '../types';
-import * as firebaseDB from './dbs/firebase';
-import * as sqlDB from './dbs/mysql';
 
 const { DB_TYPE } = process.env;
 
 let db: Db;
+const dbType = DB_TYPE || 'firebase';
 
-switch (DB_TYPE) {
+switch (dbType) {
     case 'firebase':
-        db = firebaseDB;
+        // Use require for conditional import
+        db = require('./dbs/firebase');
         break;
     case 'mysql':
-        db = sqlDB;
+        db = require('./dbs/mysql');
         break;
     default:
-        db = firebaseDB;
+        db = require('./dbs/firebase');
         break;
 }
 
