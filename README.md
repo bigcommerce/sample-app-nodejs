@@ -1,6 +1,29 @@
-# NextJS Sample App
+# NextJS Sample App for BigCommerce
 
-This starter app includes all the files necessary to get started with a basic, hello world app. This app uses NextJS, BigDesign, Typescript, and React.
+This starter app includes all the files necessary to get started with a basic BigCommerce app integration. This app uses NextJS, BigDesign, Typescript, and React to provide a foundation for building BigCommerce apps with modern web technologies.
+
+## Features
+
+- 🔐 **OAuth Authentication** - Secure app authentication with BigCommerce stores
+- 📦 **BigCommerce API Integration** - Pre-configured BigCommerce API client
+- 🎨 **BigDesign UI Components** - Built-in BigCommerce design system components
+- 🔥 **Firebase/MySQL Support** - Flexible data storage options
+- 🔒 **JWT Session Management** - Secure session handling
+- ⚡ **Next.js Framework** - Server-side rendering and API routes
+- 📱 **Responsive Design** - Mobile-friendly UI components
+- 🔧 **TypeScript** - Type-safe development
+
+## Technologies Used
+
+- **Frontend**: React 18, Next.js 13, Styled Components
+- **UI Framework**: BigDesign (BigCommerce's design system)
+- **Language**: TypeScript
+- **Backend**: Next.js API Routes
+- **Database**: Firebase Firestore or MySQL
+- **Authentication**: OAuth 2.0, JWT
+- **API Client**: node-bigcommerce
+- **Development Tools**: ESLint, Jest, Testing Library
+- **HTTP Tunneling**: ngrok (for local development)
 
 ## Running the app in development
 
@@ -99,3 +122,88 @@ In production, you must build and run optimized version of the code. Use the fol
 npm run build
 npm run start -p 3000
 ```
+
+## Project Structure
+
+```
+sample-app-nodejs-bigcommerce/
+├── components/          # React components
+├── context/            # React context providers
+├── lib/                # Utility libraries and helpers
+│   ├── auth.ts         # Authentication logic
+│   ├── db.ts           # Database abstraction layer
+│   └── dbs/            # Database implementations (Firebase/MySQL)
+├── pages/              # Next.js pages and API routes
+│   ├── api/            # API endpoints
+│   │   ├── auth.ts     # OAuth callback handler
+│   │   ├── load.ts     # App load callback
+│   │   └── uninstall.ts # App uninstall callback
+│   └── index.tsx       # Main app page
+├── scripts/            # Build and setup scripts
+├── test/               # Test files
+├── types/              # TypeScript type definitions
+├── .env-sample         # Environment variables template
+└── package.json        # Project dependencies
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**ngrok URL changes**
+- If you restart ngrok, you'll get a new URL
+- Update the callback URLs in your BigCommerce app profile
+- Update the `AUTH_CALLBACK` in your `.env` file
+
+**Port already in use**
+- Kill the process using port 3000: `lsof -ti:3000 | xargs kill -9` (macOS/Linux)
+- Or specify a different port: `npm run dev -- -p 3001`
+
+**Database connection errors**
+- **Firebase**: Ensure your service account JSON is correctly formatted in `sample-firebase-keys.json`
+- **MySQL**: Verify your MySQL credentials and run `npm run db:setup` for initial setup
+
+**JWT errors**
+- Ensure `JWT_KEY` in `.env` is at least 32 characters long
+- Use a cryptographically secure random string
+
+**OAuth callback errors**
+- Verify callback URLs match exactly (including https/http)
+- Check that ngrok tunnel is active
+- Ensure `CLIENT_ID` and `CLIENT_SECRET` are correct
+
+### Getting Help
+
+- [BigCommerce Developer Documentation](https://developer.bigcommerce.com/)
+- [BigCommerce Apps Quick Start](https://developer.bigcommerce.com/api-docs/apps/quick-start)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [BigDesign Documentation](https://developer.bigcommerce.com/big-design)
+
+## Testing
+
+Run the test suite:
+
+```shell
+npm test
+```
+
+Lint your code:
+
+```shell
+npm run lint
+```
+
+## Contributing
+
+This is a sample/starter app. Feel free to fork and customize it for your BigCommerce app needs.
+
+## License
+
+ISC
+
+## Additional Resources
+
+- [BigCommerce API Reference](https://developer.bigcommerce.com/api-reference)
+- [App Development Best Practices](https://developer.bigcommerce.com/api-docs/apps/guide/best-practices)
+- [Firebase Documentation](https://firebase.google.com/docs)
+- [MySQL Documentation](https://dev.mysql.com/doc/)
