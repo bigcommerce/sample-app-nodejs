@@ -1,12 +1,14 @@
+'use client';
+
 import { Box, Button, H1, HR, Text } from '@bigcommerce/big-design';
 import { ArrowBackIcon } from '@bigcommerce/big-design-icons';
-import { useRouter } from 'next/router';
+import { useParams, useRouter } from 'next/navigation';
 import { useProductList } from '../lib/hooks';
 import { TabIds, TabRoutes } from './header';
 
 const InnerHeader = () => {
     const router = useRouter();
-    const { pid } = router.query;
+    const { pid } = useParams<{ pid: string }>();
     const { list = [] } = useProductList();
     const { name } = list.find(item => item.id === Number(pid)) ?? {};
 

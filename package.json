@@ -9,45 +9,49 @@
     "start": "next start -p $PORT",
     "test": "jest --updateSnapshot",
     "lint": "eslint . --ext .ts,.tsx,.js",
-    "db:setup": "node scripts/db.js"
+    "db:setup": "node scripts/db.js",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": ">=18 <20",
+    "node": ">=20.9.0",
     "npm": ">=8 <10"
   },
   "packageManager": "npm@8.19.4",
   "overrides": {
-    "@bigcommerce/big-design": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-release/bigcommerce-big-design-5.0.0.tgz",
-    "@bigcommerce/big-design-icons": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-release/bigcommerce-big-design-icons-3.0.0.tgz",
-    "@bigcommerce/big-design-patterns": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-release/bigcommerce-big-design-patterns-7.0.0.tgz",
-    "@bigcommerce/big-design-theme": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-release/bigcommerce-big-design-theme-3.0.0.tgz"
+    "@bigcommerce/big-design": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-main-latest/bigcommerce-big-design-4.0.0.tgz",
+    "@bigcommerce/big-design-icons": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-main-latest/bigcommerce-big-design-icons-2.0.0.tgz",
+    "@bigcommerce/big-design-patterns": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-main-latest/bigcommerce-big-design-patterns-6.0.0.tgz",
+    "@bigcommerce/big-design-theme": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-main-latest/bigcommerce-big-design-theme-2.0.0.tgz"
   },
   "dependencies": {
-    "@bigcommerce/big-design": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-release/bigcommerce-big-design-5.0.0.tgz",
-    "@bigcommerce/big-design-icons": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-release/bigcommerce-big-design-icons-3.0.0.tgz",
-    "@bigcommerce/big-design-theme": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-release/bigcommerce-big-design-theme-3.0.0.tgz",
+    "@bigcommerce/big-design": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-main-latest/bigcommerce-big-design-4.0.0.tgz",
+    "@bigcommerce/big-design-icons": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-main-latest/bigcommerce-big-design-icons-2.0.0.tgz",
+    "@bigcommerce/big-design-theme": "file:/private/tmp/claude-503/-Users-chancellor-clark-repositories-big-design/13e2ef69-187c-46e7-97ef-3eb639edba0b/scratchpad/tarballs-main-latest/bigcommerce-big-design-theme-2.0.0.tgz",
     "dotenv": "^16.3.0",
     "firebase-admin": "^13.3.0",
     "jsonwebtoken": "^9.0.1",
     "mysql2": "^3.9.4",
-    "next": "^15.5.21",
+    "next": "^16.3.2",
     "node-bigcommerce": "github:bigcommerce/node-bigcommerce",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "styled-components": "^6.4.0",
     "swr": "^2.3.0"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.2",
     "@testing-library/dom": "^7.31.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^18.0.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@types/node": "^20.9.5",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.5",
     "@typescript-eslint/eslint-plugin": "^5.30.0",
     "@typescript-eslint/parser": "^5.30.0",
     "eslint": "^8.19.0",
@@ -57,6 +61,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^28.1.2",
     "jest-environment-jsdom": "^28.1.2",
-    "typescript": "^4.7.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.125.0"
   }
 }

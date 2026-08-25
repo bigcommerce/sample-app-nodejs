@@ -1,6 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { NextApiRequest } from 'next';
-import * as BigCommerce from 'node-bigcommerce';
+import BigCommerce from 'node-bigcommerce';
 import { ApiConfig, QueryParams, SessionContextProps, SessionProps } from '../types';
 import db from './db';
 
@@ -57,8 +56,7 @@ export function setSession(session: SessionProps) {
     db.setStoreUser(session);
 }
 
-export async function getSession({ query: { context = '' } }: NextApiRequest) {
-    if (typeof context !== 'string') return;
+export async function getSession(context = '') {
     const { context: storeHash, user } = decodePayload(context) as SessionProps;
     const hasUser = await db.hasStoreUser(storeHash, String(user?.id));
 

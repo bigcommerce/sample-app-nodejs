@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Homepage renders correctly 1`] = `
+<div
+  class="styled__StyledBox-sc-sj5f1m-0 dVcDci styled__StyledFlex-sc-hcvk8l-0 fxomXp"
+>
+  <div
+    class="styled__StyledBox-sc-sj5f1m-0 bMLHXh sc-397ce3a5-0 iIaahe"
+  >
+    <svg
+      aria-hidden="true"
+      class="base__StyledIcon-sc-a9u0e1-0 ilYneK"
+      fill="currentColor"
+      height="24"
+      stroke="currentColor"
+      stroke-width="0"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <g
+        fill="none"
+      >
+        <path
+          d="M0 0h24v24H0z"
+        />
+        <path
+          d="M0 0h24v24H0z"
+        />
+      </g>
+      <path
+        d="m21.9 7.89-1.05-3.37c-.22-.9-1-1.52-1.91-1.52H5.05c-.9 0-1.69.63-1.9 1.52L2.1 7.89c-.46 1.97.85 3.11.9 3.17V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7.94c1.12-1.12 1.09-2.41.9-3.17M13 5h1.96l.54 3.52c.09.71-.39 1.48-1.28 1.48-.67 0-1.22-.59-1.22-1.31zM6.44 8.86c-.08.65-.6 1.14-1.21 1.14-.93 0-1.35-.97-1.19-1.64L5.05 5h1.97zM11 8.69c0 .72-.55 1.31-1.29 1.31-.75 0-1.3-.7-1.22-1.48L9.04 5H11zM18.77 10c-.61 0-1.14-.49-1.21-1.14L16.98 5l1.93-.01 1.05 3.37c.16.67-.25 1.64-1.19 1.64"
+      />
+    </svg>
+  </div>
+  <div
+    class="styled__StyledBox-sc-sj5f1m-0 huHBGD"
+  >
+    <h1
+      class="styled__StyledH1-sc-tqnj75-1 fGMawJ"
+    >
+      Welcome back
+    </h1>
+    <p
+      class="styled__StyledText-sc-tqnj75-5 fbaxwk"
+      color="secondary60"
+    >
+      Here's a snapshot of your catalog.
+    </p>
+  </div>
+</div>
+`;

@@ -1,5 +1,7 @@
+'use client';
+
 import { Box, Tabs } from '@bigcommerce/big-design';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import InnerHeader from './innerHeader';
 
@@ -13,15 +15,14 @@ export const TabRoutes = {
     [TabIds.PRODUCTS]: '/products',
 };
 
-const HeaderlessRoutes = [
-    '/orders/[orderId]',
-    '/orders/[orderId]/labels',
-    '/orders/[orderId]/modal',
-    '/productAppExtension/[productId]',
+// Path prefixes (matched against the resolved pathname, not the route template)
+const HeaderlessPrefixes = [
+    '/orders/',
+    '/productAppExtension/',
 ];
 
-const InnerRoutes = [
-    '/products/[pid]',
+const InnerPrefixes = [
+    '/products/',
 ];
 
 const HeaderTypes = {
@@ -34,13 +35,13 @@ const Header = () => {
     const [activeTab, setActiveTab] = useState<string>('');
     const [headerType, setHeaderType] = useState<string>(HeaderTypes.GLOBAL);
     const router = useRouter();
-    const { pathname } = router;
+    const pathname = usePathname();
 
     useEffect(() => {
-        if (InnerRoutes.includes(pathname)) {
+        if (InnerPrefixes.some(prefix => pathname.startsWith(prefix))) {
             // Use InnerHeader if route matches inner routes
             setHeaderType(HeaderTypes.INNER);
-        } else if (HeaderlessRoutes.includes(pathname)) {
+        } else if (HeaderlessPrefixes.some(prefix => pathname.startsWith(prefix))) {
             setHeaderType(HeaderTypes.HEADERLESS);
         } else {
             // Check if new route matches TabRoutes

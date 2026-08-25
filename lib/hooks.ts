@@ -16,6 +16,11 @@ async function fetcher(url: string, query: string) {
     return res.json();
 }
 
+// Placeholder data for local preview outside the BigCommerce iframe (no signed
+// `context` will ever arrive there, so the real request never fires). Never used
+// in production - BigCommerce always supplies a context when it embeds the app.
+const MOCK_PRODUCTS_SUMMARY = { inventory_count: 482, variant_count: 129, primary_category_name: 'Widgets' };
+
 // Reusable SWR hooks
 // https://swr.vercel.app/
 export function useProducts() {
@@ -23,6 +28,10 @@ export function useProducts() {
     const params = new URLSearchParams({ context }).toString();
     // Request is deduped and cached; Can be shared across components
     const { data, error } = useSWR(context ? ['/api/products', params] : null, fetcher);
+
+    if (!context && process.env.NODE_ENV !== 'production') {
+        return { summary: MOCK_PRODUCTS_SUMMARY, isLoading: false, error: undefined };
+    }
 
     return {
         summary: data,

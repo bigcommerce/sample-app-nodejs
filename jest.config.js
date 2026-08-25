@@ -12,7 +12,7 @@ const customJestConfig = {
     '@components/(.*)': '<rootDir>/components/$1',
     '@lib/(.*)': '<rootDir>/lib/$1',
     '@mocks/(.*)': '<rootDir>/test/mocks/$1',
-    '@pages/(.*)': '<rootDir>/pages/$1',
+    '@app/(.*)': '<rootDir>/app/$1',
     '@test/utils': '<rootDir>/test/utils',
     '@types': '<rootDir>/types',
   },

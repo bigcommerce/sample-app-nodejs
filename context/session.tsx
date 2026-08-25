@@ -1,20 +1,21 @@
-import { useRouter } from 'next/router';
-import { createContext, useContext, useEffect, useState } from 'react';
+'use client';
+
+import { useSearchParams } from 'next/navigation';
+import { createContext, useContext, useEffect } from 'react';
 import { bigCommerceSDK } from '../scripts/bcSdk';
 
 const SessionContext = createContext({ context: '' });
 
 const SessionProvider = ({ children }) => {
-    const { query } = useRouter();
-    const [context, setContext] = useState('');
+    const searchParams = useSearchParams();
+    const context = searchParams.get('context') ?? '';
 
     useEffect(() => {
-        if (query.context) {
-            setContext(query.context.toString());
+        if (context) {
             // Keeps app in sync with BC (e.g. heatbeat, user logout, etc)
-            bigCommerceSDK(query.context);
+            bigCommerceSDK(context);
         }
-    }, [query.context]);
+    }, [context]);
 
     return (
         <SessionContext.Provider value={{ context }}>

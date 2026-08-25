@@ -3,10 +3,16 @@ import { getFirestore } from 'firebase-admin/firestore';
 import serviceAccount from '../../sample-firebase-keys.json';
 import { SessionProps, UserData } from '../../types';
 
-const app = getApps().length
-  ? getApp()
-  : initializeApp({ credential: cert(serviceAccount as any) });
-const db = getFirestore(app);
+// Deferred until first use: Next.js imports route handler modules at build time
+// (unlike pages/api routes), and eagerly parsing sample-firebase-keys.json's
+// placeholder private key here would fail that build before real keys are swapped in.
+function getDb() {
+  const app = getApps().length
+    ? getApp()
+    : initializeApp({ credential: cert(serviceAccount as any) });
+
+  return getFirestore(app);
+}
 
 // Firestore data management functions
 
@@ -15,7 +21,7 @@ export async function setUser({ user }: SessionProps) {
     if (!user) return null;
 
     const { email, id, username } = user;
-    const ref = db.collection('user').doc(String(id));
+    const ref = getDb().collection('user').doc(String(id));
     const data: UserData = { email };
 
     if (username) {
@@ -36,7 +42,7 @@ export async function setStore(session: SessionProps) {
     if (!accessToken || !scope) return null;
 
     const storeHash = context?.split('/')[1] || '';
-    const ref = db.collection('store').doc(storeHash);
+    const ref = getDb().collection('store').doc(storeHash);
     const data = { accessToken, adminId: id, scope };
 
     await ref.set(data);
@@ -57,7 +63,7 @@ export async function setStoreUser(session: SessionProps) {
     const contextString = context ?? sub;
     const storeHash = contextString?.split('/')[1] || '';
     const documentId = `${userId}_${storeHash}`; // users can belong to multiple stores
-    const ref = db.collection('storeUsers').doc(documentId);
+    const ref = getDb().collection('storeUsers').doc(documentId);
     const storeUser = await ref.get();
 
     // Set admin (store owner) if installing/ updating the app
@@ -81,7 +87,7 @@ export async function deleteUser({ context, user, sub }: SessionProps) {
     const contextString = context ?? sub;
     const storeHash = contextString?.split('/')[1] || '';
     const docId = `${user?.id}_${storeHash}`;
-    const ref = db.collection('storeUsers').doc(docId);
+    const ref = getDb().collection('storeUsers').doc(docId);
 
     await ref.delete();
 }
@@ -90,20 +96,20 @@ export async function hasStoreUser(storeHash: string, userId: string) {
     if (!storeHash || !userId) return false;
 
     const docId = `${userId}_${storeHash}`;
-    const userDoc = await db.collection('storeUsers').doc(docId).get();
+    const userDoc = await getDb().collection('storeUsers').doc(docId).get();
 
     return userDoc.exists;
 }
 
 export async function getStoreToken(storeHash: string) {
     if (!storeHash) return null;
-    const storeDoc = await db.collection('store').doc(storeHash).get();
+    const storeDoc = await getDb().collection('store').doc(storeHash).get();
 
     return storeDoc.data()?.accessToken ?? null;
 }
 
 export async function deleteStore({ store_hash: storeHash }: SessionProps) {
-    const ref = db.collection('store').doc(storeHash);
+    const ref = getDb().collection('store').doc(storeHash);
 
     await ref.delete();
 }

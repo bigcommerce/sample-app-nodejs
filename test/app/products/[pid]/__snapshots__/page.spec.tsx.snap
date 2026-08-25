@@ -1,0 +1,319 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Product Info Form renders correctly 1`] = `
+<form
+  class="styled__StyledForm-sc-qzey9b-0 kULBVS"
+>
+  <div
+    class="styled__StyledBox-sc-sj5f1m-0 gWofov styled__StyledPanel-sc-1h6ef3q-0 jNrDdQ"
+  >
+    <div
+      class="styled__StyledBox-sc-sj5f1m-0 huHBGD styled__StyledFlex-sc-hcvk8l-0 hWtcQj"
+    >
+      <h2
+        class="styled__StyledH2-sc-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 ffaUeG dIqAYE"
+      >
+        Basic Information
+      </h2>
+    </div>
+    <div
+      class="styled__StyledBox-sc-sj5f1m-0 fWyXLR"
+    >
+      <div
+        class="styled__StyledInlineGroup-sc-1a6yr6l-2 dqFwsQ"
+      >
+        <div>
+          <label
+            class="styled__StyledLabel-sc-m3fyue-0 ikOHwk"
+            for="_r_0_"
+          >
+            Product name
+            <span
+              aria-hidden="true"
+              class="styled__StyledText-sc-tqnj75-5 fhFOMI"
+              color="danger"
+            >
+               
+              *
+            </span>
+          </label>
+          <span
+            class="styled__StyledInputWrapper-sc-g32raa-0 fcxwhV"
+          >
+            <div
+              class="styled__StyledInputContent-sc-g32raa-3 dIrNOB"
+            >
+              <input
+                class="styled__StyledInput-sc-g32raa-1 eqylAM"
+                id="_r_0_"
+                name="name"
+                required=""
+                value="Product 1"
+              />
+            </div>
+          </span>
+        </div>
+      </div>
+      <div
+        class="styled__StyledInlineGroup-sc-1a6yr6l-2 dqFwsQ"
+      >
+        <div>
+          <label
+            class="styled__StyledLabel-sc-m3fyue-0 ikOHwk"
+            for="_r_1_-input"
+            id="_r_1_-label"
+          >
+            Product type
+            <span
+              aria-hidden="true"
+              class="styled__StyledText-sc-tqnj75-5 fhFOMI"
+              color="danger"
+            >
+               
+              *
+            </span>
+          </label>
+          <div
+            class="styled__StyledInputContainer-sc-1v66t78-2 fUXCvt"
+          >
+            <div>
+              <span
+                class="styled__StyledInputWrapper-sc-g32raa-0 fcxwhV"
+              >
+                <div
+                  class="styled__StyledInputContent-sc-g32raa-3 dIrNOB"
+                >
+                  <input
+                    aria-activedescendant=""
+                    aria-autocomplete="list"
+                    aria-controls="_r_1_-menu"
+                    aria-expanded="false"
+                    aria-labelledby="_r_1_-label"
+                    autocomplete="off"
+                    class="styled__StyledInput-sc-g32raa-1 hmczCc"
+                    id="_r_1_-input"
+                    name="type"
+                    required=""
+                    role="combobox"
+                    value="Physical"
+                  />
+                </div>
+                <div
+                  class="styled__StyledIconWrapper-sc-g32raa-2 dWcQgE"
+                >
+                  <button
+                    aria-controls="_r_1_-menu"
+                    aria-expanded="false"
+                    aria-label="toggle menu"
+                    class="styled__StyledButton-sc-3yq204-0 cPnrNR styled__DropdownButton-sc-1v66t78-3 fSMoIm"
+                    id="_r_1_-toggle-button"
+                    tabindex="-1"
+                    type="button"
+                  >
+                    <span
+                      class="styled__ContentWrapper-sc-3yq204-1 hmSheV"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="base__StyledIcon-sc-a9u0e1-0 icTxFF styled__StyledDropdownIcon-sc-1v66t78-1 gamWOF"
+                        fill="currentColor"
+                        height="24"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 24 24"
+                        width="24"
+                      >
+                        <path
+                          d="M0 0h24v24H0z"
+                          fill="none"
+                        />
+                        <path
+                          d="m8.71 11.71 2.59 2.59c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.18-1.71-.71-1.71H9.41c-.89 0-1.33 1.08-.7 1.71"
+                        />
+                      </svg>
+                    </span>
+                  </button>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div
+            class="styled__StyledBox-sc-sj5f1m-0 fhLxbE"
+            style="position: absolute; left: 0px; top: 0px; transform: translate(0px, 0px);"
+          >
+            <div
+              class="styled__StyledListOverflowWrapper-sc-5w3dcq-0 cuaMzZ"
+            >
+              <ul
+                aria-labelledby="_r_1_-label"
+                class="styled__StyledList-sc-5w3dcq-1 iRXFfN"
+                id="_r_1_-menu"
+                role="listbox"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="styled__StyledInlineGroup-sc-1a6yr6l-2 dqFwsQ"
+      >
+        <div>
+          <label
+            class="styled__StyledLabel-sc-m3fyue-0 ikOHwk"
+            for="_r_6_"
+          >
+            Default price (excluding tax)
+            <span
+              aria-hidden="true"
+              class="styled__StyledText-sc-tqnj75-5 fhFOMI"
+              color="danger"
+            >
+               
+              *
+            </span>
+          </label>
+          <span
+            class="styled__StyledInputWrapper-sc-g32raa-0 fcxwhV"
+          >
+            <div
+              class="styled__StyledIconWrapper-sc-g32raa-2 jtKNZH"
+            >
+              $
+            </div>
+            <div
+              class="styled__StyledInputContent-sc-g32raa-3 dIrNOB"
+            >
+              <input
+                class="styled__StyledInput-sc-g32raa-1 bZRMX"
+                id="_r_6_"
+                name="price"
+                placeholder="10.00"
+                required=""
+                step="0.01"
+                type="number"
+                value="20"
+              />
+            </div>
+          </span>
+        </div>
+      </div>
+      <div
+        class="styled__StyledGroup-sc-1a6yr6l-1 lcIran"
+      >
+        <div
+          class="styled__CheckboxContainer-sc-s1u0st-2 kderhq"
+        >
+          <input
+            aria-labelledby="_r_8_"
+            class="styled__HiddenCheckbox-sc-s1u0st-3 bNgavM"
+            id="_r_7_"
+            name="isVisible"
+            type="checkbox"
+          />
+          <label
+            aria-hidden="true"
+            class="styled__StyledCheckbox-sc-s1u0st-4 eHivaf"
+            for="_r_7_"
+          >
+            <svg
+              aria-hidden="true"
+              class="base__StyledIcon-sc-a9u0e1-0 icTxFF"
+              fill="currentColor"
+              height="24"
+              stroke="currentColor"
+              stroke-width="0"
+              viewBox="0 0 24 24"
+              width="24"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M9 16.17 5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41z"
+              />
+            </svg>
+          </label>
+          <div
+            class="styled__CheckboxLabelContainer-sc-s1u0st-0 eHrACr"
+          >
+            <label
+              class="styled__StyledLabel-sc-3soea9-0 gVYptp"
+              for="_r_7_"
+              id="_r_8_"
+            >
+              Visible on storefront
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="styled__StyledBox-sc-sj5f1m-0 gWofov styled__StyledPanel-sc-1h6ef3q-0 jNrDdQ"
+  >
+    <div
+      class="styled__StyledBox-sc-sj5f1m-0 huHBGD styled__StyledFlex-sc-hcvk8l-0 hWtcQj"
+    >
+      <h2
+        class="styled__StyledH2-sc-tqnj75-2 styled__StyledH2-sc-1h6ef3q-1 ffaUeG dIqAYE"
+      >
+        Description
+      </h2>
+    </div>
+    <div
+      class="styled__StyledBox-sc-sj5f1m-0 fWyXLR"
+    >
+      <div
+        class="styled__StyledInlineGroup-sc-1a6yr6l-2 dqFwsQ"
+      >
+        <div>
+          <label
+            class="styled__StyledLabel-sc-m3fyue-0 ikOHwk"
+            for="_r_a_"
+          >
+            Description
+          </label>
+          <span
+            class="styled__StyledTextareaWrapper-sc-c1uos0-0 klDTwE"
+          >
+            <textarea
+              class="styled__StyledTextarea-sc-c1uos0-1 iaofAq"
+              id="_r_a_"
+              name="description"
+              placeholder="Product info"
+              rows="3"
+            >
+              &lt;h1&gt;some sample product&lt;/h1&gt;
+            </textarea>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="styled__StyledBox-sc-sj5f1m-0 huHBGD styled__StyledFlex-sc-hcvk8l-0 kglNGy"
+  >
+    <button
+      class="styled__StyledButton-sc-3yq204-0 cilpqo bd-button"
+      type="button"
+    >
+      <span
+        class="styled__ContentWrapper-sc-3yq204-1 hmSheV"
+      >
+        Cancel
+      </span>
+    </button>
+    <button
+      class="styled__StyledButton-sc-3yq204-0 gkGyfZ bd-button"
+      type="submit"
+    >
+      <span
+        class="styled__ContentWrapper-sc-3yq204-1 hmSheV"
+      >
+        Save
+      </span>
+    </button>
+  </div>
+</form>
+`;
