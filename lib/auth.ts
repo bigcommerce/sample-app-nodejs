@@ -4,7 +4,17 @@ import * as BigCommerce from 'node-bigcommerce';
 import { ApiConfig, QueryParams, SessionContextProps, SessionProps } from '../types';
 import db from './db';
 
-const { API_URL, AUTH_CALLBACK, CLIENT_ID, CLIENT_SECRET, JWT_KEY, LOGIN_URL } = process.env;
+const {
+    API_URL,
+    AUTH_CALLBACK,
+    CLIENT_ID,
+    CLIENT_SECRET,
+    JWT_KEY,
+    LOGIN_URL,
+    AUTH_CALLBACK_2,
+    CLIENT_ID_2,
+    CLIENT_SECRET_2,
+} = process.env;
 
 // Used for internal configuration; 3rd party apps may remove
 const apiConfig: ApiConfig = {};
@@ -31,6 +41,35 @@ const bigcommerceSigned = new BigCommerce({
     responseType: 'json',
 });
 
+// Second app registration served from this same instance via the *2 routes
+// (auth2/load2/uninstall2); only created if configured.
+export type AuthVariant = 'default' | 'secondary';
+
+const bigcommerceSecondary = CLIENT_ID_2 && CLIENT_SECRET_2
+    ? new BigCommerce({
+        logLevel: 'info',
+        clientId: CLIENT_ID_2,
+        secret: CLIENT_SECRET_2,
+        callback: AUTH_CALLBACK_2,
+        responseType: 'json',
+        headers: { 'Accept-Encoding': '*' },
+        apiVersion: 'v3',
+        ...apiConfig,
+    })
+    : undefined;
+
+const bigcommerceSignedSecondary = CLIENT_SECRET_2
+    ? new BigCommerce({ secret: CLIENT_SECRET_2, responseType: 'json' })
+    : undefined;
+
+function requireVariant<T>(client: T | undefined, variant: AuthVariant): T {
+    if (!client) {
+        throw new Error(`CLIENT_ID_2/CLIENT_SECRET_2 must be set to use the '${variant}' auth variant`);
+    }
+
+    return client;
+}
+
 export function bigcommerceClient(accessToken: string, storeHash: string, apiVersion = 'v3') {
     return new BigCommerce({
         clientId: CLIENT_ID,
@@ -43,12 +82,16 @@ export function bigcommerceClient(accessToken: string, storeHash: string, apiVer
 }
 
 // Authorizes app on install
-export function getBCAuth(query: QueryParams) {
-    return bigcommerce.authorize(query);
+export function getBCAuth(query: QueryParams, variant: AuthVariant = 'default') {
+    const client = variant === 'default' ? bigcommerce : requireVariant(bigcommerceSecondary, variant);
+
+    return client.authorize(query);
 }
 // Verifies app on load/ uninstall
-export function getBCVerify({ signed_payload_jwt }: QueryParams) {
-    return bigcommerceSigned.verifyJWT(signed_payload_jwt);
+export function getBCVerify({ signed_payload_jwt }: QueryParams, variant: AuthVariant = 'default') {
+    const client = variant === 'default' ? bigcommerceSigned : requireVariant(bigcommerceSignedSecondary, variant);
+
+    return client.verifyJWT(signed_payload_jwt);
 }
 
 export function setSession(session: SessionProps) {
