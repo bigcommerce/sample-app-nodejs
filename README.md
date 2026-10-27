@@ -1,3 +1,8 @@
+> [!CAUTION]
+> **⚠️ DEPRECATED: This repository is deprecated and no longer maintained.**
+>
+> Use [bigcommerce-edu/starter-sc-app-next](https://github.com/bigcommerce-edu/starter-sc-app-next) instead.
+
 # NextJS Sample App
 
 This starter app includes all the files necessary to get started with a basic, hello world app. This app uses NextJS, BigDesign, Typescript, and React.
